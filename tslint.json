@@ -1,0 +1,6 @@
+{
+  "extends": "./node_modules/@definitelytyped/dtslint/dt.json",
+  "rules": {
+    "dt-header": false
+  }
+}
