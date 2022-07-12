@@ -1,11 +1,12 @@
 /**
+ * @license
  * Copyright 2022 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -65,7 +66,7 @@ declare namespace googletag {
    *              .addService(googletag.pubads());
    *   });
    */
-  const cmd: Array<() => void> | CommandArray;
+  const cmd: Array<(this: typeof globalThis) => void> | CommandArray;
 
   /**
    * Returns the current version of GPT.
@@ -103,8 +104,7 @@ declare namespace googletag {
   ): Slot | null;
 
   /**
-   * Constructs an out-of-page (interstitial) ad slot with the given ad unit
-   * path.
+   * Constructs an out-of-page ad slot with the given ad unit path.
    * <br><br>
    * For custom out-of-page ads, <code>div</code> is the ID
    * of the div element that will contain the ad. See the article on <a
@@ -112,10 +112,7 @@ declare namespace googletag {
    * creatives</a> for more details.
    * <br><br>
    * For GPT managed out-of-page ads, <code>div</code> is a supported <code>
-   * <a href="#googletag.enums_OutOfPageFormat">OutOfPageFormat</a></code>. See
-   * the article on
-   * <a href="https://support.google.com/admanager/answer/9840201">
-   *   web interstitials</a> for more details.
+   * <a href="#googletag.enums_OutOfPageFormat">OutOfPageFormat</a></code>.
    *
    * @example
    *   // Define a custom out-of-page ad slot.
@@ -125,6 +122,18 @@ declare namespace googletag {
    *   googletag.defineOutOfPageSlot('/1234567/sports',
    *                                 googletag.enums.OutOfPageFormat.INTERSTITIAL);
    *
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/samples/display-rewarded-ad">
+   *     Display a rewarded ad</a>
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/samples/display-web-interstitial-ad">
+   *     Display a web interstitial ad</a>
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/samples/display-anchor-ad">
+   *     Display an anchor ad</a>
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/samples/display-out-of-page-ad">
+   *     Display an out-of-page ad</a>
    * @param adUnitPath Full <a href=
    *     "https://developers.google.com/publisher-tag/guides/get-started#ad-unit-path">
    *     ad unit path</a> with the network code and ad unit code.
@@ -383,7 +392,12 @@ declare namespace googletag {
    * This is the namespace that GPT uses for <a href="#enumtypes">enum types</a>.
    */
   namespace enums {
-    /** Out of page formats supported by GPT. */
+    /**
+     * Out-of-page formats supported by GPT.
+     *
+     * @see <a href="#googletag.defineOutOfPageSlot">
+     *     <code>googletag.defineOutOfPageSlot</code></a>
+     */
     enum OutOfPageFormat {
       /** Anchor format where slot sticks to the top of the viewport. */
       TOP_ANCHOR,
@@ -397,9 +411,10 @@ declare namespace googletag {
 
     /**
      * <a href="https://support.google.com/admanager/answer/11233407">
-     * Traffic sources</a> supported by GPT. See <a
-     * href="#googletag.PrivacySettingsConfig_trafficSource">
-     * <code>PrivacySettingsConfig.trafficSource</code></a> for usage details.
+     * Traffic sources</a> supported by GPT.
+     *
+     * @see <a href="#googletag.PrivacySettingsConfig_trafficSource">
+     *     <code>PrivacySettingsConfig.trafficSource</code></a>
      */
     enum TrafficSource {
       /**
@@ -419,21 +434,21 @@ declare namespace googletag {
      * <a href="https://support.google.com/admanager/answer/9598414">restricted
      * processing mode</a> to aid in publisher regulatory compliance needs.
      */
-    restrictDataProcessing: boolean;
+    restrictDataProcessing?: boolean;
 
     /**
      * Indicates whether the page should be
      * <a href="https://support.google.com/admanager/answer/3671211">treated as
      * child-directed</a>. Set to <code>null</code> to clear the configuration.
      */
-    childDirectedTreatment: boolean | null;
+    childDirectedTreatment?: boolean | null;
 
     /**
      * Indicates whether to mark ad requests as coming from users
      * <a href="https://support.google.com/admanager/answer/9004919">under the
      * age of consent</a>. Set to <code>null</code> to clear the configuration.
      */
-    underAgeOfConsent: boolean | null;
+    underAgeOfConsent?: boolean | null;
 
     /**
      * Enables serving to run in
@@ -444,7 +459,7 @@ declare namespace googletag {
      * href="https://developers.google.com/publisher-tag/guides/general-best-practices#load_from_an_official_source">
      * limited ads URL</a>.
      */
-    limitedAds: boolean;
+    limitedAds?: boolean;
 
     /**
      * Enables serving to run in
@@ -452,7 +467,7 @@ declare namespace googletag {
      * non-personalized ads</a> mode to aid in publisher regulatory compliance
      * needs.
      */
-    nonPersonalizedAds: boolean;
+    nonPersonalizedAds?: boolean;
 
     /**
      * Indicates whether requests represent purchased or organic traffic.
@@ -472,7 +487,7 @@ declare namespace googletag {
      *     trafficSource: googletag.enums.TrafficSource.PURCHASED
      *   });
      */
-    trafficSource: enums.TrafficSource;
+    trafficSource?: enums.TrafficSource;
   }
 
   /**
@@ -1055,10 +1070,10 @@ declare namespace googletag {
      *       </dd>
      *     </dl>
      */
-    enableLazyLoad(config: {
-      fetchMarginPercent: number;
-      renderMarginPercent: number;
-      mobileScaling: number;
+    enableLazyLoad(config?: {
+      fetchMarginPercent?: number;
+      renderMarginPercent?: number;
+      mobileScaling?: number;
     }): void;
 
     /**
@@ -1127,13 +1142,13 @@ declare namespace googletag {
      * Whether SafeFrame should allow ad content to expand by overlaying page
      * content.
      */
-    allowOverlayExpansion: boolean;
+    allowOverlayExpansion?: boolean;
 
     /**
      * Whether SafeFrame should allow ad content to expand by pushing page
      * content.
      */
-    allowPushExpansion: boolean;
+    allowPushExpansion?: boolean;
 
     /**
      * Whether SafeFrame should use the HTML5 sandbox attribute to prevent top
@@ -1141,7 +1156,7 @@ declare namespace googletag {
      * <code>true</code> (cannot be forced to <code>false</code>). Note that the
      * sandbox attribute disables plugins (e.g. Flash).
      */
-    sandbox: boolean;
+    sandbox?: boolean;
 
     /**
      * Whether SafeFrame should use randomized subdomains for
@@ -1155,7 +1170,7 @@ declare namespace googletag {
      * @deprecated It is no longer possible to disable this feature. Setting
      * <code>useUniqueDomain</code> has no effect.
      */
-    useUniqueDomain: boolean | null;
+    useUniqueDomain?: boolean | null;
   }
 
   /** Base service class that contains methods common for all services. */
@@ -1204,9 +1219,9 @@ declare namespace googletag {
      * @param listener Function that takes a single event object argument.
      * @return The service object on which the method was called.
      */
-    addEventListener(
-      eventType: string,
-      listener: (arg: object | null) => void
+    addEventListener<K extends keyof events.EventTypeMap>(
+      eventType: K,
+      listener: (arg: events.EventTypeMap[K]) => void
     ): Service;
 
     /**
@@ -1238,9 +1253,9 @@ declare namespace googletag {
      * @param listener Function that takes a single event object argument.
      * @return Whether existing event listener was removed.
      */
-    removeEventListener(
-      eventType: string,
-      listener: (event: Event | null) => void
+    removeEventListener<K extends keyof events.EventTypeMap>(
+      eventType: K,
+      listener: (event: events.EventTypeMap[K]) => void
     ): boolean;
 
     /**
@@ -1260,6 +1275,10 @@ declare namespace googletag {
     /**
      * Base Interface for all GPT events. All GPT events below will have the
      * following fields.
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
      */
     interface Event {
       /** The slot that triggered the event. */
@@ -1286,7 +1305,12 @@ declare namespace googletag {
      *       // Slot specific logic.
      *     }
      *   });
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
      */
+    // tslint:disable-next-line:no-empty-interface
     interface SlotRequestedEvent extends Event {}
 
     /**
@@ -1323,6 +1347,10 @@ declare namespace googletag {
      *         }
      *       }
      *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
      */
     interface SlotRenderEndedEvent extends Event {
       /**
@@ -1394,7 +1422,12 @@ declare namespace googletag {
      *         }
      *       }
      *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
      */
+    // tslint:disable-next-line:no-empty-interface
     interface ImpressionViewableEvent extends Event {}
 
     /**
@@ -1414,7 +1447,12 @@ declare namespace googletag {
      *       // Slot specific logic.
      *     }
      *   });
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
      */
+    // tslint:disable-next-line:no-empty-interface
     interface SlotOnloadEvent extends Event {}
 
     /**
@@ -1441,6 +1479,10 @@ declare namespace googletag {
      *         }
      *       }
      *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
      */
     interface SlotVisibilityChangedEvent extends Event {
       /**
@@ -1469,7 +1511,12 @@ declare namespace googletag {
      *         }
      *       }
      *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
      */
+    // tslint:disable-next-line:no-empty-interface
     interface SlotResponseReceived extends Event {}
 
     /**
@@ -1488,8 +1535,8 @@ declare namespace googletag {
      *             'Reward granted for slot', slot.getSlotElementId(), '.');
      *
      *         // Log details of the reward.
-     *         console.log('Reward type:', event.payload.type);
-     *         console.log('Reward amount:', event.payload.amount);
+     *         console.log('Reward type:', event.payload?.type);
+     *         console.log('Reward amount:', event.payload?.amount);
      *         console.groupEnd();
      *
      *         if (slot === targetSlot) {
@@ -1497,6 +1544,10 @@ declare namespace googletag {
      *         }
      *       }
      *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
      */
     interface RewardedSlotGrantedEvent extends Event {
       /** An object containing information about the reward that was granted. */
@@ -1523,8 +1574,13 @@ declare namespace googletag {
      *         }
      *       }
      *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
      */
 
+    // tslint:disable-next-line:no-empty-interface
     interface RewardedSlotClosedEvent extends Event {}
 
     /**
@@ -1553,6 +1609,9 @@ declare namespace googletag {
      *       }
      *   );
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
      */
     interface RewardedSlotReadyEvent extends Event {
       /**
@@ -1560,6 +1619,70 @@ declare namespace googletag {
        * has consented to view the ad.
        */
       makeRewardedVisible(): void;
+    }
+
+    /**
+     * This is a pseudo-type that maps an event name to its corresponding event
+     * object type for <code><a href="#googletag.Service_addEventListener">
+     * Service.addEventListener</a></code> and
+     * <code><a href="#googletag.Service_removeEventListener">
+     * Service.removeEventListener</a></code>. It is documented for reference and
+     * type safety purposes only.
+     */
+    interface EventTypeMap {
+      /**
+       * Alias for <code><a href="#googletag.events_SlotRequestedEvent">
+       * SlotRequestedEvent</a></code>.
+       */
+      slotRequested: SlotRequestedEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_SlotRenderEndedEvent">
+       * SlotRenderEndedEvent</a></code>.
+       */
+      slotRenderEnded: SlotRenderEndedEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_ImpressionViewableEvent">
+       * ImpressionViewableEvent</a></code>.
+       */
+      impressionViewable: ImpressionViewableEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_SlotOnloadEvent">
+       * SlotOnloadEvent</a></code>.
+       */
+      slotOnload: SlotOnloadEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_SlotVisibilityChangedEvent">
+       * SlotVisibilityChangedEvent</a></code>.
+       */
+      slotVisibilityChanged: SlotVisibilityChangedEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_SlotResponseReceived">
+       * SlotResponseReceived</a></code>.
+       */
+      slotResponseReceived: SlotResponseReceived;
+
+      /**
+       * Alias for <code><a href="#googletag.events_RewardedSlotGrantedEvent">
+       * RewardedSlotGrantedEvent</a></code>.
+       */
+      rewardedSlotGranted: RewardedSlotGrantedEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_RewardedSlotClosedEvent">
+       * RewardedSlotClosedEvent</a></code>.
+       */
+      rewardedSlotClosed: RewardedSlotClosedEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_RewardedSlotReadyEvent">
+       * RewardedSlotReadyEvent</a></code>.
+       */
+      rewardedSlotReady: RewardedSlotReadyEvent;
     }
   }
 
