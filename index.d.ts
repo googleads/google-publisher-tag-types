@@ -71,12 +71,10 @@ declare namespace googletag {
   /**
    * Returns the current version of GPT.
    *
-   * Learn more about GPT versions in the
-   * <a href="https://developers.google.com/publisher-tag/versions">GPT
-   * version history</a>.
-   *
+   * @see <a href="https://developers.google.com/publisher-tag/versions">
+   *     GPT version history</a>
    * @return The currently executing GPT version string.
-   **/
+   */
   function getVersion(): string;
 
   /**
@@ -86,6 +84,9 @@ declare namespace googletag {
    * @example
    *   googletag.defineSlot('/1234567/sports', [728, 90], 'div-1');
    *
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/guides/get-started">
+   *     Get Started with Google Publisher Tags</a>
    * @param adUnitPath Full <a href=
    *     "https://developers.google.com/publisher-tag/guides/get-started#ad-unit-path">
    *     ad unit path</a> with the network code and unit code.
@@ -168,6 +169,15 @@ declare namespace googletag {
    *     &lt;/script&gt;
    *   &lt;/div&gt;
    *
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/guides/get-started">
+   *     Get Started with Google Publisher Tags</a>
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/samples/display-test-ad">
+   *     Display a test ad</a>
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/guides/control-ad-loading">
+   *     Control ad loading and refresh</a>
    * @param  divOrSlot Either the ID of the div element containing the ad slot
    *     or the div element, or the slot object. If a div element is provided,
    *     it must have an 'id' attribute which matches the ID passed into <code>
@@ -182,10 +192,11 @@ declare namespace googletag {
   function enableServices(): void;
 
   /**
-   * Disables the Google Publisher Console. See the
-   * <a
-   * href="https://developers.google.com/publisher-tag/guides/publisher-console">
-   * Google Publisher Console</a> guide for more details.
+   * Disables the Google Publisher Console.
+   *
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/guides/publisher-console">
+   *     Google Publisher Console</a>
    */
   function disablePublisherConsole(): void;
 
@@ -236,10 +247,10 @@ declare namespace googletag {
   /**
    * Creates a new <code>
    * <a href="#googletag.SizeMappingBuilder">SizeMappingBuilder</a></code>.
-   * See the
-   * <a
-   * href="https://developers.google.com/publisher-tag/guides/ad-sizes#responsive_ads">
-   * Ad Sizes</a> guide for more details.
+   *
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/guides/ad-sizes#responsive_ads">
+   *     Ad sizes: Responsive ads</a>
    * @return A new builder.
    */
   function sizeMapping(): SizeMappingBuilder;
@@ -277,10 +288,7 @@ declare namespace googletag {
   const pubadsReady: boolean | undefined;
 
   /**
-   * Opens the Google Publisher Console. See the
-   * <a
-   * href="https://developers.google.com/publisher-tag/guides/publisher-console">
-   * Google Publisher Console</a> guide for more details.
+   * Opens the Google Publisher Console.
    *
    * @example
    *   // Calling with div ID.
@@ -289,6 +297,9 @@ declare namespace googletag {
    *   // Calling without div ID.
    *   googletag.openConsole();
    *
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/guides/publisher-console">
+   *     Google Publisher Console</a>
    * @param div An ad slot div ID. This value is optional. When provided, the
    * Publisher Console will attempt to open with details of the specified ad
    * slot in view.
@@ -333,9 +344,10 @@ declare namespace googletag {
 
   /**
    * Companion Ads service. This service is used by video ads to show companion
-   * ads. See the article on
-   * <a href="https://support.google.com/admanager/answer/1191131">companion ads
-   * for video</a> for more details.
+   * ads.
+   *
+   * @see <a href="https://support.google.com/admanager/answer/1191131">
+   *     Companion ads for video and audio</a>
    */
   interface CompanionAdsService extends Service {
     /**
@@ -427,7 +439,13 @@ declare namespace googletag {
     }
   }
 
-  /** Configuration object for privacy settings. */
+  /**
+   * Configuration object for privacy settings.
+   *
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/samples/configure-privacy">
+   *     Configure privacy settings</a>
+   */
   interface PrivacySettingsConfig {
     /**
      * Enables serving to run in
@@ -458,6 +476,10 @@ declare namespace googletag {
      * cookie-less, <a
      * href="https://developers.google.com/publisher-tag/guides/general-best-practices#load_from_an_official_source">
      * limited ads URL</a>.
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/display-limited-ad">
+     *     Display a limited ad</a>
      */
     limitedAds?: boolean;
 
@@ -508,6 +530,9 @@ declare namespace googletag {
      *   // Example with multiple values for a key inside in an array.
      *   googletag.pubads().setTargeting('interests', ['sports', 'music']);
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/key-value-targeting">
+     *     Key-value targeting</a>
      * @param key Targeting parameter key.
      * @param value Targeting parameter value or array of values.
      * @return The service object on which the method was called.
@@ -529,6 +554,9 @@ declare namespace googletag {
      *   googletag.pubads().clearTargeting();
      *   // All targeting has been cleared.
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/key-value-targeting">
+     *     Key-value targeting</a>
      * @param key Targeting parameter key. The key is optional; all targeting
      *     parameters will be cleared if it is unspecified.
      * @return The service object on which the method was called.
@@ -571,15 +599,13 @@ declare namespace googletag {
 
     /**
      * Sets a page-level ad category exclusion for the given label name.
-     * <br><br>
-     * See the article on
-     * <a href="https://support.google.com/admanager/answer/3238504">ad
-     * exclusion</a> for more details.
      *
      * @example
      *   // Label = AirlineAd.
      *   googletag.pubads().setCategoryExclusion('AirlineAd');
      *
+     * @see <a href="https://support.google.com/admanager/answer/3238504">
+     *     Custom labels to block ads</a>
      * @param categoryExclusion The ad category exclusion label to add.
      * @return The service object on which the method was called.
      */
@@ -600,6 +626,8 @@ declare namespace googletag {
      *
      *   // Make ad requests. Any ad can be returned.
      *
+     * @see <a href="https://support.google.com/admanager/answer/3238504">
+     *     Custom labels to block ads</a>
      * @return The service object on which the method was called.
      */
     clearCategoryExclusions(): PubAdsService;
@@ -611,6 +639,13 @@ declare namespace googletag {
      * call. This should be set prior to enabling the service. Async mode must
      * be used; otherwise it will be impossible to request ads using
      * <code>refresh</code>.
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/control-ad-loading">
+     *     Control ad loading and refresh</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/control-sra-batching">
+     *     Control SRA batching</a>
      */
     disableInitialLoad(): void;
 
@@ -633,6 +668,12 @@ declare namespace googletag {
      * PubAdsService prior to enabling the service. Single request mode must be
      * set before the service is enabled.
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/ad-best-practices#use_single_request_architecture_correctly">
+     *     Ads best practices: Use Single Request Architecture correctly</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/control-sra-batching">
+     *     Control SRA batching</a>
      * @return Returns <code>true</code> if single request mode was enabled and
      *     <code>false</code> if it is impossible to enable single request mode
      *     because the method was called after the service was enabled.
@@ -692,6 +733,12 @@ declare namespace googletag {
      *   // changing the correlator.
      *   googletag.pubads().refresh(null, {changeCorrelator: false});
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/control-ad-loading">
+     *     Control ad loading and refresh</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/refresh">
+     *     Refresh ad slots</a>
      * @param  slots The slots to refresh. Array is  optional; all slots
      *     will be refreshed if it is unspecified.
      * @param options Configuration options associated with this refresh
@@ -736,11 +783,9 @@ declare namespace googletag {
      * automatically enabled when this method is called. For
      * <code>videoContentId</code> and <code>videoCmsId</code>, use the values
      * that are provided to the Google Ad Manager content ingestion service.
-     * <br><br>
-     * See the article on <a
-     * href="https://support.google.com/admanager/answer/1068325">video content
-     * </a> for more details.
      *
+     * @see <a href="https://support.google.com/admanager/answer/1068325">
+     *     VAST ad tag URL parameters</a>
      * @param videoContentId The video content ID.
      * @param videoCmsId The video CMS ID.
      */
@@ -749,11 +794,14 @@ declare namespace googletag {
     /**
      * Enables collapsing of slot divs so that they don't take up any space on
      * the page when there is no ad content to display. This mode must be set
-     * before the service is enabled. See the
-     * <a
-     * href="https://developers.google.com/publisher-tag/samples/collapse-empty-ad-slots">
-     * collapse empty ad slots</a> sample for more details.
+     * before the service is enabled.
      *
+     * @see <a href="
+     *     evelopers.google.com/publisher-tag/samples/collapse-empty-ad-slots">
+     *     Collapse empty ad slots</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/minimize-layout-shift">
+     *     Minimize layout shift</a>
      * @param collapseBeforeAdFetch Whether to collapse the slots even before
      *     the ads are fetched. This parameter is optional; if not provided,
      *     <code>false</code> will be used as the default value.
@@ -804,13 +852,13 @@ declare namespace googletag {
     setLocation(address: string): PubAdsService;
 
     /**
-     * Sets the value for the publisher-provided ID. See the article on
-     * <a href="https://support.google.com/admanager/answer/2880055">PPID</a>
-     * for more details.
+     * Sets the value for the publisher-provided ID.
      *
      * @example
      *   googletag.pubads().setPublisherProvidedId('AB123456789');
      *
+     * @see <a href="https://support.google.com/admanager/answer/2880055">
+     *     About publisher provided identifiers</a>
      * @param ppid An alphanumeric ID provided by the publisher with a
      *     recommended maximum of 150 characters.
      * @return The service object on which the method was called.
@@ -821,16 +869,16 @@ declare namespace googletag {
      * Sets values for AdSense attributes that apply to all ad slots under the
      * Publisher Ads service.
      * <br><br>
-     * See
-     * <a href="https://developers.google.com/publisher-tag/adsense_attributes">
-     * AdSense Attributes</a> for a list of available keys and values. Calling
-     * this more than once for the same key will override previously set values
-     * for that key. All values must be set before calling <code>display</code>
-     * or <code>refresh</code>.
+     * Calling this more than once for the same key will override previously set
+     * values for that key. All values must be set before calling
+     * <code>display</code> or <code>refresh</code>.
      *
      * @example
      *   googletag.pubads().set('adsense_background_color', '#FFFFFF');
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/adsense_attributes">
+     *     AdSense Attributes</a>
      * @param key The name of the attribute.
      * @param value Attribute value.
      * @return The service object on which the method was called.
@@ -846,6 +894,9 @@ declare namespace googletag {
      *   var color = googletag.pubads().get('adsense_background_color');
      *   // color == '#FFFFFF'.
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/adsense_attributes">
+     *     AdSense Attributes</a>
      * @param key Name of the attribute to look for.
      * @return Current value for the attribute key, or <code>null</code> if the
      *     key is not present.
@@ -880,6 +931,12 @@ declare namespace googletag {
      * @example
      *   googletag.pubads().display('/1234567/sports', [728, 90], 'div-1');
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/display-test-ad">
+     *     Display a test ad</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/control-ad-loading">
+     *     Control ad loading and refresh</a>
      * @param adUnitPath The <a href=
      *     "https://developers.google.com/publisher-tag/guides/get-started#ad-unit-path">
      *     ad unit path</a> of slot to be rendered.
@@ -923,9 +980,7 @@ declare namespace googletag {
 
     /**
      * Configures whether all ads on the page should be forced to be rendered
-     * using a SafeFrame container. For more details, please see the article on
-     * <a href="https://support.google.com/admanager/answer/6023110">rendering
-     * creatives using SafeFrame</a>.
+     * using a SafeFrame container.
      * <br><br>
      * Please keep the following things in mind while using this API:
      * <ul>
@@ -945,9 +1000,7 @@ declare namespace googletag {
      *   <li>
      *     However, if set to <code>false</code> or left unspecified, the ad
      *     will be rendered using a SafeFrame container depending on the type of
-     *     creative and the selection made in the Google Ad Manager UI (see
-     *     <a href="https://support.google.com/admanager/answer/6023110">related
-     *     article</a>).
+     *     creative and the selection made in the Google Ad Manager UI.
      *   </li>
      *   <li>
      *     This API should be used with caution as it could impact the behaviour
@@ -971,7 +1024,8 @@ declare namespace googletag {
      *
      *   googletag.display();
      *
-     *
+     * @see <a href="https://support.google.com/admanager/answer/6023110">
+     *     Render creatives using SafeFrame</a>
      * @param forceSafeFrame <code>true</code> to force all ads on the page to
      *     be rendered in SafeFrames and <code>false</code> to change the
      *     previous setting to false. Setting this to <code>false</code> when
@@ -986,9 +1040,7 @@ declare namespace googletag {
      * will be ignored if an invalid value is passed for a recognized key.
      *
      * These page-level preferences will be overridden by slot-level
-     * preferences, if specified. For more details, please see the article on
-     * <a href="https://support.google.com/admanager/answer/6023110">rendering
-     * creatives using SafeFrame</a>.
+     * preferences, if specified.
      *
      * @example
      *   googletag.pubads().setForceSafeFrame(true);
@@ -1016,6 +1068,8 @@ declare namespace googletag {
      *
      *   googletag.display();
      *
+     * @see <a href="https://support.google.com/admanager/answer/6023110">
+     *     Render creatives using SafeFrame</a>
      * @param config The configuration object.
      * @return The service object on which the method was called.
      */
@@ -1041,6 +1095,12 @@ declare namespace googletag {
      *     mobileScaling: 2.0  // Double the above values on mobile.
      *   });
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/ad-best-practices#prioritize_important_ad_slots">
+     *     Ads best practices: Prioritize &quot;important&quot; ad slots</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/lazy-loading">
+     *     Lazy loading</a>
      * @param config Configuration object allows customization of lazy behavior.
      *     Any omitted configurations will use a default set by Google
      *     that will be tuned over time. To disable a particular setting, such
@@ -1096,13 +1156,24 @@ declare namespace googletag {
      *     childDirectedTreatment: null
      *   });
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/configure-privacy">
+     *     Configure privacy settings</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/display-limited-ad">
+     *     Display a limited ad</a>
      * @param privacySettings Object containing privacy settings config.
      * @return The service object on which the function was called.
      */
     setPrivacySettings(privacySettings: PrivacySettingsConfig): PubAdsService;
   }
 
-  /** An object representing a single ad response. */
+  /**
+   * An object representing a single ad response.
+   *
+   * @see <a href="#googletag.Slot_getResponseInformation">
+   *     <code>Slot.getResponseInformation</code></a>
+   */
   interface ResponseInformation {
     /** The ID of the advertiser. */
     advertiserId: number | null;
@@ -1123,6 +1194,10 @@ declare namespace googletag {
   /**
    * An object representing the reward associated with a <a
    * href="https://support.google.com/admanager/answer/9116812">rewarded ad</a>.
+   *
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/samples/display-rewarded-ad">
+   *     Display a rewarded ad</a>
    */
   interface RewardedPayload {
     /** The type of item included in the reward (for example, "coin"). */
@@ -1136,6 +1211,9 @@ declare namespace googletag {
    * Configuration object for
    * <a href="https://support.google.com/admanager/answer/6023110">SafeFrame</a>
    * containers.
+   *
+   * @see <a href="#googletag.PubAdsService_setSafeFrameConfig">
+   *     <code>PubAdsService.setSafeFrameConfig</code></a>
    */
   interface SafeFrameConfig {
     /**
@@ -1163,12 +1241,12 @@ declare namespace googletag {
      * Reservation creatives. Pass in <code>null</code> to clear the stored
      * value.
      *
-     * Note: this feature is enabled by default. See the <a
-     * href="https://support.google.com/admanager/answer/9999596">Use unique
-     * SafeFrame domains</a> article for more information.
+     * Note: this feature is enabled by default.
      *
      * @deprecated It is no longer possible to disable this feature. Setting
      * <code>useUniqueDomain</code> has no effect.
+     * @see <a href="https://support.google.com/admanager/answer/9999596">
+     *     Render creatives using SafeFrame</a>
      */
     useUniqueDomain?: boolean | null;
   }
@@ -1180,6 +1258,12 @@ declare namespace googletag {
      * function when a specific GPT event happens on the page. The following
      * events are supported: <ul> <li><code><a
      * href="#googletag.events.ImpressionViewableEvent">googletag.events.ImpressionViewableEvent</a></code></li>
+     * <li><code><a
+     * href="#googletag.events.RewardedSlotClosedEvent">googletag.events.RewardedSlotClosedEvent</a></code></li>
+     * <li><code><a
+     * href="#googletag.events.RewardedSlotGrantedEvent">googletag.events.RewardedSlotGrantedEvent</a></code></li>
+     * <li><code><a
+     * href="#googletag.events.RewardedSlotReadyEvent">googletag.events.RewardedSlotReadyEvent</a></code></li>
      * <li><code><a
      * href="#googletag.events.SlotOnloadEvent">googletag.events.SlotOnloadEvent</a></code></li>
      * <li><code><a
@@ -1214,6 +1298,9 @@ declare namespace googletag {
      *     }
      *   });
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
      * @param eventType A string representing the type of event generated by
      *     GPT. Event types are case sensitive.
      * @param listener Function that takes a single event object argument.
@@ -1548,6 +1635,9 @@ declare namespace googletag {
      * @see <a href="
      *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
      *     Ad event listeners</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/display-rewarded-ad">
+     *     Display a rewarded ad</a>
      */
     interface RewardedSlotGrantedEvent extends Event {
       /** An object containing information about the reward that was granted. */
@@ -1578,6 +1668,9 @@ declare namespace googletag {
      * @see <a href="
      *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
      *     Ad event listeners</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/display-rewarded-ad">
+     *     Display a rewarded ad</a>
      */
 
     // tslint:disable-next-line:no-empty-interface
@@ -1612,6 +1705,9 @@ declare namespace googletag {
      * @see <a href="
      *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
      *     Ad event listeners</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/display-rewarded-ad">
+     *     Display a rewarded ad</a>
      */
     interface RewardedSlotReadyEvent extends Event {
       /**
@@ -1689,10 +1785,10 @@ declare namespace googletag {
   /**
    * Builder for size mapping specification objects. This builder is provided
    * to help easily construct size specifications.
-   * <br><br>
-   * See the <a
-   * href="https://developers.google.com/publisher-tag/guides/ad-sizes#responsive_ads">
-   * Ad sizes</a> guide for more details.
+   *
+   * @see <a href="
+   *     https://developers.google.com/publisher-tag/guides/ad-sizes#responsive_ads">
+   *     Ad sizes: Responsive ads</a>
    */
   interface SizeMappingBuilder {
     /**
@@ -1751,10 +1847,7 @@ declare namespace googletag {
      * Sets a value for an AdSense attribute on this ad slot. This will override
      * any values set at the service level for this key.
      * <br><br>
-     * See the
-     * <a href="https://developers.google.com/publisher-tag/adsense_attributes">
-     * AdSense Attributes</a>
-     * for a list of available keys and values. Calling this method more than
+     * Calling this method more than
      * once for the same key will override previously set values for that key.
      * All values must be set before calling <code>display</code> or
      * <code>refresh</code>.
@@ -1765,6 +1858,9 @@ declare namespace googletag {
      *            .set('adsense_background_color', '#FFFFFF')
      *            .addService(googletag.pubads());
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/adsense_attributes">
+     *     AdSense Attributes</a>
      * @param key The name of the attribute.
      * @param value Attribute value.
      * @return The slot object on which the method was called.
@@ -1785,6 +1881,9 @@ declare namespace googletag {
      *   var color = slot.get('adsense_background_color');
      *   // color == '#FFFFFF'.
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/adsense_attributes">
+     *     AdSense Attributes</a>
      * @param key Name of the attribute to look for.
      * @return Current value for the attribute key, or <code>null</code> if the
      *     key is not present.
@@ -1818,6 +1917,12 @@ declare namespace googletag {
      *   googletag.defineSlot('/1234567/sports', [160, 600])
      *            .addService(googletag.pubads());
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/get-started">
+     *     Get Started with Google Publisher Tags</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/display-test-ad">
+     *     Display a test ad</a>
      * @param service The service to be added.
      * @return The slot object on which the method was called.
      */
@@ -1826,10 +1931,6 @@ declare namespace googletag {
     /**
      * Sets an array of mappings from a minimum viewport size to slot size
      * for this slot.
-     * <br><br>
-     * See the <a
-     * href="https://developers.google.com/publisher-tag/guides/ad-sizes#responsive_ads">
-     * Ad sizes</a> guide for more details.
      *
      * @example
      *   var slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div-1')
@@ -1842,6 +1943,9 @@ declare namespace googletag {
      *
      *   slot.defineSizeMapping(mapping);
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/ad-sizes#responsive_ads">
+     *     Ad sizes: Responsive ads</a>
      * @param sizeMapping Array of size mappings. You can use <code><a
      *     href="#googletag.SizeMappingBuilder">SizeMappingBuilder</a></code>
      *     to create it. Each size mapping is an array of two elements:
@@ -1872,10 +1976,6 @@ declare namespace googletag {
 
     /**
      * Sets a slot-level ad category exclusion label on this slot.
-     * <br><br>
-     * See the article on
-     * <a href="https://support.google.com/admanager/answer/3238504">ad
-     * exclusion</a> for more details.
      *
      * @example
      *   // Label = AirlineAd
@@ -1883,6 +1983,8 @@ declare namespace googletag {
      *            .setCategoryExclusion('AirlineAd')
      *            .addService(googletag.pubads());
      *
+     * @see <a href="https://support.google.com/admanager/answer/3238504">
+     *     Custom labels to block ads</a>
      * @param categoryExclusion The ad category exclusion label to add.
      * @return The slot object on which the method was called.
      */
@@ -1942,6 +2044,9 @@ declare namespace googletag {
      *   // Example with multiple values for a key inside in an array.
      *   slot.setTargeting('interests', ['sports', 'music']);
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/key-value-targeting">
+     *     Key-value targeting</a>
      * @param key Targeting parameter key.
      * @param value Targeting parameter value or array of values.
      * @return The slot object on which the method was called.
@@ -1966,6 +2071,9 @@ declare namespace googletag {
      *   slot.clearTargeting();
      *   // All targeting has been cleared.
      *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/key-value-targeting">
+     *     Key-value targeting</a>
      * @param key Targeting parameter key. The key is optional; all
      *     targeting parameters will be cleared if it is unspecified.
      * @return The slot object on which the method was called.
@@ -2027,6 +2135,12 @@ declare namespace googletag {
      *   // The above will cause the div for this slot to be collapsed
      *   // only after GPT detects that no ads are available for the slot.
      *
+     * @see <a href="
+     *     evelopers.google.com/publisher-tag/samples/collapse-empty-ad-slots">
+     *     Collapse empty ad slots</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/guides/minimize-layout-shift">
+     *     Minimize layout shift</a>
      * @param collapse Whether to collapse the slot if no ad is returned.
      * @param collapseBeforeAdFetch Whether to collapse the slot even before an
      *     ad is fetched. Ignored if collapse is not <code>true</code>.
@@ -2069,9 +2183,7 @@ declare namespace googletag {
 
     /**
      * Configures whether ads in this slot should be forced to be rendered using
-     * a SafeFrame container. For more details, please see the article on <a
-     * href="https://support.google.com/admanager/answer/6023110">rendering
-     * creatives using SafeFrame</a>.
+     * a SafeFrame container.
      * <br><br>
      * Please keep the following things in mind while using this API:
      * <ul>
@@ -2091,9 +2203,7 @@ declare namespace googletag {
      *   <li>
      *     However, if set to <code>false</code> or left unspecified, the ad
      *     will be rendered using a SafeFrame container depending on the type of
-     *     creative and the selection made in the Google Ad Manager UI (see
-     *     <a href="https://support.google.com/admanager/answer/6023110">related
-     *     article</a>).
+     *     creative and the selection made in the Google Ad Manager UI.
      *   </li>
      *   <li>
      *     This API should be used with caution as it could impact the behaviour
@@ -2108,6 +2218,8 @@ declare namespace googletag {
      *            .setForceSafeFrame(true)
      *            .addService(googletag.pubads());
      *
+     * @see <a href="https://support.google.com/admanager/answer/6023110">
+     *     Render creatives using SafeFrame</a>
      * @param forceSafeFrame <code>true</code> to force all ads in this slot to
      *     be rendered in SafeFrames and <code>false</code> to opt-out of a
      *     page-level setting (if present). Setting this to <code>false</code>
@@ -2122,9 +2234,7 @@ declare namespace googletag {
      * will be ignored if an invalid value is passed for a recognized key.
      *
      * These slot-level preferences, if specified, will override any page-level
-     * preferences. For more details, please see the article on
-     * <a href="https://support.google.com/admanager/answer/6023110">rendering
-     * creatives using SafeFrame</a>.
+     * preferences.
      *
      * @example
      *   googletag.pubads().setForceSafeFrame(true);
@@ -2141,6 +2251,8 @@ declare namespace googletag {
      *
      *   googletag.display();
      *
+     * @see <a href="https://support.google.com/admanager/answer/6023110">
+     *     Render creatives using SafeFrame</a>
      * @param config The configuration object.
      * @return The slot object on which the method was called.
      */
