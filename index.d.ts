@@ -2308,7 +2308,7 @@ declare namespace googletag {
   }
 
   /** Array of two numbers representing [width, height]. */
-  type SingleSizeArray = number[];
+  type SingleSizeArray = [number, number];
 
   /**
    * Named sizes that a slot can have. In most cases size is a fixed-size
@@ -2344,7 +2344,7 @@ declare namespace googletag {
   /**
    * A mapping of viewport size to ad sizes. Used for responsive ads.
    */
-  type SizeMapping = GeneralSize[];
+  type SizeMapping = [SingleSizeArray, GeneralSize];
 
   /**
    * A list of size mappings.
