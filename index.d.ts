@@ -222,11 +222,14 @@ declare namespace googletag {
    * @example
    *   // The calls to construct an ad and display contents.
    *   var slot1 =
-   *       googletag.pubads().display('/1234567/sports', [728, 90], 'div-1');
+   *       googletag.defineSlot('/1234567/sports', [728, 90], 'div-1');
+   *   googletag.display('div-1');
    *   var slot2 =
-   *       googletag.pubads().display('/1234567/news', [160, 600], 'div-2');
+   *       googletag.defineSlot('/1234567/news', [160, 600], 'div-2');
+   *   googletag.display('div-2');
    *   var slot3 =
-   *       googletag.pubads().display('/1234567/weather', [160, 600], 'div-3');
+   *       googletag.defineSlot('/1234567/weather', [160, 600], 'div-3');
+   *   googletag.display('div-3');
    *
    *   // This call to destroy only slot1.
    *   googletag.destroySlots([slot1]);
@@ -1022,7 +1025,8 @@ declare namespace googletag {
      *   googletag.defineSlot('/1234567/news', [160, 600], 'div-2')
      *            .addService(googletag.pubads());
      *
-     *   googletag.display();
+     *   googletag.display('div-1');
+     *   googletag.display('div-2');
      *
      * @see <a href="https://support.google.com/admanager/answer/6023110">
      *     Render creatives using SafeFrame</a>
@@ -1066,7 +1070,8 @@ declare namespace googletag {
      *   googletag.defineSlot('/1234567/news', [160, 600], 'div-2')
      *            .addService(googletag.pubads());
      *
-     *   googletag.display();
+     *   googletag.display('div-1');
+     *   googletag.display('div-2');
      *
      * @see <a href="https://support.google.com/admanager/answer/6023110">
      *     Render creatives using SafeFrame</a>
@@ -1291,7 +1296,7 @@ declare namespace googletag {
      *   // a listener for an event for a specific slot only. You can, however,
      *   // programmatically filter a listener to respond only to a certain ad
      *   // slot, using this pattern:
-     *   var targetSlot = ...;
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
      *   googletag.pubads().addEventListener('slotOnload', function(event) {
      *     if (event.slot === targetSlot) {
      *       // Slot specific logic.
@@ -1383,7 +1388,7 @@ declare namespace googletag {
      *   // request for a slot. Each slot will fire this event, even though they
      *   // may be batched together in a single request if single request
      *   // architecture (SRA) is enabled.
-     *   var targetSlot = ...;
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
      *   googletag.pubads().addEventListener('slotRequested', function(event) {
      *     var slot = event.slot;
      *     console.log('Slot', slot.getSlotElementId(), 'has been requested.');
@@ -1409,7 +1414,7 @@ declare namespace googletag {
      *
      * @example
      *   // This listener is called when a slot has finished rendering.
-     *   var targetSlot = ...;
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
      *   googletag.pubads().addEventListener('slotRenderEnded',
      *       function(event) {
      *         var slot = event.slot;
@@ -1497,7 +1502,7 @@ declare namespace googletag {
      *
      * @example
      *   // This listener is called when an impression becomes viewable.
-     *   var targetSlot = ...;
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
      *   googletag.pubads().addEventListener('impressionViewable',
      *       function(event) {
      *         var slot = event.slot;
@@ -1524,7 +1529,7 @@ declare namespace googletag {
      *
      * @example
      *   // This listener is called when a creative iframe load event fires.
-     *   var targetSlot = ...;
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
      *   googletag.pubads().addEventListener('slotOnload', function(event) {
      *     var slot = event.slot;
      *     console.log('Creative iframe for slot', slot.getSlotElementId(),
@@ -1550,7 +1555,7 @@ declare namespace googletag {
      * @example
      *   // This listener is called whenever the on-screen percentage of an
      *   // ad slot's area changes.
-     *   var targetSlot = ...;
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
      *   googletag.pubads().addEventListener('slotVisibilityChanged',
      *       function(event) {
      *         var slot = event.slot;
@@ -1586,7 +1591,7 @@ declare namespace googletag {
      * @example
      *   // This listener is called when an ad response has been received
      *   // for a slot.
-     *   var targetSlot = ...;
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
      *   googletag.pubads().addEventListener('slotResponseReceived',
      *       function(event) {
      *         var slot = event.slot;
@@ -1614,7 +1619,7 @@ declare namespace googletag {
      * @example
      *   // This listener is called whenever a reward is granted for a
      *   // rewarded ad.
-     *   var targetSlot = ...;
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
      *   googletag.pubads().addEventListener('rewardedSlotGranted',
      *       function(event) {
      *         var slot = event.slot;
@@ -1652,7 +1657,7 @@ declare namespace googletag {
      * instead.
      * @example
      *   // This listener is called when the user closes a rewarded ad slot.
-     *   var targetSlot = ...;
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
      *   googletag.pubads().addEventListener('rewardedSlotClosed',
      *       function(event) {
      *         var slot = event.slot;
@@ -1684,14 +1689,14 @@ declare namespace googletag {
      * @example
      *   // This listener is called when a rewarded ad slot becomes ready to be
      *   // displayed.
-     *   var targetSlot = ...;
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
      *   googletag.pubads().addEventListener('rewardedSlotReady',
      *       function(event) {
      *         var slot = event.slot;
      *         console.log('Rewarded ad slot', slot.getSlotElementId(),
      *                     'is ready to be displayed.');
      *
-     *         if(/* User consents to viewing the ad. *&#47;) {
+     *         if('User consents to viewing the ad.') {
      *           // Display the ad.
      *           event.makeRewardedVisible();
      *         }
@@ -2249,7 +2254,8 @@ declare namespace googletag {
      *   googletag.defineSlot('/1234567/news', [160, 600], 'div-2')
      *            .addService(googletag.pubads());
      *
-     *   googletag.display();
+     *   googletag.display('div-1');
+     *   googletag.display('div-2');
      *
      * @see <a href="https://support.google.com/admanager/answer/6023110">
      *     Render creatives using SafeFrame</a>
