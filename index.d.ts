@@ -36,16 +36,6 @@ declare namespace googletag {
   function companionAds(): CompanionAdsService;
 
   /**
-   * Returns a reference to the <code><a
-   * href="#googletag.ContentService">ContentService</a></code>.
-   *
-   * @return The content service.
-   * @deprecated This method will be removed after March 29, 2022. See also
-   *     <code><a href="#googletag.ContentService">ContentService</a></code>.
-   */
-  function content(): ContentService;
-
-  /**
    * Reference to the global command queue for asynchronous execution of
    * GPT-related calls.
    * <br><br>
@@ -372,35 +362,6 @@ declare namespace googletag {
      *     <code>false</code> to leave them unchanged.
      */
     setRefreshUnfilledSlots(value: boolean): void;
-  }
-
-  /**
-   * The content service. This service is used to set the content of a slot
-   * manually.
-   * @deprecated This service will be unavailable after March 29, 2022. Use the
-   *     browser's built-in DOM APIs to directly add content to div elements
-   *     instead. See also <code><a
-   *     href="#googletag.content">googletag.content()</a></code>.
-   */
-  interface ContentService extends Service {
-    /**
-     * Fills a slot with the given content. If services are not yet enabled,
-     * stores the content and fills it in when services are enabled.
-     *
-     * @example
-     *   var slot = googletag.defineSlot('/1234567/sports', [728, 90], 'div-1')
-     *                       .addService(googletag.content());
-     *   googletag.enableServices();
-     *
-     *   var content = '&lt;a href="www.mydestinationsite.com"&gt;' +
-     *                 '&lt;img src="www.mysite.com/img.png"&gt;' +
-     *                 '&lt;/img&gt;&lt;/a&gt;';
-     *   googletag.content().setContent(slot, content);
-     *
-     * @param slot The slot to be filled.
-     * @param content The HTML content for the slot.
-     */
-    setContent(slot: Slot, content: string): void;
   }
 
   /**
