@@ -365,45 +365,6 @@ declare namespace googletag {
   }
 
   /**
-   * This is the namespace that GPT uses for <a href="#enumtypes">enum types</a>.
-   */
-  namespace enums {
-    /**
-     * Out-of-page formats supported by GPT.
-     *
-     * @see <a href="#googletag.defineOutOfPageSlot">
-     *     <code>googletag.defineOutOfPageSlot</code></a>
-     */
-    enum OutOfPageFormat {
-      /** Anchor format where slot sticks to the top of the viewport. */
-      TOP_ANCHOR,
-      /** Anchor format where slot sticks to the bottom of the viewport. */
-      BOTTOM_ANCHOR,
-      /** Web interstitial creative format. */
-      INTERSTITIAL,
-      /** Rewarded format. */
-      REWARDED,
-    }
-
-    /**
-     * <a href="https://support.google.com/admanager/answer/11233407">
-     * Traffic sources</a> supported by GPT.
-     *
-     * @see <a href="#googletag.PrivacySettingsConfig_trafficSource">
-     *     <code>PrivacySettingsConfig.trafficSource</code></a>
-     */
-    enum TrafficSource {
-      /**
-       * Traffic redirected from properties other than owned (acquired or otherwise
-       * incentivized activity).
-       */
-      PURCHASED,
-      /** Direct URL entry, site search, or app download. */
-      ORGANIC,
-    }
-  }
-
-  /**
    * Configuration object for privacy settings.
    *
    * @see <a href="
@@ -1320,436 +1281,6 @@ declare namespace googletag {
   }
 
   /**
-   * This is the namespace that GPT uses for
-   * <a href="#googletag.events.Event">Events</a>. Your code can react to these
-   * events using
-   * <a href="#googletag.Service_addEventListener">Service.addEventListener</a>.
-   */
-  namespace events {
-    /**
-     * Base Interface for all GPT events. All GPT events below will have the
-     * following fields.
-     *
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
-     *     Ad event listeners</a>
-     */
-    interface Event {
-      /** The slot that triggered the event. */
-      slot: Slot;
-
-      /** Name of the service that triggered the event. */
-      serviceName: string;
-    }
-
-    /**
-     * This event is fired when an ad has been requested for a particular slot.
-     *
-     * @example
-     *   // This listener is called when the specified service issues an ad
-     *   // request for a slot. Each slot will fire this event, even though they
-     *   // may be batched together in a single request if single request
-     *   // architecture (SRA) is enabled.
-     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-     *   googletag.pubads().addEventListener('slotRequested', function(event) {
-     *     var slot = event.slot;
-     *     console.log('Slot', slot.getSlotElementId(), 'has been requested.');
-     *
-     *     if (slot === targetSlot) {
-     *       // Slot specific logic.
-     *     }
-     *   });
-     *
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
-     *     Ad event listeners</a>
-     */
-    // tslint:disable-next-line:no-empty-interface
-    interface SlotRequestedEvent extends Event {}
-
-    /**
-     * This event is fired when the creative code is injected into a slot. This
-     * event will occur before the creative's resources are fetched, so the
-     * creative may not be visible yet. If you need to know when all creative
-     * resources for a slot have finished loading, consider the <a
-     * href="#googletag.events_SlotOnloadEvent">SlotOnloadEvent</a> instead.
-     *
-     * @example
-     *   // This listener is called when a slot has finished rendering.
-     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-     *   googletag.pubads().addEventListener('slotRenderEnded',
-     *       function(event) {
-     *         var slot = event.slot;
-     *         console.group(
-     *             'Slot', slot.getSlotElementId(), 'finished rendering.');
-     *
-     *         // Log details of the rendered ad.
-     *         console.log('Advertiser ID:', event.advertiserId);
-     *         console.log('Campaign ID: ', event.campaignId);
-     *         console.log('Creative ID: ', event.creativeId);
-     *         console.log('Is empty?:', event.isEmpty);
-     *         console.log('Line Item ID:', event.lineItemId);
-     *         console.log('Size:', event.size);
-     *         console.log('Source Agnostic Creative ID:',
-     *                     event.sourceAgnosticCreativeId);
-     *         console.log('Source Agnostic Line Item ID:',
-     *                     event.sourceAgnosticLineItemId);
-     *         console.groupEnd();
-     *
-     *         if (slot === targetSlot) {
-     *           // Slot specific logic.
-     *         }
-     *       }
-     *   );
-     *
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
-     *     Ad event listeners</a>
-     */
-    interface SlotRenderEndedEvent extends Event {
-      /**
-       * Whether an ad was returned for the slot. Value is <code>true</code> if
-       * no ad was returned, <code>false</code> otherwise.
-       */
-      isEmpty: boolean;
-      /**
-       * Indicates the pixel size of the rendered creative. Example:
-       * <code>[728, 90]</code>. Value is <code>null</code> for empty ad slots.
-       */
-      size: number[] | string | null;
-      /**
-       * Advertiser ID of the rendered ad. Value is <code>null</code> for empty
-       * slots, backfill ads, and creatives rendered by services other than
-       * <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
-       */
-      advertiserId: number | null;
-      /**
-       * Campaign ID of the rendered ad. Value is <code>null</code> for empty
-       * slots, backfill ads, and creatives rendered by services other than
-       * <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
-       */
-      campaignId: number | null;
-      /**
-       * Creative ID of the rendered reservation ad. Value is <code>null</code>
-       * for empty slots, backfill ads, and creatives rendered by services other
-       * than <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
-       */
-      creativeId: number | null;
-      /**
-       * Line item ID of the rendered reservation ad. Value is <code>null</code>
-       * for empty slots, backfill ads, and creatives rendered by services other
-       * than <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
-       */
-      lineItemId: number | null;
-      /**
-       * Creative ID of the rendered reservation or backfill ad. Value is
-       * <code>null</code> if the ad is not a reservation or line item backfill,
-       * or the creative is rendered by services other than
-       * <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
-       */
-      sourceAgnosticCreativeId: number | null;
-      /**
-       * Line item ID of the rendered reservation or backfill ad. Value is
-       * <code>null</code> if the ad is not a reservation or line item backfill,
-       * or the creative is rendered by services other than
-       * <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
-       */
-      sourceAgnosticLineItemId: number | null;
-    }
-
-    /**
-     * This event is fired when an impression becomes viewable, according to the
-     * <a href="https://support.google.com/admanager/answer/4524488">Active
-     * View criteria</a>.
-     *
-     * @example
-     *   // This listener is called when an impression becomes viewable.
-     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-     *   googletag.pubads().addEventListener('impressionViewable',
-     *       function(event) {
-     *         var slot = event.slot;
-     *         console.log('Impression for slot', slot.getSlotElementId(),
-     *                     'became viewable.');
-     *
-     *         if (slot === targetSlot) {
-     *           // Slot specific logic.
-     *         }
-     *       }
-     *   );
-     *
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
-     *     Ad event listeners</a>
-     */
-    // tslint:disable-next-line:no-empty-interface
-    interface ImpressionViewableEvent extends Event {}
-
-    /**
-     * This event is fired when the creative's iframe fires its load event. When
-     * rendering rich media ads in sync rendering mode, no iframe is used so no
-     * <code>SlotOnloadEvent</code> will be fired.
-     *
-     * @example
-     *   // This listener is called when a creative iframe load event fires.
-     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-     *   googletag.pubads().addEventListener('slotOnload', function(event) {
-     *     var slot = event.slot;
-     *     console.log('Creative iframe for slot', slot.getSlotElementId(),
-     *                 'has loaded.');
-     *
-     *     if (slot === targetSlot) {
-     *       // Slot specific logic.
-     *     }
-     *   });
-     *
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
-     *     Ad event listeners</a>
-     */
-    // tslint:disable-next-line:no-empty-interface
-    interface SlotOnloadEvent extends Event {}
-
-    /**
-     * This event is fired whenever the on-screen percentage of an ad slot's
-     * area changes. The event is throttled and will not fire more often than
-     * once every 200ms.
-     *
-     * @example
-     *   // This listener is called whenever the on-screen percentage of an
-     *   // ad slot's area changes.
-     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-     *   googletag.pubads().addEventListener('slotVisibilityChanged',
-     *       function(event) {
-     *         var slot = event.slot;
-     *         console.group(
-     *             'Visibility of slot', slot.getSlotElementId(), 'changed.');
-     *
-     *         // Log details of the event.
-     *         console.log('Visible area:', event.inViewPercentage + '%');
-     *         console.groupEnd();
-     *
-     *         if (slot === targetSlot) {
-     *           // Slot specific logic.
-     *         }
-     *       }
-     *   );
-     *
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
-     *     Ad event listeners</a>
-     */
-    interface SlotVisibilityChangedEvent extends Event {
-      /**
-       * The percentage of the ad's area that is visible. Value is a number
-       * between 0 and 100.
-       */
-      inViewPercentage: number;
-    }
-
-    /**
-     * This event is fired when an ad response has been received for a
-     * particular slot.
-     *
-     * @example
-     *   // This listener is called when an ad response has been received
-     *   // for a slot.
-     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-     *   googletag.pubads().addEventListener('slotResponseReceived',
-     *       function(event) {
-     *         var slot = event.slot;
-     *         console.log('Ad response for slot', slot.getSlotElementId(),
-     *                     'received.');
-     *
-     *         if (slot === targetSlot) {
-     *           // Slot specific logic.
-     *         }
-     *       }
-     *   );
-     *
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
-     *     Ad event listeners</a>
-     */
-    // tslint:disable-next-line:no-empty-interface
-    interface SlotResponseReceived extends Event {}
-
-    /**
-     * This event is fired when a reward is granted for viewing a <a
-     * href="https://support.google.com/admanager/answer/9116812">rewarded ad</a>.
-     * If the ad is closed before the criteria for granting a reward is met, this
-     * event will not fire.
-     * @example
-     *   // This listener is called whenever a reward is granted for a
-     *   // rewarded ad.
-     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-     *   googletag.pubads().addEventListener('rewardedSlotGranted',
-     *       function(event) {
-     *         var slot = event.slot;
-     *         console.group(
-     *             'Reward granted for slot', slot.getSlotElementId(), '.');
-     *
-     *         // Log details of the reward.
-     *         console.log('Reward type:', event.payload?.type);
-     *         console.log('Reward amount:', event.payload?.amount);
-     *         console.groupEnd();
-     *
-     *         if (slot === targetSlot) {
-     *           // Slot specific logic.
-     *         }
-     *       }
-     *   );
-     *
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
-     *     Ad event listeners</a>
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/display-rewarded-ad">
-     *     Display a rewarded ad</a>
-     */
-    interface RewardedSlotGrantedEvent extends Event {
-      /** An object containing information about the reward that was granted. */
-      payload: RewardedPayload | null;
-    }
-
-    /**
-     * This event is fired when a rewarded ad slot is closed by the user. It may
-     * fire either before or after a reward has been granted. To determine whether a
-     * reward has been granted, use <code><a
-     * href="#googletag.events_RewardedSlotGrantedEvent">RewardedSlotGrantedEvent</a></code>
-     * instead.
-     * @example
-     *   // This listener is called when the user closes a rewarded ad slot.
-     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-     *   googletag.pubads().addEventListener('rewardedSlotClosed',
-     *       function(event) {
-     *         var slot = event.slot;
-     *         console.log('Rewarded ad slot', slot.getSlotElementId(),
-     *                     'has been closed.');
-     *
-     *         if (slot === targetSlot) {
-     *           // Slot specific logic.
-     *         }
-     *       }
-     *   );
-     *
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
-     *     Ad event listeners</a>
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/display-rewarded-ad">
-     *     Display a rewarded ad</a>
-     */
-
-    // tslint:disable-next-line:no-empty-interface
-    interface RewardedSlotClosedEvent extends Event {}
-
-    /**
-     * This event is fired when a <a
-     * href="https://support.google.com/admanager/answer/9116812">rewarded ad</a> is
-     * ready to be displayed. The publisher is responsible for presenting the user
-     * an option to view the ad before displaying it.
-     * @example
-     *   // This listener is called when a rewarded ad slot becomes ready to be
-     *   // displayed.
-     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-     *   googletag.pubads().addEventListener('rewardedSlotReady',
-     *       function(event) {
-     *         var slot = event.slot;
-     *         console.log('Rewarded ad slot', slot.getSlotElementId(),
-     *                     'is ready to be displayed.');
-     *
-     *         if('User consents to viewing the ad.') {
-     *           // Display the ad.
-     *           event.makeRewardedVisible();
-     *         }
-     *
-     *         if (slot === targetSlot) {
-     *           // Slot specific logic.
-     *         }
-     *       }
-     *   );
-     *
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
-     *     Ad event listeners</a>
-     * @see <a href="
-     *     https://developers.google.com/publisher-tag/samples/display-rewarded-ad">
-     *     Display a rewarded ad</a>
-     */
-    interface RewardedSlotReadyEvent extends Event {
-      /**
-       * Displays the rewarded ad. This method should not be called until the user
-       * has consented to view the ad.
-       */
-      makeRewardedVisible(): void;
-    }
-
-    /**
-     * This is a pseudo-type that maps an event name to its corresponding event
-     * object type for <code><a href="#googletag.Service_addEventListener">
-     * Service.addEventListener</a></code> and
-     * <code><a href="#googletag.Service_removeEventListener">
-     * Service.removeEventListener</a></code>. It is documented for reference and
-     * type safety purposes only.
-     */
-    interface EventTypeMap {
-      /**
-       * Alias for <code><a href="#googletag.events_SlotRequestedEvent">
-       * SlotRequestedEvent</a></code>.
-       */
-      slotRequested: SlotRequestedEvent;
-
-      /**
-       * Alias for <code><a href="#googletag.events_SlotRenderEndedEvent">
-       * SlotRenderEndedEvent</a></code>.
-       */
-      slotRenderEnded: SlotRenderEndedEvent;
-
-      /**
-       * Alias for <code><a href="#googletag.events_ImpressionViewableEvent">
-       * ImpressionViewableEvent</a></code>.
-       */
-      impressionViewable: ImpressionViewableEvent;
-
-      /**
-       * Alias for <code><a href="#googletag.events_SlotOnloadEvent">
-       * SlotOnloadEvent</a></code>.
-       */
-      slotOnload: SlotOnloadEvent;
-
-      /**
-       * Alias for <code><a href="#googletag.events_SlotVisibilityChangedEvent">
-       * SlotVisibilityChangedEvent</a></code>.
-       */
-      slotVisibilityChanged: SlotVisibilityChangedEvent;
-
-      /**
-       * Alias for <code><a href="#googletag.events_SlotResponseReceived">
-       * SlotResponseReceived</a></code>.
-       */
-      slotResponseReceived: SlotResponseReceived;
-
-      /**
-       * Alias for <code><a href="#googletag.events_RewardedSlotGrantedEvent">
-       * RewardedSlotGrantedEvent</a></code>.
-       */
-      rewardedSlotGranted: RewardedSlotGrantedEvent;
-
-      /**
-       * Alias for <code><a href="#googletag.events_RewardedSlotClosedEvent">
-       * RewardedSlotClosedEvent</a></code>.
-       */
-      rewardedSlotClosed: RewardedSlotClosedEvent;
-
-      /**
-       * Alias for <code><a href="#googletag.events_RewardedSlotReadyEvent">
-       * RewardedSlotReadyEvent</a></code>.
-       */
-      rewardedSlotReady: RewardedSlotReadyEvent;
-    }
-  }
-
-  /**
    * Builder for size mapping specification objects. This builder is provided
    * to help easily construct size specifications.
    *
@@ -2318,4 +1849,473 @@ declare namespace googletag {
    * A list of size mappings.
    */
   type SizeMappingArray = SizeMapping[];
+
+  /**
+   * This is the namespace that GPT uses for <a href="#enumtypes">enum types</a>.
+   */
+  namespace enums {
+    /**
+     * Out-of-page formats supported by GPT.
+     *
+     * @see <a href="#googletag.defineOutOfPageSlot">
+     *     <code>googletag.defineOutOfPageSlot</code></a>
+     */
+    enum OutOfPageFormat {
+      /** Anchor format where slot sticks to the top of the viewport. */
+      TOP_ANCHOR,
+      /** Anchor format where slot sticks to the bottom of the viewport. */
+      BOTTOM_ANCHOR,
+      /** Web interstitial creative format. */
+      INTERSTITIAL,
+      /** Rewarded format. */
+      REWARDED,
+    }
+
+    /**
+     * <a href="https://support.google.com/admanager/answer/11233407">
+     * Traffic sources</a> supported by GPT.
+     *
+     * @see <a href="#googletag.PrivacySettingsConfig_trafficSource">
+     *     <code>PrivacySettingsConfig.trafficSource</code></a>
+     */
+    enum TrafficSource {
+      /**
+       * Traffic redirected from properties other than owned (acquired or otherwise
+       * incentivized activity).
+       */
+      PURCHASED,
+      /** Direct URL entry, site search, or app download. */
+      ORGANIC,
+    }
+  }
+
+  /**
+   * This is the namespace that GPT uses for
+   * <a href="#googletag.events.Event">Events</a>. Your code can react to these
+   * events using
+   * <a href="#googletag.Service_addEventListener">Service.addEventListener</a>.
+   */
+  namespace events {
+    /**
+     * Base Interface for all GPT events. All GPT events below will have the
+     * following fields.
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
+     */
+    interface Event {
+      /** The slot that triggered the event. */
+      slot: Slot;
+
+      /** Name of the service that triggered the event. */
+      serviceName: string;
+    }
+
+    /**
+     * This event is fired when an ad has been requested for a particular slot.
+     *
+     * @example
+     *   // This listener is called when the specified service issues an ad
+     *   // request for a slot. Each slot will fire this event, even though they
+     *   // may be batched together in a single request if single request
+     *   // architecture (SRA) is enabled.
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
+     *   googletag.pubads().addEventListener('slotRequested', function(event) {
+     *     var slot = event.slot;
+     *     console.log('Slot', slot.getSlotElementId(), 'has been requested.');
+     *
+     *     if (slot === targetSlot) {
+     *       // Slot specific logic.
+     *     }
+     *   });
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
+     */
+    // tslint:disable-next-line:no-empty-interface
+    interface SlotRequestedEvent extends Event {}
+
+    /**
+     * This event is fired when the creative code is injected into a slot. This
+     * event will occur before the creative's resources are fetched, so the
+     * creative may not be visible yet. If you need to know when all creative
+     * resources for a slot have finished loading, consider the <a
+     * href="#googletag.events_SlotOnloadEvent">SlotOnloadEvent</a> instead.
+     *
+     * @example
+     *   // This listener is called when a slot has finished rendering.
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
+     *   googletag.pubads().addEventListener('slotRenderEnded',
+     *       function(event) {
+     *         var slot = event.slot;
+     *         console.group(
+     *             'Slot', slot.getSlotElementId(), 'finished rendering.');
+     *
+     *         // Log details of the rendered ad.
+     *         console.log('Advertiser ID:', event.advertiserId);
+     *         console.log('Campaign ID: ', event.campaignId);
+     *         console.log('Creative ID: ', event.creativeId);
+     *         console.log('Is empty?:', event.isEmpty);
+     *         console.log('Line Item ID:', event.lineItemId);
+     *         console.log('Size:', event.size);
+     *         console.log('Source Agnostic Creative ID:',
+     *                     event.sourceAgnosticCreativeId);
+     *         console.log('Source Agnostic Line Item ID:',
+     *                     event.sourceAgnosticLineItemId);
+     *         console.groupEnd();
+     *
+     *         if (slot === targetSlot) {
+     *           // Slot specific logic.
+     *         }
+     *       }
+     *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
+     */
+    interface SlotRenderEndedEvent extends Event {
+      /**
+       * Whether an ad was returned for the slot. Value is <code>true</code> if
+       * no ad was returned, <code>false</code> otherwise.
+       */
+      isEmpty: boolean;
+      /**
+       * Indicates the pixel size of the rendered creative. Example:
+       * <code>[728, 90]</code>. Value is <code>null</code> for empty ad slots.
+       */
+      size: number[] | string | null;
+      /**
+       * Advertiser ID of the rendered ad. Value is <code>null</code> for empty
+       * slots, backfill ads, and creatives rendered by services other than
+       * <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
+       */
+      advertiserId: number | null;
+      /**
+       * Campaign ID of the rendered ad. Value is <code>null</code> for empty
+       * slots, backfill ads, and creatives rendered by services other than
+       * <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
+       */
+      campaignId: number | null;
+      /**
+       * Creative ID of the rendered reservation ad. Value is <code>null</code>
+       * for empty slots, backfill ads, and creatives rendered by services other
+       * than <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
+       */
+      creativeId: number | null;
+      /**
+       * Line item ID of the rendered reservation ad. Value is <code>null</code>
+       * for empty slots, backfill ads, and creatives rendered by services other
+       * than <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
+       */
+      lineItemId: number | null;
+      /**
+       * Creative ID of the rendered reservation or backfill ad. Value is
+       * <code>null</code> if the ad is not a reservation or line item backfill,
+       * or the creative is rendered by services other than
+       * <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
+       */
+      sourceAgnosticCreativeId: number | null;
+      /**
+       * Line item ID of the rendered reservation or backfill ad. Value is
+       * <code>null</code> if the ad is not a reservation or line item backfill,
+       * or the creative is rendered by services other than
+       * <code><a href="#googletag.PubAdsService">PubAdsService</a></code>.
+       */
+      sourceAgnosticLineItemId: number | null;
+    }
+
+    /**
+     * This event is fired when an impression becomes viewable, according to the
+     * <a href="https://support.google.com/admanager/answer/4524488">Active
+     * View criteria</a>.
+     *
+     * @example
+     *   // This listener is called when an impression becomes viewable.
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
+     *   googletag.pubads().addEventListener('impressionViewable',
+     *       function(event) {
+     *         var slot = event.slot;
+     *         console.log('Impression for slot', slot.getSlotElementId(),
+     *                     'became viewable.');
+     *
+     *         if (slot === targetSlot) {
+     *           // Slot specific logic.
+     *         }
+     *       }
+     *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
+     */
+    // tslint:disable-next-line:no-empty-interface
+    interface ImpressionViewableEvent extends Event {}
+
+    /**
+     * This event is fired when the creative's iframe fires its load event. When
+     * rendering rich media ads in sync rendering mode, no iframe is used so no
+     * <code>SlotOnloadEvent</code> will be fired.
+     *
+     * @example
+     *   // This listener is called when a creative iframe load event fires.
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
+     *   googletag.pubads().addEventListener('slotOnload', function(event) {
+     *     var slot = event.slot;
+     *     console.log('Creative iframe for slot', slot.getSlotElementId(),
+     *                 'has loaded.');
+     *
+     *     if (slot === targetSlot) {
+     *       // Slot specific logic.
+     *     }
+     *   });
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
+     */
+    // tslint:disable-next-line:no-empty-interface
+    interface SlotOnloadEvent extends Event {}
+
+    /**
+     * This event is fired whenever the on-screen percentage of an ad slot's
+     * area changes. The event is throttled and will not fire more often than
+     * once every 200ms.
+     *
+     * @example
+     *   // This listener is called whenever the on-screen percentage of an
+     *   // ad slot's area changes.
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
+     *   googletag.pubads().addEventListener('slotVisibilityChanged',
+     *       function(event) {
+     *         var slot = event.slot;
+     *         console.group(
+     *             'Visibility of slot', slot.getSlotElementId(), 'changed.');
+     *
+     *         // Log details of the event.
+     *         console.log('Visible area:', event.inViewPercentage + '%');
+     *         console.groupEnd();
+     *
+     *         if (slot === targetSlot) {
+     *           // Slot specific logic.
+     *         }
+     *       }
+     *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
+     */
+    interface SlotVisibilityChangedEvent extends Event {
+      /**
+       * The percentage of the ad's area that is visible. Value is a number
+       * between 0 and 100.
+       */
+      inViewPercentage: number;
+    }
+
+    /**
+     * This event is fired when an ad response has been received for a
+     * particular slot.
+     *
+     * @example
+     *   // This listener is called when an ad response has been received
+     *   // for a slot.
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
+     *   googletag.pubads().addEventListener('slotResponseReceived',
+     *       function(event) {
+     *         var slot = event.slot;
+     *         console.log('Ad response for slot', slot.getSlotElementId(),
+     *                     'received.');
+     *
+     *         if (slot === targetSlot) {
+     *           // Slot specific logic.
+     *         }
+     *       }
+     *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
+     */
+    // tslint:disable-next-line:no-empty-interface
+    interface SlotResponseReceived extends Event {}
+
+    /**
+     * This event is fired when a reward is granted for viewing a <a
+     * href="https://support.google.com/admanager/answer/9116812">rewarded ad</a>.
+     * If the ad is closed before the criteria for granting a reward is met, this
+     * event will not fire.
+     * @example
+     *   // This listener is called whenever a reward is granted for a
+     *   // rewarded ad.
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
+     *   googletag.pubads().addEventListener('rewardedSlotGranted',
+     *       function(event) {
+     *         var slot = event.slot;
+     *         console.group(
+     *             'Reward granted for slot', slot.getSlotElementId(), '.');
+     *
+     *         // Log details of the reward.
+     *         console.log('Reward type:', event.payload?.type);
+     *         console.log('Reward amount:', event.payload?.amount);
+     *         console.groupEnd();
+     *
+     *         if (slot === targetSlot) {
+     *           // Slot specific logic.
+     *         }
+     *       }
+     *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/display-rewarded-ad">
+     *     Display a rewarded ad</a>
+     */
+    interface RewardedSlotGrantedEvent extends Event {
+      /** An object containing information about the reward that was granted. */
+      payload: RewardedPayload | null;
+    }
+
+    /**
+     * This event is fired when a rewarded ad slot is closed by the user. It may
+     * fire either before or after a reward has been granted. To determine whether a
+     * reward has been granted, use <code><a
+     * href="#googletag.events_RewardedSlotGrantedEvent">RewardedSlotGrantedEvent</a></code>
+     * instead.
+     * @example
+     *   // This listener is called when the user closes a rewarded ad slot.
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
+     *   googletag.pubads().addEventListener('rewardedSlotClosed',
+     *       function(event) {
+     *         var slot = event.slot;
+     *         console.log('Rewarded ad slot', slot.getSlotElementId(),
+     *                     'has been closed.');
+     *
+     *         if (slot === targetSlot) {
+     *           // Slot specific logic.
+     *         }
+     *       }
+     *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/display-rewarded-ad">
+     *     Display a rewarded ad</a>
+     */
+
+    // tslint:disable-next-line:no-empty-interface
+    interface RewardedSlotClosedEvent extends Event {}
+
+    /**
+     * This event is fired when a <a
+     * href="https://support.google.com/admanager/answer/9116812">rewarded ad</a> is
+     * ready to be displayed. The publisher is responsible for presenting the user
+     * an option to view the ad before displaying it.
+     * @example
+     *   // This listener is called when a rewarded ad slot becomes ready to be
+     *   // displayed.
+     *   var targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
+     *   googletag.pubads().addEventListener('rewardedSlotReady',
+     *       function(event) {
+     *         var slot = event.slot;
+     *         console.log('Rewarded ad slot', slot.getSlotElementId(),
+     *                     'is ready to be displayed.');
+     *
+     *         if('User consents to viewing the ad.') {
+     *           // Display the ad.
+     *           event.makeRewardedVisible();
+     *         }
+     *
+     *         if (slot === targetSlot) {
+     *           // Slot specific logic.
+     *         }
+     *       }
+     *   );
+     *
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/ad-event-listeners">
+     *     Ad event listeners</a>
+     * @see <a href="
+     *     https://developers.google.com/publisher-tag/samples/display-rewarded-ad">
+     *     Display a rewarded ad</a>
+     */
+    interface RewardedSlotReadyEvent extends Event {
+      /**
+       * Displays the rewarded ad. This method should not be called until the user
+       * has consented to view the ad.
+       */
+      makeRewardedVisible(): void;
+    }
+
+    /**
+     * This is a pseudo-type that maps an event name to its corresponding event
+     * object type for <code><a href="#googletag.Service_addEventListener">
+     * Service.addEventListener</a></code> and
+     * <code><a href="#googletag.Service_removeEventListener">
+     * Service.removeEventListener</a></code>. It is documented for reference and
+     * type safety purposes only.
+     */
+    interface EventTypeMap {
+      /**
+       * Alias for <code><a href="#googletag.events_SlotRequestedEvent">
+       * SlotRequestedEvent</a></code>.
+       */
+      slotRequested: SlotRequestedEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_SlotRenderEndedEvent">
+       * SlotRenderEndedEvent</a></code>.
+       */
+      slotRenderEnded: SlotRenderEndedEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_ImpressionViewableEvent">
+       * ImpressionViewableEvent</a></code>.
+       */
+      impressionViewable: ImpressionViewableEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_SlotOnloadEvent">
+       * SlotOnloadEvent</a></code>.
+       */
+      slotOnload: SlotOnloadEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_SlotVisibilityChangedEvent">
+       * SlotVisibilityChangedEvent</a></code>.
+       */
+      slotVisibilityChanged: SlotVisibilityChangedEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_SlotResponseReceived">
+       * SlotResponseReceived</a></code>.
+       */
+      slotResponseReceived: SlotResponseReceived;
+
+      /**
+       * Alias for <code><a href="#googletag.events_RewardedSlotGrantedEvent">
+       * RewardedSlotGrantedEvent</a></code>.
+       */
+      rewardedSlotGranted: RewardedSlotGrantedEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_RewardedSlotClosedEvent">
+       * RewardedSlotClosedEvent</a></code>.
+       */
+      rewardedSlotClosed: RewardedSlotClosedEvent;
+
+      /**
+       * Alias for <code><a href="#googletag.events_RewardedSlotReadyEvent">
+       * RewardedSlotReadyEvent</a></code>.
+       */
+      rewardedSlotReady: RewardedSlotReadyEvent;
+    }
+  }
 }
