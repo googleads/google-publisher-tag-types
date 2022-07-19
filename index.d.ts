@@ -819,12 +819,13 @@ declare namespace googletag {
      * Sets the value for the publisher-provided ID.
      *
      * @example
-     *   googletag.pubads().setPublisherProvidedId('AB123456789');
+     *   googletag.pubads()
+     *            .setPublisherProvidedId('12JD92JD8078S8J29SDOAKC0EF230337');
      *
      * @see <a href="https://support.google.com/admanager/answer/2880055">
      *     About publisher provided identifiers</a>
-     * @param ppid An alphanumeric ID provided by the publisher with a
-     *     recommended maximum of 150 characters.
+     * @param ppid An alphanumeric ID provided by the publisher. Must be between
+     *     32 and 150 characters.
      * @return The service object on which the method was called.
      */
     setPublisherProvidedId(ppid: string): PubAdsService;
