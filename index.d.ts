@@ -2326,7 +2326,9 @@ declare namespace googletag {
     }
   }
 
-  /** Main configuration interface for slot-level settings. */
+  /**
+   * Main configuration interface for slot-level settings.
+   */
   namespace config {
     interface SlotSettingsConfig {
       /**
