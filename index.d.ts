@@ -1804,6 +1804,13 @@ declare namespace googletag {
     updateTargetingFromMap(map: {
       [adUnitPath: string]: string | string[];
     }): Slot;
+
+    /**
+     * Sets general configuration options for this slot.
+     *
+     * @param slotConfig The configuration object.
+     */
+    setConfig(slotConfig: config.SlotSettingsConfig): void;
   }
 
   /** Array of two numbers representing [width, height]. */
@@ -2316,6 +2323,97 @@ declare namespace googletag {
        * RewardedSlotReadyEvent</a></code>.
        */
       rewardedSlotReady: RewardedSlotReadyEvent;
+    }
+  }
+
+  /** Main configuration interface for slot-level settings. */
+  namespace config {
+    interface SlotSettingsConfig {
+      /**
+       * An array of component auctions to be included in an on-device ad auction.
+       *
+       * @experimental
+       */
+      componentAuction?: ComponentAuctionConfig[];
+    }
+
+    /**
+     * An object representing a single component auction in a on-device ad auction.
+     *
+     * @experimental
+     * @see <a href="https://github.com/WICG/turtledove/blob/main/FLEDGE.md#2-sellers-run-on-device-auctions">FLEDGE: Sellers Run On-Device Auctions</a>
+     */
+    interface ComponentAuctionConfig {
+      /**
+       * The configuration key associated with this component auction.
+       *
+       * This value must be non-empty and should be unique. If two
+       * <code>ComponentAuctionConfig</code> objects share the same configKey value,
+       * the last to be set will overwrite prior configurations.
+       */
+      configKey: string;
+
+      /**
+       * An auction configuration object for this component auction.
+       *
+       * If this value is set to <code>null</code>, any existing configuration for
+       * the specified <code>configKey</code> will be deleted.
+       *
+       * @example
+       *
+       * var componentAuctionConfig = {
+       *   seller: 'https://testSeller.com', // should be https and the same as
+       *                                     // decisionLogicUrl's origin
+       *   decisionLogicUrl: 'https://testSeller.com/ssp/decision-logic.js',
+       *   interestGroupBuyers: [
+       *     'https://example-buyer.com',
+       *   ],
+       *   auctionSignals: {auction_signals: 'auction_signals'},
+       *   sellerSignals: {seller_signals: 'seller_signals'},
+       *   perBuyerSignals: {
+       *     // listed on interestGroupBuyers
+       *     'https://example-buyer.com': {
+       *       per_buyer_signals: 'per_buyer_signals',
+       *     },
+       *   },
+       * };
+       *
+       * var auctionSlot = googletag.defineSlot('/1234567/example', [160, 600]);
+       *
+       * // To add configKey to the component auction:
+       * auctionSlot.setConfig({
+       *   componentAuction: [{
+       *      configKey: 'https://testSeller.com',
+       *      auctionConfig: componentAuctionConfig
+       *   }]
+       * });
+       *
+       * // To remove configKey from the component auction:
+       * auctionSlot.setConfig({
+       *   componentAuction: [{
+       *      configKey: 'https://testSeller.com',
+       *      auctionConfig: null
+       *   }]
+       * });
+       *
+       * @see <a
+       * href="https://github.com/WICG/turtledove/blob/main/FLEDGE.md#21-initiating-an-on-device-auction">FLEDGE:
+       * Initiating an On-Device Auction</a>
+       */
+      auctionConfig: {
+        seller: string;
+        decisionLogicUrl: string;
+        trustedScoringSignalsUrl?: string;
+        interestGroupBuyers?: string[];
+        auctionSignals?: unknown;
+        sellerSignals?: unknown;
+        sellerTimeout?: number;
+        sellerExperimentGroupId?: number;
+        perBuyerSignals?: { [buyer: string]: unknown };
+        perBuyerTimeouts?: { [buyer: string]: number };
+        perBuyerGroupLimits?: { [buyer: string]: number };
+        perBuyerExperimentGroupIds?: { [buyer: string]: number };
+      } | null;
     }
   }
 }
