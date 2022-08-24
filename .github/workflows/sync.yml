@@ -1,6 +1,9 @@
 name: Sync
 
 on:
+  schedule:
+    # Run @ 12:00 UTC every Friday
+    - cron: '0 12 * * 5'
   workflow_dispatch:
 
 jobs:
