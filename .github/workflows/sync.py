@@ -67,7 +67,6 @@ def main() -> None:
     if types_changed:
         print(f'Diff detected @ {COMMIT_SHA}, syncing changes.')
         update()
-        sys.exit(1)
     else:
         print('No diff detected, exiting.')
         sys.exit(1)
