@@ -1,0 +1,43 @@
+name: Sync
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: google
+      - uses: actions/checkout@v3
+        with:
+          repository: DefinitelyTyped/DefinitelyTyped
+          token: ${{ secrets.PUBTAGS_BOT_REPO_TOKEN }}
+          path: dt
+          ref: master
+      - name: Run sync script
+        id: sync
+        run: python google/.github/workflows/sync.py
+        shell: sh
+        continue-on-error: true
+      - name: Verify DefinitelyTyped compliance
+        if: steps.sync.outcome == 'success'
+        id: verify
+        working-directory: ./dt
+        run: |
+          npm install
+          npm run prettier -- --write types/google-publisher-tag/*.ts
+          npm test google-publisher-tag
+      - name: Create Pull Request
+        if: steps.verify.outcome == 'success'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          path: dt
+          push-to-fork: publisher-ads-audits-bot/DefinitelyTyped
+          token: ${{ secrets.PUBTAGS_BOT_REPO_TOKEN }}
+          title: "Sync latest changes to @types/google-publisher-tag"
+          body: "Automated PR to update @types/google-publisher-tag"
+          commit-message: "Sync latest changes to @types/google-publisher-tag"
+          branch: "sync/google-publisher-tag"
+          delete-branch: true
