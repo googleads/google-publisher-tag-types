@@ -28,7 +28,7 @@ jobs:
       - name: Run prettier
         run: |
           npm install
-          npm prettier -- --write *.ts
+          npm run prettier -- --write *.ts
       - name: Run linter
         run: |
           npm run test
