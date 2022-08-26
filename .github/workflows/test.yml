@@ -13,11 +13,25 @@
 # limitations under the License.
 
 name: Test
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: |
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Run prettier
+        run: |
+          npm install
+          npm prettier -- --write *.ts
+      - name: Run linter
+        run: |
           npm run test
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply prettier changes
