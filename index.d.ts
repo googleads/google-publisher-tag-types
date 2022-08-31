@@ -17,7 +17,6 @@
 
 /**
  * The global namespace the Google Publisher Tag uses for its API.
- *
  */
 declare namespace googletag {
     /**
