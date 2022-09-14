@@ -1809,7 +1809,7 @@ declare namespace googletag {
      *   </li>
      * </ul>
      */
-    type NamedSize = string | string[];
+    type NamedSize = 'fluid' | ['fluid'];
 
     /**
      * A single valid size for a slot.
