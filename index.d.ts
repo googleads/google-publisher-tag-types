@@ -37,12 +37,12 @@ declare namespace googletag {
      * Reference to the global command queue for asynchronous execution of
      * GPT-related calls.
      * <br><br>
-     * The <code>googletag.cmd</code> variable is initialized to an empty
+     * The `googletag.cmd` variable is initialized to an empty
      * JavaScript array by the GPT tag syntax on the page, and
-     * <code>cmd.push</code> is the standard <code>Array.push</code> method that
+     * `cmd.push` is the standard `Array.push` method that
      * adds an element to the end of the array. When the GPT JavaScript is loaded,
      * it looks through the array and executes all the functions in order. The
-     * script then replaces <code>cmd</code> with a {@link CommandArray} object
+     * script then replaces `cmd` with a {@link CommandArray} object
      * whose push method is defined to execute the function argument passed to it.
      * This mechanism allows GPT to reduce perceived latency by fetching the
      * JavaScript asynchronously while allowing the browser to continue rendering
@@ -80,7 +80,7 @@ declare namespace googletag {
      *     mapping is provided or the size of the viewport is smaller than the
      *     smallest size provided in the mapping.
      * @param div ID of the div that will contain this ad unit.
-     * @return The newly created slot, or <code>null</code> if a slot cannot be
+     * @return The newly created slot, or `null` if a slot cannot be
      *     created.
      */
     function defineSlot(adUnitPath: string, size: GeneralSize, div?: string): Slot | null;
@@ -88,11 +88,11 @@ declare namespace googletag {
     /**
      * Constructs an out-of-page ad slot with the given ad unit path.
      * <br><br>
-     * For custom out-of-page ads, <code>div</code> is the ID
+     * For custom out-of-page ads, `div` is the ID
      * of the div element that will contain the ad. See the article on
      * [out-of-page
      * creatives](https://support.google.com/admanager/answer/6088046) for more
-     * details. <br><br> For GPT managed out-of-page ads, <code>div</code> is a
+     * details. <br><br> For GPT managed out-of-page ads, `div` is a
      * supported {@link enums.OutOfPageFormat | OutOfPageFormat}.
      *
      * @example
@@ -112,7 +112,7 @@ declare namespace googletag {
      *     with the network code and ad unit code.
      * @param div ID of the div that  will contain this ad unit or
      *     OutOfPageFormat.
-     * @return The newly created slot, or <code>null</code> if a slot cannot be
+     * @return The newly created slot, or `null` if a slot cannot be
      *     created.
      */
     function defineOutOfPageSlot(adUnitPath: string, div?: string | enums.OutOfPageFormat): Slot | null;
@@ -202,7 +202,7 @@ declare namespace googletag {
      *
      * @param slots The array of slots to destroy. Array is optional; all slots
      *     will be destroyed if it is unspecified.
-     * @return <code>true</code> if slots have been destroyed, <code>false</code>
+     * @return `true` if slots have been destroyed, `false`
      *     otherwise.
      */
     function destroySlots(slots?: Slot[]): boolean;
@@ -217,7 +217,7 @@ declare namespace googletag {
 
     /**
      * Flag indicating that the GPT API is loaded and ready to be called.
-     * This property will be simply <code>undefined</code> until the API is ready.
+     * This property will be simply `undefined` until the API is ready.
      *
      * Note that the recommended way of handling async is to use
      * {@link cmd | googletag.cmd} to queue callbacks for when GPT is ready. These
@@ -236,7 +236,7 @@ declare namespace googletag {
     /**
      * Flag indicating that
      * {@link PubAdsService} is enabled, loaded and fully operational. This
-     * property will be simply <code>undefined</code> until {@link enableServices}
+     * property will be simply `undefined` until {@link enableServices}
      * is called and {@link PubAdsService} is loaded and initialized.
      */
     const pubadsReady: boolean | undefined;
@@ -285,10 +285,10 @@ declare namespace googletag {
          *  @param f A JavaScript function to be executed. The runtime binding will
          * always be
          * [`globalThis`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/globalThis).
-         * Consider passing an arrow function to retain the <code>this</code> value
+         * Consider passing an arrow function to retain the `this` value
          * of the enclosing lexical context.
          *  @return The number of commands processed so far. This is compatible with
-         * <code>Array.push</code>'s return value (the current length of the array).
+         * `Array.push`'s return value (the current length of the array).
          */
         push(...f: Array<(this: typeof globalThis) => void>): number;
     }
@@ -313,8 +313,8 @@ declare namespace googletag {
          * @example
          *   googletag.companionAds().setRefreshUnfilledSlots(true);
          *
-         * @param value <code>true</code> to automatically backfill unfilled slots,
-         *     <code>false</code> to leave them unchanged.
+         * @param value `true` to automatically backfill unfilled slots,
+         *     `false` to leave them unchanged.
          */
         setRefreshUnfilledSlots(value: boolean): void;
     }
@@ -337,7 +337,7 @@ declare namespace googletag {
          * Indicates whether the page should be
          * [treated as
          * child-directed](https://support.google.com/admanager/answer/3671211). Set
-         * to <code>null</code> to clear the configuration.
+         * to `null` to clear the configuration.
          */
         childDirectedTreatment?: boolean | null;
 
@@ -345,7 +345,7 @@ declare namespace googletag {
          * Indicates whether to mark ad requests as coming from users
          * [under the age of
          * consent](https://support.google.com/admanager/answer/9004919). Set to
-         * <code>null</code> to clear the configuration.
+         * `null` to clear the configuration.
          */
         underAgeOfConsent?: boolean | null;
 
@@ -372,7 +372,7 @@ declare namespace googletag {
          * This value populates the
          * [Traffic source](https://support.google.com/admanager/answer/11233407)
          * dimension in Ad Manager reporting. If not set, traffic source defaults to
-         * <code>Undefined</code> in reporting.
+         * `undefined` in reporting.
          *
          * @example
          *   // Indicate requests represent organic traffic.
@@ -506,7 +506,7 @@ declare namespace googletag {
          * Disables requests for ads on page load, but allows ads to be requested
          * with a {@link PubAdsService.refresh} call. This should be set prior to
          * enabling the service. Async mode must be used; otherwise it will be
-         * impossible to request ads using <code>refresh</code>.
+         * impossible to request ads using `refresh`.
          *
          * @see [Control ad loading and refresh](https://developers.google.com/publisher-tag/guides/control-ad-loading)
          * @see [Control SRA batching](https://developers.google.com/publisher-tag/samples/control-sra-batching)
@@ -517,9 +517,9 @@ declare namespace googletag {
          * Returns whether or not initial requests for ads was successfully disabled
          * by a previous {@link PubAdsService.disableInitialLoad} call.
          *
-         * @return Returns <code>true</code> if a previous call to
-         *     {@link PubAdsService.disableInitialLoad} was successful,
-         *     <code>false</code> otherwise.
+         * @return Returns `true` if a previous call to
+         *     {@link PubAdsService.disableInitialLoad} was successful, `false`
+         *     otherwise.
          */
         isInitialLoadDisabled(): boolean;
 
@@ -531,8 +531,8 @@ declare namespace googletag {
          *
          * @see [Ads best practices: Use Single Request Architecture correctly](https://developers.google.com/publisher-tag/guides/ad-best-practices#use_single_request_architecture_correctly)
          * @see [Control SRA batching](https://developers.google.com/publisher-tag/samples/control-sra-batching)
-         * @return Returns <code>true</code> if single request mode was enabled and
-         *     <code>false</code> if it is impossible to enable single request mode
+         * @return Returns `true` if single request mode was enabled and
+         *     `false` if it is impossible to enable single request mode
          *     because the method was called after the service was enabled.
          */
         enableSingleRequest(): boolean;
@@ -541,15 +541,15 @@ declare namespace googletag {
          * Enables and disables horizontal centering of ads. Centering is disabled
          * by default. In legacy gpt_mobile.js, centering is enabled by default.
          *
-         * This method should be invoked before calling <code>display</code> or
-         * <code>refresh</code> because only ads that are requested after calling
+         * This method should be invoked before calling `display` or
+         * `refresh` because only ads that are requested after calling
          * this method will be centered.
          *
          * @example
          *   // Make ads centered.
          *   googletag.pubads().setCentering(true);
          *
-         * @param centerAds <code>true</code> to center ads, <code>false</code> to
+         * @param centerAds `true` to center ads, `false` to
          *     left-align them.
          */
         setCentering(centerAds: boolean): void;
@@ -558,11 +558,11 @@ declare namespace googletag {
          * Fetches and displays new ads for specific or all slots on the page. Works
          * only in asynchronous rendering mode.
          * <br><br>
-         * For proper behavior across all browsers, calling <code>refresh</code>
-         * must be preceded by a call to <code>display</code> the ad slot. If the
-         * call to <code>display</code> is omitted, refresh may behave unexpectedly.
+         * For proper behavior across all browsers, calling `refresh`
+         * must be preceded by a call to `display` the ad slot. If the
+         * call to `display` is omitted, refresh may behave unexpectedly.
          * If desired, the {@link PubAdsService.disableInitialLoad}
-         * method can be used to stop <code>display</code> from fetching an ad.
+         * method can be used to stop `display` from fetching an ad.
          * <br><br>
          * Refreshing a slot removes the old ad from GPT's
          * [long-lived pageview](https://support.google.com/admanager/answer/183281),
@@ -631,7 +631,7 @@ declare namespace googletag {
          * Sets the video content information to be sent along with the ad requests
          * for targeting and content exclusion purposes. Video ads will be
          * automatically enabled when this method is called. For
-         * <code>videoContentId</code> and <code>videoCmsId</code>, use the values
+         * `videoContentId` and `videoCmsId`, use the values
          * that are provided to the Google Ad Manager content ingestion service.
          *
          * @see [VAST ad tag URL parameters](https://support.google.com/admanager/answer/1068325)
@@ -649,9 +649,9 @@ declare namespace googletag {
          * @see [Minimize layout shift](https://developers.google.com/publisher-tag/guides/minimize-layout-shift)
          * @param collapseBeforeAdFetch Whether to collapse the slots even before
          *     the ads are fetched. This parameter is optional; if not provided,
-         *     <code>false</code> will be used as the default value.
-         * @return Returns <code>true</code> if div collapse mode was enabled and
-         *     <code>false</code> if it is impossible to enable collapse mode
+         *     `false` will be used as the default value.
+         * @return Returns `true` if div collapse mode was enabled and
+         *     `false` if it is impossible to enable collapse mode
          *     because the method was called after the service was enabled.
          */
         collapseEmptyDivs(collapseBeforeAdFetch?: boolean): boolean;
@@ -678,8 +678,8 @@ declare namespace googletag {
          *
          * @param slots The array of slots to clear. Array is optional; all slots
          *     will be cleared if it is unspecified.
-         * @return Returns <code>true</code> if slots have been cleared,
-         *     <code>false</code> otherwise.
+         * @return Returns `true` if slots have been cleared,
+         *     `false` otherwise.
          */
         clear(slots?: Slot[]): boolean;
 
@@ -716,7 +716,7 @@ declare namespace googletag {
          * <br><br>
          * Calling this more than once for the same key will override previously set
          * values for that key. All values must be set before calling
-         * <code>display</code> or <code>refresh</code>.
+         * `display` or `refresh`.
          *
          * @example
          *   googletag.pubads().set('adsense_background_color', '#FFFFFF');
@@ -739,7 +739,7 @@ declare namespace googletag {
          *
          * @see [AdSense Attributes](https://developers.google.com/publisher-tag/adsense_attributes)
          * @param key Name of the attribute to look for.
-         * @return Current value for the attribute key, or <code>null</code> if the
+         * @return Current value for the attribute key, or `null` if the
          *     key is not present.
          */
         get(key: string): string | null;
@@ -767,7 +767,7 @@ declare namespace googletag {
          * rendering the response. Any changes that are made to the slot or page
          * state after this method is called (including targeting, privacy settings,
          * force SafeFrame, etc.) will only apply to subsequent
-         * <code>display()</code> or <code>refresh()</code> requests.
+         * `display()` or `refresh()` requests.
          *
          * @example
          *   googletag.pubads().display('/1234567/sports', [728, 90], 'div-1');
@@ -858,9 +858,9 @@ declare namespace googletag {
          *   googletag.display('div-2');
          *
          * @see [Render creatives using SafeFrame](https://support.google.com/admanager/answer/6023110)
-         * @param forceSafeFrame <code>true</code> to force all ads on the page to
-         *     be rendered in SafeFrames and <code>false</code> to change the
-         *     previous setting to false. Setting this to <code>false</code> when
+         * @param forceSafeFrame `true` to force all ads on the page to
+         *     be rendered in SafeFrames and `false` to change the
+         *     previous setting to false. Setting this to `false` when
          *     unspecified earlier, won't change anything.
          * @return The service object on which the function was called.
          */
@@ -927,24 +927,24 @@ declare namespace googletag {
          * @param config Configuration object allows customization of lazy behavior.
          *     Any omitted configurations will use a default set by Google
          *     that will be tuned over time. To disable a particular setting, such
-         *     as a fetching margin, set the value to <code>-1</code>.
+         *     as a fetching margin, set the value to `-1`.
          *     <dl>
-         *       <dt><code>fetchMarginPercent</code></dt>
+         *       <dt>`fetchMarginPercent`</dt>
          *       <dd>
          *         The minimum distance from the current viewport a slot must be
          *         before we fetch the ad as a percentage of viewport size. A value
          *         of 0 means "when the slot enters the viewport", 100 means "when
          *         the ad is 1 viewport away", and so on.
          *       </dd>
-         *       <dt><code>renderMarginPercent</code></dt>
+         *       <dt>`renderMarginPercent`</dt>
          *       <dd>
          *         The minimum distance from the current viewport a slot must be
          *         before we render an ad. This allows for prefetching the ad, but
          *         waiting to render and download other subresources. The value
-         *         works just like <code>fetchMarginPercent</code> as a percentage
+         *         works just like `fetchMarginPercent` as a percentage
          *         of viewport.
          *       </dd>
-         *       <dt><code>mobileScaling</code></dt>
+         *       <dt>`mobileScaling`</dt>
          *       <dd>
          *         A multiplier applied to margins on mobile devices. This allows
          *         varying margins on mobile vs. desktop. For example, a value of
@@ -1046,20 +1046,20 @@ declare namespace googletag {
         /**
          * Whether SafeFrame should use the HTML5 sandbox attribute to prevent top
          * level navigation without user interaction. The only valid value is
-         * <code>true</code> (cannot be forced to <code>false</code>). Note that the
+         * `true` (cannot be forced to `false`). Note that the
          * sandbox attribute disables plugins (e.g. Flash).
          */
         sandbox?: boolean;
 
         /**
          * Whether SafeFrame should use randomized subdomains for
-         * Reservation creatives. Pass in <code>null</code> to clear the stored
+         * Reservation creatives. Pass in `null` to clear the stored
          * value.
          *
          * Note: this feature is enabled by default.
          *
          * @deprecated It is no longer possible to disable this feature. Setting
-         * <code>useUniqueDomain</code> has no effect.
+         * `useUniqueDomain` has no effect.
          * @see [Render creatives using SafeFrame](https://support.google.com/admanager/answer/9999596)
          */
         useUniqueDomain?: boolean | null;
@@ -1198,7 +1198,7 @@ declare namespace googletag {
          * Builds a size map specification from the mappings added to this builder.
          * <br><br>
          * If any invalid mappings have been supplied, this method will return
-         * <code>null</code>. Otherwise it returns a specification in the correct
+         * `null`. Otherwise it returns a specification in the correct
          * format to pass to {@link Slot.defineSizeMapping}.
          * <br><br>
          * Note: the behavior of the builder after calling this method is undefined.
@@ -1215,10 +1215,9 @@ declare namespace googletag {
          * Sets a value for an AdSense attribute on this ad slot. This will override
          * any values set at the service level for this key.
          * <br><br>
-         * Calling this method more than
-         * once for the same key will override previously set values for that key.
-         * All values must be set before calling <code>display</code> or
-         * <code>refresh</code>.
+         * Calling this method more than once for the same key will override
+         * previously set values for that key. All values must be set before calling
+         * `display` or `refresh`.
          *
          * @example
          *   // Setting an attribute on a single ad slot.
@@ -1248,7 +1247,7 @@ declare namespace googletag {
          *
          * @see [AdSense Attributes](https://developers.google.com/publisher-tag/adsense_attributes)
          * @param key Name of the attribute to look for.
-         * @return Current value for the attribute key, or <code>null</code> if the
+         * @return Current value for the attribute key, or `null` if the
          *     key is not present.
          */
         get(key: string): string | null;
@@ -1467,7 +1466,7 @@ declare namespace googletag {
         getTargetingKeys(): string[];
 
         /**
-         * Sets whether the slot <code>div</code> should be hidden when there is no
+         * Sets whether the slot `div` should be hidden when there is no
          * ad in the slot. This overrides the service-level settings.
          *
          * @example
@@ -1487,7 +1486,7 @@ declare namespace googletag {
          * @see [Minimize layout shift](https://developers.google.com/publisher-tag/guides/minimize-layout-shift)
          * @param collapse Whether to collapse the slot if no ad is returned.
          * @param collapseBeforeAdFetch Whether to collapse the slot even before an
-         *     ad is fetched. Ignored if collapse is not <code>true</code>.
+         *     ad is fetched. Ignored if collapse is not `true`.
          * @return The slot object on which the method was called.
          */
         setCollapseEmptyDiv(collapse: boolean, collapseBeforeAdFetch?: boolean): Slot;
@@ -1508,7 +1507,7 @@ declare namespace googletag {
         getAdUnitPath(): string;
 
         /**
-         * Returns the ID of the slot <code>div</code> provided when the slot was
+         * Returns the ID of the slot `div` provided when the slot was
          * defined.
          *
          * @example
@@ -1518,7 +1517,7 @@ declare namespace googletag {
          *   var slotElementId = slot.getSlotElementId();
          *   // slotElementId is 'div-1'
          *
-         * @return Slot <code>div</code> ID.
+         * @return Slot `div` ID.
          */
         getSlotElementId(): string;
 
@@ -1553,16 +1552,15 @@ declare namespace googletag {
          *   </li>
          * </ul>
          *
-         *
          * @example
          *   googletag.defineSlot('/1234567/sports', [160, 600], 'div-1')
          *            .setForceSafeFrame(true)
          *            .addService(googletag.pubads());
          *
          * @see [Render creatives using SafeFrame](https://support.google.com/admanager/answer/6023110)
-         * @param forceSafeFrame <code>true</code> to force all ads in this slot to
-         *     be rendered in SafeFrames and <code>false</code> to opt-out of a
-         *     page-level setting (if present). Setting this to <code>false</code>
+         * @param forceSafeFrame `true` to force all ads in this slot to
+         *     be rendered in SafeFrames and `false` to opt-out of a
+         *     page-level setting (if present). Setting this to `false`
          *     when not specified at the page-level won't change anything.
          * @return The slot object on which the method was called.
          */
@@ -1601,9 +1599,9 @@ declare namespace googletag {
         /**
          * Returns the ad response information. This is based on the last ad
          * response for the slot. If this is called when the slot has no ad,
-         * <code>null</code> will be returned.
+         * `null` will be returned.
          *
-         * @return The latest ad response information, or <code>null</code> if the
+         * @return The latest ad response information, or `null` if the
          *     slot has no ad.
          */
         getResponseInformation(): ResponseInformation | null;
@@ -1814,49 +1812,49 @@ declare namespace googletag {
          */
         interface SlotRenderEndedEvent extends Event {
             /**
-             * Whether an ad was returned for the slot. Value is <code>true</code> if
-             * no ad was returned, <code>false</code> otherwise.
+             * Whether an ad was returned for the slot. Value is `true` if
+             * no ad was returned, `false` otherwise.
              */
             isEmpty: boolean;
             /**
              * Indicates the pixel size of the rendered creative. Example:
-             * <code>[728, 90]</code>. Value is <code>null</code> for empty ad slots.
+             * `[728, 90]`. Value is `null` for empty ad slots.
              */
             size: number[] | string | null;
             /**
-             * Advertiser ID of the rendered ad. Value is <code>null</code> for empty
+             * Advertiser ID of the rendered ad. Value is `null` for empty
              * slots, backfill ads, and creatives rendered by services other than
              * {@link PubAdsService}.
              */
             advertiserId: number | null;
             /**
-             * Campaign ID of the rendered ad. Value is <code>null</code> for empty
+             * Campaign ID of the rendered ad. Value is `null` for empty
              * slots, backfill ads, and creatives rendered by services other than
              * {@link PubAdsService}.
              */
             campaignId: number | null;
             /**
-             * Creative ID of the rendered reservation ad. Value is <code>null</code>
+             * Creative ID of the rendered reservation ad. Value is `null`
              * for empty slots, backfill ads, and creatives rendered by services other
              * than {@link PubAdsService}.
              */
             creativeId: number | null;
             /**
-             * Line item ID of the rendered reservation ad. Value is <code>null</code>
+             * Line item ID of the rendered reservation ad. Value is `null`
              * for empty slots, backfill ads, and creatives rendered by services other
              * than {@link PubAdsService}.
              */
             lineItemId: number | null;
             /**
              * Creative ID of the rendered reservation or backfill ad. Value is
-             * <code>null</code> if the ad is not a reservation or line item backfill,
+             * `null` if the ad is not a reservation or line item backfill,
              * or the creative is rendered by services other than
              * {@link PubAdsService}.
              */
             sourceAgnosticCreativeId: number | null;
             /**
              * Line item ID of the rendered reservation or backfill ad. Value is
-             * <code>null</code> if the ad is not a reservation or line item backfill,
+             * `null` if the ad is not a reservation or line item backfill,
              * or the creative is rendered by services other than
              * {@link PubAdsService}.
              */
@@ -1890,7 +1888,7 @@ declare namespace googletag {
         /**
          * This event is fired when the creative's iframe fires its load event. When
          * rendering rich media ads in sync rendering mode, no iframe is used so no
-         * <code>SlotOnloadEvent</code> will be fired.
+         * `SlotOnloadEvent` will be fired.
          *
          * @example
          *   // This listener is called when a creative iframe load event fires.
@@ -2146,7 +2144,7 @@ declare namespace googletag {
              * The configuration key associated with this component auction.
              *
              * This value must be non-empty and should be unique. If two
-             * <code>ComponentAuctionConfig</code> objects share the same configKey value,
+             * `ComponentAuctionConfig` objects share the same configKey value,
              * the last to be set will overwrite prior configurations.
              */
             configKey: string;
@@ -2154,8 +2152,8 @@ declare namespace googletag {
             /**
              * An auction configuration object for this component auction.
              *
-             * If this value is set to <code>null</code>, any existing configuration for
-             * the specified <code>configKey</code> will be deleted.
+             * If this value is set to `null`, any existing configuration for
+             * the specified `configKey` will be deleted.
              *
              * @example
              *
