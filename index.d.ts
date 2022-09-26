@@ -36,7 +36,7 @@ declare namespace googletag {
     /**
      * Reference to the global command queue for asynchronous execution of
      * GPT-related calls.
-     * <br><br>
+     *
      * The `googletag.cmd` variable is initialized to an empty
      * JavaScript array by the GPT tag syntax on the page, and
      * `cmd.push` is the standard `Array.push` method that
@@ -87,12 +87,14 @@ declare namespace googletag {
 
     /**
      * Constructs an out-of-page ad slot with the given ad unit path.
-     * <br><br>
+     *
      * For custom out-of-page ads, `div` is the ID
      * of the div element that will contain the ad. See the article on
      * [out-of-page
      * creatives](https://support.google.com/admanager/answer/6088046) for more
-     * details. <br><br> For GPT managed out-of-page ads, `div` is a
+     * details.
+     *
+     * For GPT managed out-of-page ads, `div` is a
      * supported {@link enums.OutOfPageFormat | OutOfPageFormat}.
      *
      * @example
@@ -124,7 +126,7 @@ declare namespace googletag {
      * happen until the element is present in the DOM. The usual way to achieve
      * that is to place it within a script block within the div element named in
      * the method call.
-     * <br><br>
+     *
      * If single request architecture (SRA) is being used, all unfetched
      * ad slots at the time this method is called will be fetched at once. To
      * force an ad slot not to display, the entire div must be removed.
@@ -165,14 +167,14 @@ declare namespace googletag {
      * Destroys the given slots, removing all related objects and references of
      * those slots from GPT. This API does not support passback slots and
      * companion slots.
-     * <br><br>
+     *
      * Calling this API on a slot clears the ad and removes the slot object from
      * the internal state maintained by GPT. Calling any more functions on the
      * slot object will result in undefined behavior. Note the browser may still
      * not free the memory associated with that slot if a reference to it is
      * maintained by the publisher page. Calling this API makes the div associated
      * with that slot available for reuse.
-     * <br><br>
+     *
      * In particular, destroying a slot removes the ad from GPT's
      * [long-lived pageview](https://support.google.com/admanager/answer/183281),
      * so future requests will not be influenced by roadblocks or competitive
@@ -303,7 +305,7 @@ declare namespace googletag {
         /**
          * Sets whether companion slots that have not been filled will be
          * automatically backfilled.
-         * <br><br>
+         *
          * This method can be called multiple times during the page's lifetime to
          * turn backfill on and off.
          * Only slots that are also registered with the {@link PubAdsService} will be
@@ -557,13 +559,13 @@ declare namespace googletag {
         /**
          * Fetches and displays new ads for specific or all slots on the page. Works
          * only in asynchronous rendering mode.
-         * <br><br>
+         *
          * For proper behavior across all browsers, calling `refresh`
          * must be preceded by a call to `display` the ad slot. If the
          * call to `display` is omitted, refresh may behave unexpectedly.
          * If desired, the {@link PubAdsService.disableInitialLoad}
          * method can be used to stop `display` from fetching an ad.
-         * <br><br>
+         *
          * Refreshing a slot removes the old ad from GPT's
          * [long-lived pageview](https://support.google.com/admanager/answer/183281),
          * so future requests will not be influenced by roadblocks or competitive
@@ -594,23 +596,20 @@ declare namespace googletag {
          *     will be refreshed if it is unspecified.
          * @param options Configuration options associated with this refresh
          *     call.
-         *     <dl>
-         *       <dt>changeCorrelator</dt>
-         *       <dd>
-         *         Specifies whether or not a new correlator is to be generated for
-         *         fetching ads. Our ad servers maintain this correlator value
-         *         briefly (currently for 30 seconds, but subject to change), such
-         *         that requests with the same correlator received close together
-         *         will be considered a single page view. By default a new
-         *         correlator is generated for every refresh.
-         *         <br><br>
-         *         <b>Note:</b> this option has no effect on GPT's
-         *         [long-lived
-         *         pageview](https://support.google.com/admanager/answer/183281),
-         *         which automatically reflects the ads currently on the page and has
-         *         no expiration time.
-         *       </dd>
-         *     </dl>
+         *
+         * - `changeCorrelator`
+         *
+         *     Specifies whether or not a new correlator is to be generated for
+         *     fetching ads. Our ad servers maintain this correlator value briefly
+         *     (currently for 30 seconds, but subject to change), such that requests
+         *     with the same correlator received close together will be considered
+         *     a single page view. By default a new correlator is generated for every
+         *     refresh.
+         *
+         *     **Note:** this option has no effect on GPT's [long-lived
+         *     pageview](https://support.google.com/admanager/answer/183281), which
+         *     automatically reflects the ads currently on the page and has no
+         *     expiration time.
          */
         refresh(
             slots?: Slot[] | null,
@@ -659,7 +658,7 @@ declare namespace googletag {
         /**
          * Removes the ads from the given slots and replaces them with blank
          * content. The slots will be marked as unfetched.
-         * <br><br>
+         *
          * In particular, clearing a slot removes the ad from GPT's [long-lived
          * pageview](https://support.google.com/admanager/answer/183281), so future
          * requests will not be influenced by roadblocks or competitive exclusions
@@ -713,7 +712,7 @@ declare namespace googletag {
         /**
          * Sets values for AdSense attributes that apply to all ad slots under the
          * Publisher Ads service.
-         * <br><br>
+         *
          * Calling this more than once for the same key will override previously set
          * values for that key. All values must be set before calling
          * `display` or `refresh`.
@@ -761,8 +760,8 @@ declare namespace googletag {
         /**
          * Constructs and displays an ad slot with the given ad unit path and size.
          * This method does not work with single request mode.
-         * <br><br>
-         * <b>Note:</b> When this method is called, a snapshot of the slot and page
+         *
+         * **Note:** When this method is called, a snapshot of the slot and page
          * state is created to ensure consistency when sending the ad request and
          * rendering the response. Any changes that are made to the slot or page
          * state after this method is called (including targeting, privacy settings,
@@ -790,7 +789,7 @@ declare namespace googletag {
          * requests coming from one page view, and unique across page views. Only
          * applies to async mode.
          *
-         * <b>Note:</b> this has no effect on GPT's [long-lived
+         * **Note:** this has no effect on GPT's [long-lived
          * pageview](https://support.google.com/admanager/answer/183281), which
          * automatically reflects the ads actually on the page and has no expiration
          * time.
@@ -813,33 +812,22 @@ declare namespace googletag {
         /**
          * Configures whether all ads on the page should be forced to be rendered
          * using a SafeFrame container.
-         * <br><br>
+         *
          * Please keep the following things in mind while using this API:
-         * <ul>
-         *   <li>
-         *     This setting will only take effect for <b>subsequent</b> ad requests
-         *     made for the respective slots.
-         *   </li>
-         *   <li>
-         *     The slot level setting, if specified, will always override the page
-         *     level setting.
-         *   </li>
-         *   <li>
-         *     If set to <code>true</code> (at slot-level or page level), the ad
-         *     will always be rendered using a SafeFrame container independent of
-         *     the choice made in the Google Ad Manager UI.
-         *   </li>
-         *   <li>
-         *     However, if set to <code>false</code> or left unspecified, the ad
-         *     will be rendered using a SafeFrame container depending on the type of
-         *     creative and the selection made in the Google Ad Manager UI.
-         *   </li>
-         *   <li>
-         *     This API should be used with caution as it could impact the behaviour
-         *     of creatives that attempt to break out of their iFrames or rely on
-         *     them being rendered directly in a publishers page.
-         *   </li>
-         * </ul>
+         *
+         * - This setting will only take effect for **subsequent** ad requests
+         *   made for the respective slots.
+         * - The slot level setting, if specified, will always override the page
+         *   level setting.
+         * - If set to `true` (at slot-level or page level), the ad will always be
+         *   rendered using a SafeFrame container independent of the choice made in
+         *   the Google Ad Manager UI.
+         * - However, if set to `false` or left unspecified, the ad will be rendered
+         *   using a SafeFrame container depending on the type of creative and the
+         *   selection made in the Google Ad Manager UI.
+         * - This API should be used with caution as it could impact the behaviour
+         *   of creatives that attempt to break out of their iFrames or rely on
+         *   them being rendered directly in a publishers page.
          *
          * @example
          *   googletag.pubads().setForceSafeFrame(true);
@@ -911,9 +899,10 @@ declare namespace googletag {
          * Enables lazy loading in GPT as defined by the config object. For more
          * detailed examples, see the [Lazy
          * loading](https://developers.google.com/publisher-tag/samples/lazy-loading)
-         * sample. <br><br> <b>Notes:</b> <ul> <li>Lazy fetching in SRA only works if
-         * all slots are outside the fetching margin.</li>
-         * </ul>
+         * sample.
+         *
+         * **Note:** Lazy fetching in SRA only works if all slots are outside the
+         * fetching margin.
          *
          * @example
          *   googletag.pubads().enableLazyLoad({
@@ -928,30 +917,27 @@ declare namespace googletag {
          *     Any omitted configurations will use a default set by Google
          *     that will be tuned over time. To disable a particular setting, such
          *     as a fetching margin, set the value to `-1`.
-         *     <dl>
-         *       <dt>`fetchMarginPercent`</dt>
-         *       <dd>
-         *         The minimum distance from the current viewport a slot must be
-         *         before we fetch the ad as a percentage of viewport size. A value
-         *         of 0 means "when the slot enters the viewport", 100 means "when
-         *         the ad is 1 viewport away", and so on.
-         *       </dd>
-         *       <dt>`renderMarginPercent`</dt>
-         *       <dd>
-         *         The minimum distance from the current viewport a slot must be
-         *         before we render an ad. This allows for prefetching the ad, but
-         *         waiting to render and download other subresources. The value
-         *         works just like `fetchMarginPercent` as a percentage
-         *         of viewport.
-         *       </dd>
-         *       <dt>`mobileScaling`</dt>
-         *       <dd>
-         *         A multiplier applied to margins on mobile devices. This allows
-         *         varying margins on mobile vs. desktop. For example, a value of
-         *         2.0 will multiply all margins by 2 on mobile devices, increasing
-         *         the minimum distance a slot can be before fetching and rendering.
-         *       </dd>
-         *     </dl>
+         *
+         * - `fetchMarginPercent`
+         *
+         *     The minimum distance from the current viewport a slot must be before
+         *     we fetch the ad as a percentage of viewport size. A value of 0 means
+         *     "when the slot enters the viewport", 100 means "when the ad is 1
+         *     viewport away", and so on.
+         *
+         * - `renderMarginPercent`
+         *
+         *     The minimum distance from the current viewport a slot must be before we
+         *     render an ad. This allows for prefetching the ad, but waiting to render
+         *     and download other subresources. The value works just like
+         *     `fetchMarginPercent` as a percentage of viewport.
+         *
+         * - `mobileScaling`
+         *
+         *     A multiplier applied to margins on mobile devices. This allows varying
+         *     margins on mobile vs. desktop. For example, a value of 2.0 will
+         *     multiply all margins by 2 on mobile devices, increasing the minimum
+         *     distance a slot can be before fetching and rendering.
          */
         enableLazyLoad(config?: {
             fetchMarginPercent?: number;
@@ -1196,11 +1182,11 @@ declare namespace googletag {
 
         /**
          * Builds a size map specification from the mappings added to this builder.
-         * <br><br>
+         *
          * If any invalid mappings have been supplied, this method will return
          * `null`. Otherwise it returns a specification in the correct
          * format to pass to {@link Slot.defineSizeMapping}.
-         * <br><br>
+         *
          * Note: the behavior of the builder after calling this method is undefined.
          *
          * @return The result built by this builder. Can be null if invalid size
@@ -1214,7 +1200,7 @@ declare namespace googletag {
         /**
          * Sets a value for an AdSense attribute on this ad slot. This will override
          * any values set at the service level for this key.
-         * <br><br>
+         *
          * Calling this method more than once for the same key will override
          * previously set values for that key. All values must be set before calling
          * `display` or `refresh`.
@@ -1310,7 +1296,7 @@ declare namespace googletag {
         /**
          * Sets the click URL to which users will be redirected after clicking on
          * the ad.
-         * <br><br>
+         *
          * The Google Ad Manager servers still record a click even if the
          * click URL is replaced. Any landing page URL associated with the creative
          * that is served is appended to the provided value. Subsequent calls
@@ -1524,33 +1510,22 @@ declare namespace googletag {
         /**
          * Configures whether ads in this slot should be forced to be rendered using
          * a SafeFrame container.
-         * <br><br>
+         *
          * Please keep the following things in mind while using this API:
-         * <ul>
-         *   <li>
-         *     This setting will only take effect for <b>subsequent</b> ad requests
-         *     made for the respective slots.
-         *   </li>
-         *   <li>
-         *     The slot level setting, if specified, will always override the page
-         *     level setting.
-         *   </li>
-         *   <li>
-         *     If set to <code>true</code> (at slot-level or page level), the ad
-         *     will always be rendered using a SafeFrame container independent of
-         *     the choice made in the Google Ad Manager UI.
-         *   </li>
-         *   <li>
-         *     However, if set to <code>false</code> or left unspecified, the ad
-         *     will be rendered using a SafeFrame container depending on the type of
-         *     creative and the selection made in the Google Ad Manager UI.
-         *   </li>
-         *   <li>
-         *     This API should be used with caution as it could impact the behaviour
-         *     of creatives that attempt to break out of their iFrames or rely on
-         *     them being rendered directly in a publishers page.
-         *   </li>
-         * </ul>
+         *
+         * - This setting will only take effect for **subsequent** ad requests
+         *   made for the respective slots.
+         * - The slot level setting, if specified, will always override the page
+         *   level setting.
+         * - If set to `true` (at slot-level or page level), the ad will always be
+         *   rendered using a SafeFrame container independent of the choice made in
+         *   the Google Ad Manager UI.
+         * - However, if set to `false` or left unspecified, the ad will be rendered
+         *   using a SafeFrame container depending on the type of creative and the
+         *   selection made in the Google Ad Manager UI.
+         * - This API should be used with caution as it could impact the behaviour
+         *   of creatives that attempt to break out of their iFrames or rely on
+         *   them being rendered directly in a publishers page.
          *
          * @example
          *   googletag.defineSlot('/1234567/sports', [160, 600], 'div-1')
@@ -1611,21 +1586,13 @@ declare namespace googletag {
          * in a JSON object. This is the same as calling {@link Slot.setTargeting}
          * for all the key values of the object. These keys are defined in your
          * Google Ad Manager account.
-         * <br><br>
-         * <b>Notes:</b>
-         * <ul>
-         *   <li>
-         *     In case of overwriting, only the last value will be kept.
-         *   </li>
-         *   <li>
-         *     If the value is an array, any previous value will be overwritten,
-         *     not merged.
-         *   </li>
-         *   <li>
-         *     Values set here will overwrite targeting parameters set at the
-         *     service-level.
-         *   </li>
-         * </ul>
+         *
+         * **Notes:**
+         *
+         * - In case of overwriting, only the last value will be kept.
+         * - If the value is an array, any previous value will be overwritten, not
+         * - Values set here will overwrite targeting parameters set at the
+         *   service-level.
          *
          * @example
          *   var slot = googletag.defineSlot('/1234567/sports', [160, 600],
@@ -1656,16 +1623,13 @@ declare namespace googletag {
      * Named sizes that a slot can have. In most cases size is a fixed-size
      * rectangle but there are some cases when we need other kinds of size
      * specifications. Only the following are valid named sizes:
-     *  <ul>
-     *   <li><b>'fluid'</b>: the ad container takes 100% width of parent div and
-     *       then resizes its height to fit creative content. Similar to how
-     *       regular block elements on a page behave. Used for native ads (see
-     *       [related
-     *       article](https://support.google.com/admanager/answer/6366845)). Note
-     *       that both 'fluid' and ['fluid'] are acceptable forms to declare a slot
-     *       size as fluid.
-     *   </li>
-     * </ul>
+     *
+     * - **fluid**: the ad container takes 100% width of parent div and then
+     *   resizes its height to fit creative content. Similar to how regular block
+     *   elements on a page behave. Used for native ads (see
+     *   [related article](https://support.google.com/admanager/answer/6366845)).
+     *   Note that both `fluid` and `['fluid']` are acceptable forms to declare a
+     *   slot size as fluid.
      */
     type NamedSize = 'fluid' | ['fluid'];
 
