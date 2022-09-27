@@ -1591,6 +1591,7 @@ declare namespace googletag {
          *
          * - In case of overwriting, only the last value will be kept.
          * - If the value is an array, any previous value will be overwritten, not
+         *   merged.
          * - Values set here will overwrite targeting parameters set at the
          *   service-level.
          *
