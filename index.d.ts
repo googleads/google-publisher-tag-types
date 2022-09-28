@@ -1756,15 +1756,21 @@ declare namespace googletag {
          *
          *         // Log details of the rendered ad.
          *         console.log('Advertiser ID:', event.advertiserId);
-         *         console.log('Campaign ID: ', event.campaignId);
-         *         console.log('Creative ID: ', event.creativeId);
+         *         console.log('Campaign ID:', event.campaignId);
+         *         console.log('Company IDs:', event.companyIds);
+         *         console.log('Creative ID:', event.creativeId);
+         *         console.log('Creative Template ID:', event.creativeTemplateId);
+         *         console.log('Is backfill?:', event.isBackfill);
          *         console.log('Is empty?:', event.isEmpty);
+         *         console.log('Label IDs:', event.labelIds);
          *         console.log('Line Item ID:', event.lineItemId);
          *         console.log('Size:', event.size);
+         *         console.log('Slot content changed?', event.slotContentChanged);
          *         console.log('Source Agnostic Creative ID:',
          *                     event.sourceAgnosticCreativeId);
          *         console.log('Source Agnostic Line Item ID:',
          *                     event.sourceAgnosticLineItemId);
+         *         console.log('Yield Group IDs:', event.yieldGroupIds);
          *         console.groupEnd();
          *
          *         if (slot === targetSlot) {
@@ -1781,6 +1787,11 @@ declare namespace googletag {
              * no ad was returned, `false` otherwise.
              */
             isEmpty: boolean;
+            /**
+             * Whether the slot content was changed with the rendered ad. Value is
+             * `true` if the content was changed, `false` otherwise.
+             */
+            slotContentChanged: boolean;
             /**
              * Indicates the pixel size of the rendered creative. Example:
              * `[728, 90]`. Value is `null` for empty ad slots.
@@ -1805,6 +1816,18 @@ declare namespace googletag {
              */
             creativeId: number | null;
             /**
+             * Creative template ID of the rendered reservation ad. Value is
+             * `null` for empty slots, backfill ads, and creatives rendered by
+             * services other than {@link PubAdsService}.
+             */
+            creativeTemplateId: number | null;
+            /**
+             * Label IDs of the rendered ad. Value is `null` for empty slots,
+             * backfill ads, and creatives rendered by services other than {@link
+             * PubAdsService}.
+             */
+            labelIds: number[] | null;
+            /**
              * Line item ID of the rendered reservation ad. Value is `null`
              * for empty slots, backfill ads, and creatives rendered by services other
              * than {@link PubAdsService}.
@@ -1824,6 +1847,23 @@ declare namespace googletag {
              * {@link PubAdsService}.
              */
             sourceAgnosticLineItemId: number | null;
+            /**
+             * Whether an ad was a backfill ad. Value is `true` if
+             * the ad was a backfill ad, `false` otherwise.
+             */
+            isBackfill: boolean;
+            /**
+             * IDs of the yield groups for the rendered backfill ad. Value is
+             * `null` for empty slots, reservation ads, and creatives rendered by
+             * services other than {@link PubAdsService}.
+             */
+            yieldGroupIds: number[] | null;
+            /**
+             * IDs of the companies that bid on the rendered backfill ad. Value is
+             * `null` for empty slots, reservation ads, and creatives rendered by
+             * services other than {@link PubAdsService}.
+             */
+            companyIds: number[] | null;
         }
 
         /**
