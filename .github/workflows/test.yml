@@ -32,6 +32,6 @@ jobs:
       - name: Run linter
         run: |
           npm run test
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Apply prettier changes
+#      - uses: stefanzweifel/git-auto-commit-action@v4
+#        with:
+#          commit_message: Apply prettier changes
