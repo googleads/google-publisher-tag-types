@@ -84,9 +84,9 @@ declare namespace googletag {
      * @see [Share secure signals with bidders](https://support.google.com/admanager/answer/10488752)
      */
     let secureSignalProviders:
-                | secureSignals.SecureSignalProvider[]
-                | secureSignals.SecureSignalProvidersArray
-                | undefined;
+        | secureSignals.SecureSignalProvider[]
+        | secureSignals.SecureSignalProvidersArray
+        | undefined;
 
     /**
      * Constructs an ad slot with a given ad unit path and size and associates it
@@ -964,9 +964,9 @@ declare namespace googletag {
          *     distance a slot can be before fetching and rendering.
          */
         enableLazyLoad(config?: {
-                        fetchMarginPercent?: number;
-                        renderMarginPercent?: number;
-                        mobileScaling?: number;
+            fetchMarginPercent?: number;
+            renderMarginPercent?: number;
+            mobileScaling?: number;
         }): void;
 
         /**
@@ -1122,8 +1122,8 @@ declare namespace googletag {
          * @return The service object on which the method was called.
          */
         addEventListener<K extends keyof events.EventTypeMap>(
-                        eventType: K,
-                        listener: (arg: events.EventTypeMap[K]) => void,
+            eventType: K,
+            listener: (arg: events.EventTypeMap[K]) => void,
         ): Service;
 
         /**
@@ -1155,8 +1155,8 @@ declare namespace googletag {
          * @param listener Function that takes a single event object argument.
          */
         removeEventListener<K extends keyof events.EventTypeMap>(
-                        eventType: K,
-                        listener: (event: events.EventTypeMap[K]) => void,
+            eventType: K,
+            listener: (event: events.EventTypeMap[K]) => void,
         ): void;
 
         /**
