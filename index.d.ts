@@ -892,8 +892,7 @@ declare namespace googletag {
          *   var pageConfig = {
          *     allowOverlayExpansion: true,
          *     allowPushExpansion: true,
-         *     sandbox: true,
-         *     useUniqueDomain: true
+         *     sandbox: true
          *   };
          *
          *   var slotConfig = {allowOverlayExpansion: false};
