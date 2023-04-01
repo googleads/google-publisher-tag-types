@@ -2294,8 +2294,8 @@ declare namespace googletag {
              * @example
              *
              * const componentAuctionConfig = {
-             *   seller: 'https://testSeller.com', // should be https and the same as
-             *                                     // decisionLogicUrl's origin
+             *   // Seller URL should be https and the same as decisionLogicUrl's origin
+             *   seller: 'https://testSeller.com',
              *   decisionLogicUrl: 'https://testSeller.com/ssp/decision-logic.js',
              *   interestGroupBuyers: [
              *     'https://example-buyer.com',
