@@ -26,14 +26,20 @@ HEADER: str = 'google/HEADER'
 DT_TESTS: str = 'dt/types/google-publisher-tag/google-publisher-tag-tests.ts'
 DT_TYPES: str = 'dt/types/google-publisher-tag/index.d.ts'
 
+GOOGLE_TESTS: str = 'google/google-publisher-tag-tests.ts'
 GOOGLE_TYPES: str = 'google/index.d.ts'
 
 
+def have_tests_changed() -> bool:
+    return have_files_changed(DT_TESTS, GOOGLE_TESTS)
+
+
 def have_types_changed() -> bool:
-    dt_types = read_file_without_header(DT_TYPES)
-    google_types = read_file_without_header(GOOGLE_TYPES)
-    
-    return dt_types != google_types
+    return have_files_changed(DT_TYPES, GOOGLE_TYPES)
+
+
+def have_files_changed(old, new) -> str:
+    return read_file_without_header(old) != read_file_without_header(new)
 
 
 def read_file_without_header(file) -> str:
@@ -55,16 +61,16 @@ def update() -> None:
         out.write(read_file_without_header(GOOGLE_TYPES))
 
     with open(DT_TESTS, 'w') as out:
-        # Placeholder until test suite is ready.
         out.write(f'// Tests for Google Publisher Tag 1.{new_version}\n')
         out.write(f'// Synced from: https://github.com/googleads/google-publisher-tag-types/commit/{COMMIT_SHA}\n')
-        out.write('googletag.cmd;\n')
+        out.write(read_file_without_header(GOOGLE_TESTS))
 
 
 def main() -> None:
+    tests_changed: bool = have_tests_changed()
     types_changed: bool = have_types_changed()
 
-    if types_changed:
+    if tests_changed or types_changed:
         print(f'Diff detected @ {COMMIT_SHA}, syncing changes.')
         update()
     else:
