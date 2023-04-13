@@ -19,6 +19,11 @@ jobs:
           token: ${{ secrets.PUBTAGS_BOT_REPO_TOKEN }}
           path: dt
           ref: master
+      - name: Run prettier
+        working-directory: ./google
+        run: |
+          npm install
+          npm run prettier -- --write *.ts
       - name: Run sync script
         id: sync
         run: python google/.github/workflows/sync.py
