@@ -2263,8 +2263,6 @@ declare namespace googletag {
         interface SlotSettingsConfig {
             /**
              * An array of component auctions to be included in an on-device ad auction.
-             *
-             * @experimental
              */
             componentAuction?: ComponentAuctionConfig[];
         }
@@ -2272,8 +2270,7 @@ declare namespace googletag {
         /**
          * An object representing a single component auction in a on-device ad auction.
          *
-         * @experimental
-         * @see [FLEDGE: Sellers Run On-Device Auctions](https://github.com/WICG/turtledove/blob/main/FLEDGE.md#2-sellers-run-on-device-auctions)
+         * @see [Protected Audience API Seller guide: run ad auctions](https://developer.chrome.com/docs/privacy-sandbox/fledge-api/ad-auction/)
          */
         interface ComponentAuctionConfig {
             /**
@@ -2328,7 +2325,7 @@ declare namespace googletag {
              *   }]
              * });
              *
-             * @see [FLEDGE: Initiating an On-Device Auction](https://github.com/WICG/turtledove/blob/main/FLEDGE.md#21-initiating-an-on-device-auction)
+             * @see [Protected Audience API: Initiating an On-Device Auction](https://github.com/WICG/turtledove/blob/main/FLEDGE.md#21-initiating-an-on-device-auction)
              */
             auctionConfig: {
                 seller: string;
