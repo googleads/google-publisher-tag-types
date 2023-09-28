@@ -19,11 +19,11 @@ jobs:
           token: ${{ secrets.PUBTAGS_BOT_REPO_TOKEN }}
           path: dt
           ref: master
-      - name: Run prettier
+      - name: Run dprint
         working-directory: ./google
         run: |
-          npm install
-          npm run prettier -- --write *.ts
+          cp ../dt/.dprint.jsonc .
+          npx --yes dprint fmt -- '*.ts'
       - name: Run sync script
         id: sync
         run: python google/.github/workflows/sync.py
@@ -35,7 +35,7 @@ jobs:
         working-directory: ./dt
         run: |
           npm install
-          npm run prettier -- --write types/google-publisher-tag/*.ts
+          npx --yes dprint fmt -- 'types/google-publisher-tag/*.ts'
           npm test google-publisher-tag
       - name: Create Pull Request
         if: steps.verify.outcome == 'success'
