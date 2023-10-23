@@ -19,6 +19,9 @@ jobs:
           token: ${{ secrets.PUBTAGS_BOT_REPO_TOKEN }}
           path: dt
           ref: master
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
       - name: Run dprint
         working-directory: ./google
         run: |
@@ -34,9 +37,8 @@ jobs:
         id: verify
         working-directory: ./dt
         run: |
-          npm install
-          npx --yes dprint fmt -- 'types/google-publisher-tag/*.ts'
-          npm test google-publisher-tag
+          pnpm install -w --filter "{./types/google-publisher-tag}..."
+          pnpm test google-publisher-tag
       - name: Create Pull Request
         if: steps.verify.outcome == 'success'
         uses: peter-evans/create-pull-request@v3

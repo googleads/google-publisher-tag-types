@@ -21,49 +21,44 @@ from datetime import datetime, timedelta
 
 COMMIT_SHA: str = os.getenv('GITHUB_SHA')
 
-HEADER: str = 'google/HEADER'
-
+DT_PACKAGE: str = 'dt/types/google-publisher-tag/package.json'
 DT_TESTS: str = 'dt/types/google-publisher-tag/google-publisher-tag-tests.ts'
 DT_TYPES: str = 'dt/types/google-publisher-tag/index.d.ts'
 
+GOOGLE_PACKAGE: str = 'google/PACKAGE'
 GOOGLE_TESTS: str = 'google/google-publisher-tag-tests.ts'
 GOOGLE_TYPES: str = 'google/index.d.ts'
 
 
 def have_tests_changed() -> bool:
-    return have_files_changed(DT_TESTS, GOOGLE_TESTS)
+    return read_file(DT_TESTS) != read_file(GOOGLE_TESTS)
 
 
 def have_types_changed() -> bool:
-    return have_files_changed(DT_TYPES, GOOGLE_TYPES)
+    return read_file(DT_TYPES, False) != read_file(GOOGLE_TYPES)
 
 
-def have_files_changed(old, new) -> str:
-    return read_file_without_header(old) != read_file_without_header(new)
-
-
-def read_file_without_header(file) -> str:
+def read_file(file, has_header=True) -> str:
     with open(file) as f:
         contents = f.read()
     
-    return contents[contents.find('\n\n'):]
+    return contents[contents.find('\n\n'):].lstrip() if has_header else contents
 
 
 def update() -> None:
     # Use start (Monday) of the current week as minor version, to align with GPT release notes.
     new_version: str = (datetime.today() - timedelta(days=datetime.today().weekday() % 7)).strftime('%Y%m%d')
 
-    with open(HEADER) as input:
-        header: str = input.read()
+    with open(DT_PACKAGE, 'w') as out:
+        out.write(read_file(GOOGLE_PACKAGE, False).replace('$VERSION', new_version))
 
     with open(DT_TYPES, 'w') as out:
-        out.write(header.replace('$VERSION', new_version))
-        out.write(read_file_without_header(GOOGLE_TYPES))
+        out.write(read_file(GOOGLE_TYPES))
 
     with open(DT_TESTS, 'w') as out:
         out.write(f'// Tests for Google Publisher Tag 1.{new_version}\n')
-        out.write(f'// Synced from: https://github.com/googleads/google-publisher-tag-types/commit/{COMMIT_SHA}\n')
-        out.write(read_file_without_header(GOOGLE_TESTS))
+        out.write(f'// Synced from: https://github.com/googleads/google-publisher-tag-types/commit/{COMMIT_SHA}\n\n')
+        out.write(read_file(GOOGLE_TESTS))
 
 
 def main() -> None:
