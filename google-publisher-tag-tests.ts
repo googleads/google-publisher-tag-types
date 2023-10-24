@@ -860,3 +860,24 @@ function test_googletag_config_componentAuctionConfig_auctionConfig() {
         ],
     });
 }
+
+// Test for googletag.config.InterstitialConfig.triggers
+function test_googletag_config_interstitialConfig_triggers() {
+    // Define a GPT managed web interstitial ad slot.
+    const interstitialSlot = googletag.defineOutOfPageSlot(
+        '/1234567/sports',
+        googletag.enums.OutOfPageFormat.INTERSTITIAL,
+    )!;
+
+    // Enable optional interstitial triggers.
+    // Change this value to false to disable.
+    const enableTriggers = true;
+
+    interstitialSlot.setConfig({
+        interstitial: {
+            triggers: {
+                unhideWindow: enableTriggers,
+            },
+        },
+    });
+}
