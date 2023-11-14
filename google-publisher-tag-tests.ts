@@ -632,6 +632,75 @@ function test_googletag_slot_updateTargetingFromMap() {
     });
 }
 
+// Test for googletag.config.PrivacyTreatmentsConfig.treatments
+function test_googletag_config_privacyTreatmentsConfig_treatments() {
+    // Disable personalization across the entire page.
+    googletag.setConfig({
+        privacyTreatments: { treatments: ['disablePersonalization'] },
+    });
+}
+
+// Test for googletag.config.ComponentAuctionConfig.auctionConfig
+function test_googletag_config_componentAuctionConfig_auctionConfig() {
+    const componentAuctionConfig = {
+        // Seller URL should be https and the same as decisionLogicUrl's origin
+        seller: 'https://testSeller.com',
+        decisionLogicUrl: 'https://testSeller.com/ssp/decision-logic.js',
+        interestGroupBuyers: ['https://example-buyer.com'],
+        auctionSignals: { auction_signals: 'auction_signals' },
+        sellerSignals: { seller_signals: 'seller_signals' },
+        perBuyerSignals: {
+            // listed on interestGroupBuyers
+            'https://example-buyer.com': {
+                per_buyer_signals: 'per_buyer_signals',
+            },
+        },
+    };
+
+    const auctionSlot = googletag.defineSlot('/1234567/example', [160, 600])!;
+
+    // To add configKey to the component auction:
+    auctionSlot.setConfig({
+        componentAuction: [
+            {
+                configKey: 'https://testSeller.com',
+                auctionConfig: componentAuctionConfig,
+            },
+        ],
+    });
+
+    // To remove configKey from the component auction:
+    auctionSlot.setConfig({
+        componentAuction: [
+            {
+                configKey: 'https://testSeller.com',
+                auctionConfig: null,
+            },
+        ],
+    });
+}
+
+// Test for googletag.config.InterstitialConfig.triggers
+function test_googletag_config_interstitialConfig_triggers() {
+    // Define a GPT managed web interstitial ad slot.
+    const interstitialSlot = googletag.defineOutOfPageSlot(
+        '/1234567/sports',
+        googletag.enums.OutOfPageFormat.INTERSTITIAL,
+    )!;
+
+    // Enable optional interstitial triggers.
+    // Change this value to false to disable.
+    const enableTriggers = true;
+
+    interstitialSlot.setConfig({
+        interstitial: {
+            triggers: {
+                unhideWindow: enableTriggers,
+            },
+        },
+    });
+}
+
 // Test for googletag.secureSignals.BidderSignalProvider
 function test_googletag_secureSignals_bidderSignalProvider() {
     // id is provided
@@ -818,66 +887,5 @@ function test_googletag_events_rewardedSlotReadyEvent() {
         if (slot === targetSlot) {
             // Slot specific logic.
         }
-    });
-}
-
-// Test for googletag.config.ComponentAuctionConfig.auctionConfig
-function test_googletag_config_componentAuctionConfig_auctionConfig() {
-    const componentAuctionConfig = {
-        // Seller URL should be https and the same as decisionLogicUrl's origin
-        seller: 'https://testSeller.com',
-        decisionLogicUrl: 'https://testSeller.com/ssp/decision-logic.js',
-        interestGroupBuyers: ['https://example-buyer.com'],
-        auctionSignals: { auction_signals: 'auction_signals' },
-        sellerSignals: { seller_signals: 'seller_signals' },
-        perBuyerSignals: {
-            // listed on interestGroupBuyers
-            'https://example-buyer.com': {
-                per_buyer_signals: 'per_buyer_signals',
-            },
-        },
-    };
-
-    const auctionSlot = googletag.defineSlot('/1234567/example', [160, 600])!;
-
-    // To add configKey to the component auction:
-    auctionSlot.setConfig({
-        componentAuction: [
-            {
-                configKey: 'https://testSeller.com',
-                auctionConfig: componentAuctionConfig,
-            },
-        ],
-    });
-
-    // To remove configKey from the component auction:
-    auctionSlot.setConfig({
-        componentAuction: [
-            {
-                configKey: 'https://testSeller.com',
-                auctionConfig: null,
-            },
-        ],
-    });
-}
-
-// Test for googletag.config.InterstitialConfig.triggers
-function test_googletag_config_interstitialConfig_triggers() {
-    // Define a GPT managed web interstitial ad slot.
-    const interstitialSlot = googletag.defineOutOfPageSlot(
-        '/1234567/sports',
-        googletag.enums.OutOfPageFormat.INTERSTITIAL,
-    )!;
-
-    // Enable optional interstitial triggers.
-    // Change this value to false to disable.
-    const enableTriggers = true;
-
-    interstitialSlot.setConfig({
-        interstitial: {
-            triggers: {
-                unhideWindow: enableTriggers,
-            },
-        },
     });
 }
