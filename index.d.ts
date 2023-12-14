@@ -2092,7 +2092,7 @@ declare namespace googletag {
          *
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          */
-        // tslint:disable-next-line:no-empty-interface
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface SlotRequestedEvent extends Event {}
 
         /**
@@ -2244,7 +2244,7 @@ declare namespace googletag {
          *
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          */
-        // tslint:disable-next-line:no-empty-interface
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface ImpressionViewableEvent extends Event {}
 
         /**
@@ -2267,7 +2267,7 @@ declare namespace googletag {
          *
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          */
-        // tslint:disable-next-line:no-empty-interface
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface SlotOnloadEvent extends Event {}
 
         /**
@@ -2327,7 +2327,7 @@ declare namespace googletag {
          *
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          */
-        // tslint:disable-next-line:no-empty-interface
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface SlotResponseReceived extends Event {}
 
         /**
@@ -2388,7 +2388,7 @@ declare namespace googletag {
          * @see [Display a rewarded ad](https://developers.google.com/publisher-tag/samples/display-rewarded-ad)
          */
 
-        // tslint:disable-next-line:no-empty-interface
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface RewardedSlotClosedEvent extends Event {}
 
         /**
