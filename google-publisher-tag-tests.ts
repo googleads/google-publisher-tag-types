@@ -648,6 +648,22 @@ function test_googletag_config_privacyTreatmentsConfig_treatments() {
     });
 }
 
+// Test for googletag.config.PublisherProvidedSignalsConfig
+function test_googletag_config_publisherProvidedSignalsConfig() {
+    googletag.setConfig({
+        pps: {
+            taxonomies: {
+                'IAB_AUDIENCE_1_1': { values: ['6', '626'] },
+                // '6' = 'Demographic | Age Range | 18-20'
+                // '626' = 'Interest | Sports | Darts'
+                'IAB_CONTENT_2_2': { values: ['48', '127'] },
+                // '48' = 'Books and Literature | Fiction'
+                // '127' = 'Careers | Job Search'
+            },
+        },
+    });
+}
+
 // Test for googletag.config.ComponentAuctionConfig.auctionConfig
 function test_googletag_config_componentAuctionConfig_auctionConfig() {
     const componentAuctionConfig = {
