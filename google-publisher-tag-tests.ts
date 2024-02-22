@@ -719,6 +719,7 @@ function test_googletag_config_interstitialConfig_triggers() {
     interstitialSlot.setConfig({
         interstitial: {
             triggers: {
+                navBar: enableTriggers,
                 unhideWindow: enableTriggers,
             },
         },
