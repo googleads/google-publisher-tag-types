@@ -1530,7 +1530,7 @@ declare namespace googletag {
          *                         .addService(googletag.pubads());
          *
          *   slot.getSlotElementId();
-         *   // Returns 'div-1'.
+         *   // Returns 'div'.
          *
          * @return Slot `div` ID.
          */

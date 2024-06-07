@@ -596,7 +596,7 @@ function test_googletag_slot_getSlotElementId() {
     const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!.addService(googletag.pubads());
 
     slot.getSlotElementId();
-    // Returns 'div-1'.
+    // Returns 'div'.
 }
 
 // Test for googletag.Slot.setForceSafeFrame
