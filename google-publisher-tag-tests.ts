@@ -95,6 +95,15 @@ function test_googletag_companionAdsService_setRefreshUnfilledSlots() {
     googletag.companionAds().setRefreshUnfilledSlots(true);
 }
 
+// Test for googletag.PrivacySettingsConfig.limitedAds
+function test_googletag_privacySettingsConfig_limitedAds() {
+    // Manually enable limited ads serving.
+    // GPT must be loaded from the limited ads URL to configure this setting.
+    googletag.pubads().setPrivacySettings({
+        limitedAds: true,
+    });
+}
+
 // Test for googletag.PrivacySettingsConfig.trafficSource
 function test_googletag_privacySettingsConfig_trafficSource() {
     // Indicate requests represent organic traffic.
