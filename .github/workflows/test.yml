@@ -13,25 +13,48 @@
 # limitations under the License.
 
 name: Test
+
 on:
   pull_request:
   push:
     branches:
       - main
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
+          path: google
           ref: ${{ github.head_ref }}
-      - name: Run prettier
-        run: |
-          npm install
-          npm run prettier -- --write *.ts
+      - uses: actions/checkout@v3
+        with:
+          repository: DefinitelyTyped/DefinitelyTyped
+          token: ${{ secrets.PUBTAGS_BOT_REPO_TOKEN }}
+          path: dt
+          ref: master
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
       - name: Run linter
+        working-directory: ./google
         run: |
           npm run test
-#      - uses: stefanzweifel/git-auto-commit-action@v4
-#        with:
-#          commit_message: Apply prettier changes
+      - name: Run dprint
+        working-directory: ./google
+        run: |
+          cp ../dt/.dprint.jsonc .
+          npx --yes dprint fmt -- '*.ts'
+      - name: Run sync script
+        id: sync
+        run: python google/.github/workflows/sync.py
+        shell: sh
+        continue-on-error: true
+      - name: Verify DefinitelyTyped compliance
+        if: steps.sync.outcome == 'success'
+        id: verify
+        working-directory: ./dt
+        run: |
+          pnpm install -w --filter "{./types/google-publisher-tag}..."
+          pnpm test google-publisher-tag
