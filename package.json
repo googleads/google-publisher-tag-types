@@ -28,18 +28,15 @@
     "typescript": "^3.3.1"
   },
   "devDependencies": {
-    "@definitelytyped/dtslint": "0.0.115",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
     "eslint": "^8.17.0",
     "gts": "^4.0.0",
-    "prettier": "^2.7.1",
-    "tslint": "^6.1.3"
+    "prettier": "^2.7.1"
   },
   "scripts": {
     "lint:google": "eslint index.d.ts",
-    "lint:dts": "tslint index.d.ts",
-    "lint": "npm run lint:google && npm run lint:dts",
+    "lint": "npm run lint:google",
     "test": "npm i && npm run lint",
     "prettier": "prettier"
   }
