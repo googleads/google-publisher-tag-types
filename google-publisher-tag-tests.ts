@@ -649,6 +649,18 @@ function test_googletag_config_adExpansionConfig() {
     });
 }
 
+// Test for googletag.config.PageSettingsConfig.adYield
+function test_googletag_config_pageSettingsConfig_adYield() {
+    // Disable yielding.
+    googletag.setConfig({ adYield: 'DISABLED' });
+
+    // Enable yielding for all slots.
+    googletag.setConfig({ adYield: 'ENABLED_ALL_SLOTS' });
+
+    // Enable yielding only for slots outside of the viewport (default).
+    googletag.setConfig({ adYield: null });
+}
+
 // Test for googletag.config.PrivacyTreatmentsConfig.treatments
 function test_googletag_config_privacyTreatmentsConfig_treatments() {
     // Disable personalization across the entire page.
