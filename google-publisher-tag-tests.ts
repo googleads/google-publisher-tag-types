@@ -935,3 +935,44 @@ function test_googletag_events_rewardedSlotReadyEvent() {
         }
     });
 }
+
+// Test for googletag.events.GameManualInterstitialSlotReadyEvent
+function test_googletag_events_gameManualInterstitialSlotReadyEvent() {
+    // This listener is called when a game manual interstitial slot is ready to
+    // be displayed.
+    const targetSlot = googletag.defineOutOfPageSlot(
+        '/1234567/example',
+        googletag.enums.OutOfPageFormat.GAME_MANUAL_INTERSTITIAL,
+    );
+    googletag.pubads().addEventListener('gameManualInterstitialSlotReady', event => {
+        const slot = event.slot;
+        console.log('Game manual interstital slot', slot.getSlotElementId(), 'is ready to be displayed.');
+
+        //Replace with custom logic.
+        const displayGmiAd = true;
+        if (displayGmiAd) {
+            event.makeGameManualInterstitialVisible();
+        }
+
+        if (slot === targetSlot) {
+            // Slot specific logic.
+        }
+    });
+}
+
+// Test for googletag.events.GameManualInterstitialSlotClosedEvent
+function test_googletag_events_gameManualInterstitialSlotClosedEvent() {
+    // This listener is called when a game manual interstial slot is closed.
+    const targetSlot = googletag.defineOutOfPageSlot(
+        '/1234567/example',
+        googletag.enums.OutOfPageFormat.GAME_MANUAL_INTERSTITIAL,
+    );
+    googletag.pubads().addEventListener('gameManualInterstitialSlotClosed', event => {
+        const slot = event.slot;
+        console.log('Game manual interstital slot', slot.getSlotElementId(), 'is closed.');
+
+        if (slot === targetSlot) {
+            // Slot specific logic.
+        }
+    });
+}
