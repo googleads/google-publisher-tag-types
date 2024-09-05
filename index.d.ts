@@ -2689,7 +2689,7 @@ declare namespace googletag {
          * This event is fired when a game manual interstitial slot has been closed by
          * the user.
          *
-         * **Note:** Game manual interstitial is a [limited-access](https://support.google.com/admanager/answer/14640119?hl=en) format.
+         * **Note:** Game manual interstitial is a [limited-access](https://support.google.com/admanager/answer/14640119) format.
          *
          * @example
          *   // This listener is called when a game manual interstial slot is closed.
@@ -2711,6 +2711,7 @@ declare namespace googletag {
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          * @see [Display a game manual interstitial ad](https://support.google.com/admanager/answer/14640119)
          */
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface GameManualInterstitialSlotClosedEvent extends Event {}
 
         /**
