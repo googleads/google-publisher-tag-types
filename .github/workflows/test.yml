@@ -24,11 +24,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           path: google
           ref: ${{ github.head_ref }}
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           repository: DefinitelyTyped/DefinitelyTyped
           token: ${{ secrets.PUBTAGS_BOT_REPO_TOKEN }}
