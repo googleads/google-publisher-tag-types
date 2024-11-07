@@ -804,7 +804,6 @@ function test_googletag_events_slotRenderEndedEvent() {
         console.log('Creative Template ID:', event.creativeTemplateId);
         console.log('Is backfill?:', event.isBackfill);
         console.log('Is empty?:', event.isEmpty);
-        console.log('Label IDs:', event.labelIds);
         console.log('Line Item ID:', event.lineItemId);
         console.log('Size:', event.size);
         console.log('Slot content changed?', event.slotContentChanged);
