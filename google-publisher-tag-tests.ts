@@ -675,7 +675,7 @@ function test_googletag_config_publisherProvidedSignalsConfig() {
         pps: {
             taxonomies: {
                 'IAB_AUDIENCE_1_1': { values: ['6', '626'] },
-                // '6' = 'Demographic | Age Range | 18-20'
+                // '6' = 'Demographic | Age Range | 30-34'
                 // '626' = 'Interest | Sports | Darts'
                 'IAB_CONTENT_2_2': { values: ['48', '127'] },
                 // '48' = 'Books and Literature | Fiction'
