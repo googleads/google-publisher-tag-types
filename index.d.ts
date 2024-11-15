@@ -1860,7 +1860,7 @@ declare namespace googletag {
              *     privacyTreatments: {treatments: ['disablePersonalization']}
              *   });
              */
-            treatments: PrivacyTreatment[];
+            treatments: PrivacyTreatment[] | null;
         }
 
         /**
