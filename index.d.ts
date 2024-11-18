@@ -1734,7 +1734,7 @@ declare namespace googletag {
              * @see [Expand ads on desktop and tablet](https://support.google.com/admanager/answer/9384852)
              * @see [Expand ads on mobile web (partial screen)](https://support.google.com/admanager/answer/9117822)
              */
-            enabled?: boolean;
+            enabled?: boolean | null;
         }
 
         /**
