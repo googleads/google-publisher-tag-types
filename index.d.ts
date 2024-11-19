@@ -1992,7 +1992,7 @@ declare namespace googletag {
             /**
              * Settings to control ad expansion.
              */
-            adExpansion?: AdExpansionConfig;
+            adExpansion?: AdExpansionConfig | null;
         }
 
         /**
