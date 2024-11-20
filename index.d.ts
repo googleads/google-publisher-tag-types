@@ -1982,7 +1982,7 @@ declare namespace googletag {
             /**
              * An array of component auctions to be included in an on-device ad auction.
              */
-            componentAuction?: ComponentAuctionConfig[];
+            componentAuction?: ComponentAuctionConfig[] | null;
 
             /**
              * Settings that control interstitial ad slot behavior.
