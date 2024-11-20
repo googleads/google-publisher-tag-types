@@ -1987,7 +1987,7 @@ declare namespace googletag {
             /**
              * Settings that control interstitial ad slot behavior.
              */
-            interstitial?: InterstitialConfig;
+            interstitial?: InterstitialConfig | null;
 
             /**
              * Settings to control ad expansion.
@@ -2103,7 +2103,7 @@ declare namespace googletag {
              *
              * @see [Display a web interstitial ad](https://developers.google.com/publisher-tag/samples/display-web-interstitial-ad)
              */
-            triggers?: Partial<Record<InterstitialTrigger, boolean>>;
+            triggers?: Partial<Record<InterstitialTrigger, boolean>> | null;
         }
 
         /**
