@@ -747,6 +747,22 @@ function test_googletag_config_interstitialConfig_triggers() {
     });
 }
 
+// Test for googletag.config.InterstitialConfig.requireStorageAccess
+function test_googletag_config_interstitialConfig_requireStorageAccess() {
+    // Opt out of showing interstitials to users
+    // without local storage consent.
+    const interstitialSlot = googletag.defineOutOfPageSlot(
+        '/1234567/sports',
+        googletag.enums.OutOfPageFormat.INTERSTITIAL,
+    )!;
+
+    interstitialSlot.setConfig({
+        interstitial: {
+            requireStorageAccess: true, // defaults to false
+        },
+    });
+}
+
 // Test for googletag.secureSignals.BidderSignalProvider
 function test_googletag_secureSignals_bidderSignalProvider() {
     // id is provided
