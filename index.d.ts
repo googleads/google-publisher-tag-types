@@ -2707,16 +2707,19 @@ declare namespace googletag {
          * @example
          *   // This listener is called when a game manual interstitial slot is ready to
          *   // be displayed.
-         *   const targetSlot = googletag.defineOutOfPageSlot(
-         *       '/1234567/example',
-         *       googletag.enums.OutOfPageFormat.GAME_MANUAL_INTERSTITIAL);
-         *   googletag.pubads().addEventListener('gameManualInterstitialSlotReady',
+         *   const targetSlot = googletag.defineOutOfPageSlot('/1234567/example', googletag.enums.OutOfPageFormat.GAME_MANUAL_INTERSTITIAL);
+         *
+         *   // Slot returns null if the page or device does not support game manual interstitial ads.
+         *   if(targetSlot) {
+         *     targetSlot.addService(googletag.pubads());
+         *
+         *     googletag.pubads().addEventListener('gameManualInterstitialSlotReady',
          *       (event) => {
          *         const slot = event.slot;
          *         console.log('Game manual interstital slot',
          *                     slot.getSlotElementId(), 'is ready to be displayed.')
          *
-         *         //Replace with custom logic.
+         *         // Replace with custom logic.
          *         const displayGmiAd = true;
          *         if (displayGmiAd) {
          *           event.makeGameManualInterstitialVisible();
@@ -2726,7 +2729,8 @@ declare namespace googletag {
          *           // Slot specific logic.
          *         }
          *       }
-         *   );
+         *     );
+         *   }
          *
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          * @see [Display a game manual interstitial ad](https://support.google.com/admanager/answer/14640119)
@@ -2743,11 +2747,14 @@ declare namespace googletag {
          * **Note:** Game manual interstitial is a [limited-access](https://support.google.com/admanager/answer/14640119) format.
          *
          * @example
-         *   // This listener is called when a game manual interstial slot is closed.
-         *   const targetSlot = googletag.defineOutOfPageSlot(
-         *       '/1234567/example',
-         *       googletag.enums.OutOfPageFormat.GAME_MANUAL_INTERSTITIAL);
-         *   googletag.pubads().addEventListener('gameManualInterstitialSlotClosed',
+         *   // This listener is called when a game manual interstitial slot is closed.
+         *   const targetSlot = googletag.defineOutOfPageSlot('/1234567/example', googletag.enums.OutOfPageFormat.GAME_MANUAL_INTERSTITIAL);
+         *
+         *   // Slot returns null if the page or device does not support game manual interstitial ads.
+         *   if(targetSlot) {
+         *     targetSlot.addService(googletag.pubads());
+         *
+         *     googletag.pubads().addEventListener('gameManualInterstitialSlotClosed',
          *       (event) => {
          *         const slot = event.slot;
          *         console.log('Game manual interstital slot',
@@ -2757,7 +2764,8 @@ declare namespace googletag {
          *           // Slot specific logic.
          *         }
          *       }
-         *   );
+         *     );
+         *   }
          *
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          * @see [Display a game manual interstitial ad](https://support.google.com/admanager/answer/14640119)
