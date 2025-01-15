@@ -2579,25 +2579,33 @@ declare namespace googletag {
          * If the ad is closed before the criteria for granting a reward is met, this
          * event will not fire.
          * @example
-         *   // This listener is called whenever a reward is granted for a
-         *   // rewarded ad.
-         *   const targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-         *   googletag.pubads().addEventListener('rewardedSlotGranted',
-         *       (event) => {
-         *         const slot = event.slot;
-         *         console.group(
-         *             'Reward granted for slot', slot.getSlotElementId(), '.');
+         *   const targetSlot = googletag.defineOutOfPageSlot(
+         *       '/1234567/example',
+         *       googletag.enums.OutOfPageFormat.REWARDED);
          *
-         *         // Log details of the reward.
-         *         console.log('Reward type:', event.payload?.type);
-         *         console.log('Reward amount:', event.payload?.amount);
-         *         console.groupEnd();
+         *   // Slot returns null if the page or device does not support rewarded ads.
+         *   if(targetSlot) {
+         *     targetSlot.addService(googletag.pubads());
          *
-         *         if (slot === targetSlot) {
-         *           // Slot specific logic.
+         *     // This listener is called whenever a reward is granted for a
+         *     // rewarded ad.
+         *     googletag.pubads().addEventListener('rewardedSlotGranted',
+         *         (event) => {
+         *           const slot = event.slot;
+         *           console.group(
+         *               'Reward granted for slot', slot.getSlotElementId(), '.');
+         *
+         *           // Log details of the reward.
+         *           console.log('Reward type:', event.payload?.type);
+         *           console.log('Reward amount:', event.payload?.amount);
+         *           console.groupEnd();
+         *
+         *           if (slot === targetSlot) {
+         *             // Slot specific logic.
+         *           }
          *         }
-         *       }
-         *   );
+         *     );
+         *   }
          *
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          * @see [Display a rewarded ad](https://developers.google.com/publisher-tag/samples/display-rewarded-ad)
@@ -2613,19 +2621,27 @@ declare namespace googletag {
          * reward has been granted, use {@link events.RewardedSlotGrantedEvent}
          * instead.
          * @example
-         *   // This listener is called when the user closes a rewarded ad slot.
-         *   const targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-         *   googletag.pubads().addEventListener('rewardedSlotClosed',
-         *       (event) => {
-         *         const slot = event.slot;
-         *         console.log('Rewarded ad slot', slot.getSlotElementId(),
-         *                     'has been closed.');
+         *   const targetSlot = googletag.defineOutOfPageSlot(
+         *       '/1234567/example',
+         *       googletag.enums.OutOfPageFormat.REWARDED);
          *
-         *         if (slot === targetSlot) {
-         *           // Slot specific logic.
+         *   // Slot returns null if the page or device does not support rewarded ads.
+         *   if(targetSlot) {
+         *     targetSlot.addService(googletag.pubads());
+         *
+         *     // This listener is called when the user closes a rewarded ad slot.
+         *     googletag.pubads().addEventListener('rewardedSlotClosed',
+         *         (event) => {
+         *           const slot = event.slot;
+         *           console.log('Rewarded ad slot', slot.getSlotElementId(),
+         *                       'has been closed.');
+         *
+         *           if (slot === targetSlot) {
+         *             // Slot specific logic.
+         *           }
          *         }
-         *       }
-         *   );
+         *     );
+         *   }
          *
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          * @see [Display a rewarded ad](https://developers.google.com/publisher-tag/samples/display-rewarded-ad)
@@ -2642,24 +2658,34 @@ declare namespace googletag {
          * @example
          *   // This listener is called when a rewarded ad slot becomes ready to be
          *   // displayed.
-         *   const targetSlot = googletag.defineSlot('/1234567/example', [160, 600]);
-         *   googletag.pubads().addEventListener('rewardedSlotReady',
-         *       (event) => {
-         *         const slot = event.slot;
-         *         console.log('Rewarded ad slot', slot.getSlotElementId(),
-         *                     'is ready to be displayed.');
+         *   const targetSlot = googletag.defineOutOfPageSlot(
+         *       '/1234567/example',
+         *       googletag.enums.OutOfPageFormat.REWARDED);
          *
-         *         // Replace with custom logic.
-         *         const userHasConsented = true;
-         *         if(userHasConsented) {
-         *           event.makeRewardedVisible();
-         *         }
+         *   // Slot returns null if the page or device does not support rewarded ads.
+         *   if(targetSlot) {
+         *     targetSlot.addService(googletag.pubads());
          *
-         *         if (slot === targetSlot) {
-         *           // Slot specific logic.
+         *     // This listener is called whenever a reward is granted for a
+         *     // rewarded ad.
+         *     googletag.pubads().addEventListener('rewardedSlotReady',
+         *         (event) => {
+         *            const slot = event.slot;
+         *            console.log('Rewarded ad slot', slot.getSlotElementId(),
+         *                        'is ready to be displayed.');
+         *
+         *            // Replace with custom logic.
+         *            const userHasConsented = true;
+         *           if(userHasConsented) {
+         *             event.makeRewardedVisible();
+         *           }
+         *
+         *           if (slot === targetSlot) {
+         *             // Slot specific logic.
+         *           }
          *         }
-         *       }
-         *   );
+         *      );
+         *   }
          *
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          * @see [Display a rewarded ad](https://developers.google.com/publisher-tag/samples/display-rewarded-ad)
