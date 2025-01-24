@@ -1906,7 +1906,7 @@ declare namespace googletag {
             /**
              * A list of {@link googletag.config.Taxonomy | Taxonomy} values.
              */
-            values: string[];
+            values: readonly string[];
         }
 
         /**
