@@ -688,9 +688,9 @@ function test_googletag_config_publisherProvidedSignalsConfig() {
 // Test for googletag.config.ComponentAuctionConfig.auctionConfig
 function test_googletag_config_componentAuctionConfig_auctionConfig() {
     const componentAuctionConfig = {
-        // Seller URL should be https and the same as decisionLogicUrl's origin
+        // Seller URL should be https and the same as decisionLogicURL's origin
         seller: 'https://testSeller.com',
-        decisionLogicUrl: 'https://testSeller.com/ssp/decision-logic.js',
+        decisionLogicURL: 'https://testSeller.com/ssp/decision-logic.js',
         interestGroupBuyers: ['https://example-buyer.com'],
         auctionSignals: { auction_signals: 'auction_signals' },
         sellerSignals: { seller_signals: 'seller_signals' },
