@@ -58,7 +58,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           path: dt
-          push-to-fork: publisher-ads-audits-bot/DefinitelyTyped
+          push-to-fork: google-publisher-tag/DefinitelyTyped
           token: ${{ secrets.PUBTAGS_BOT_REPO_TOKEN }}
           title: "Sync latest changes to @types/google-publisher-tag"
           body: "Automated PR to update @types/google-publisher-tag"
