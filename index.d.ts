@@ -1812,8 +1812,8 @@ declare namespace googletag {
             pps?: PublisherProvidedSignalsConfig | null;
 
             /**
-             * Setting to control whether GPT should yield the JS thread when
-             * rendering creatives.
+             * Setting to control whether GPT should yield the JS thread when requesting
+             * and rendering creatives.
              *
              * GPT will yield only for browsers that support the Scheduler.postTask
              * or Scheduler.yield API.
