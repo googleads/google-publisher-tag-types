@@ -286,6 +286,29 @@ declare namespace googletag {
     function setConfig(config: config.PageSettingsConfig): void;
 
     /**
+     * Gets general configuration options for the page set by {@link setConfig}.
+     *
+     * Not all `setConfig()` properties are supported by this method. Supported
+     * properties are:
+     * - {@link config.PageSettingsConfig.adsenseAttributes | `adsenseAttributes`}
+     * - {@link config.PageSettingsConfig.disableInitialLoad | `disableInitialLoad`}
+     * - {@link config.PageSettingsConfig.targeting | `targeting`}
+     *
+     * @example
+     *   // Get the value of the `targeting` setting.
+     *   const targetingConfig = googletag.getConfig('targeting');
+     *
+     *   // Get the value of the `adsenseAttributes` and `disableInitialLoad` settings.
+     *   const config = googletag.getConfig(['adsenseAttributes', 'disableInitialLoad']);
+     *
+     * @param keys The keys of the configuration options to get.
+     * @return The configuration options for the slot.
+     */
+    function getConfig(
+        keys: string | string[],
+    ): Pick<config.PageSettingsConfig, 'adsenseAttributes' | 'disableInitialLoad' | 'targeting'>;
+
+    /**
      * The command array accepts a sequence of functions and invokes them in
      * order. It is intended to replace a standard array that is used to enqueue
      * functions to be invoked once GPT is loaded.
@@ -1625,6 +1648,31 @@ declare namespace googletag {
          * @param slotConfig The configuration object.
          */
         setConfig(slotConfig: config.SlotSettingsConfig): void;
+
+        /**
+         * Gets general configuration options for the page set by {@link setConfig}.
+         *
+         * Not all `setConfig()` properties are supported by this method. Supported
+         * properties are:
+         * - {@link config.SlotSettingsConfig.adsenseAttributes | `adsenseAttributes`}
+         * - {@link config.SlotSettingsConfig.categoryExclusion | `categoryExclusion`}
+         * - {@link config.SlotSettingsConfig.targeting | `targeting`}
+         *
+         * @example
+         *   const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!;
+         *
+         *   // Get the value of the `targeting` setting.
+         *   const targetingConfig = slot.getConfig('targeting');
+         *
+         *   // Get the value of the `adsenseAttributes` and `categoryExclusion` settings.
+         *   const config = slot.getConfig(['adsenseAttributes', 'categoryExclusion']);
+         *
+         * @param keys The keys of the configuration options to get.
+         * @return The configuration options for the slot.
+         */
+        getConfig(
+            keys: string | string[],
+        ): Pick<config.SlotSettingsConfig, 'categoryExclusion' | 'targeting' | 'adsenseAttributes'>;
     }
 
     /** Array of two numbers representing [width, height]. */

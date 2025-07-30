@@ -83,6 +83,15 @@ function test_googletag_setAdIframeTitle() {
     googletag.setAdIframeTitle('title');
 }
 
+// Test for googletag.getConfig
+function test_googletag_getConfig() {
+    // Get the value of the `targeting` setting.
+    const targetingConfig = googletag.getConfig('targeting');
+
+    // Get the value of the `adsenseAttributes` and `disableInitialLoad` settings.
+    const config = googletag.getConfig(['adsenseAttributes', 'disableInitialLoad']);
+}
+
 // Test for googletag.CommandArray.push
 function test_googletag_commandArray_push() {
     googletag.cmd.push(() => {
@@ -639,6 +648,17 @@ function test_googletag_slot_updateTargetingFromMap() {
         'color': 'red',
         'interests': ['sports', 'music', 'movies'],
     });
+}
+
+// Test for googletag.Slot.getConfig
+function test_googletag_slot_getConfig() {
+    const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!;
+
+    // Get the value of the `targeting` setting.
+    const targetingConfig = slot.getConfig('targeting');
+
+    // Get the value of the `adsenseAttributes` and `categoryExclusion` settings.
+    const config = slot.getConfig(['adsenseAttributes', 'categoryExclusion']);
 }
 
 // Test for googletag.config.AdExpansionConfig
