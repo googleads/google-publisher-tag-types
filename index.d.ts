@@ -471,6 +471,7 @@ declare namespace googletag {
          * @param key Targeting parameter key.
          * @param value Targeting parameter value or array of values.
          * @return The service object on which the method was called.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.targeting | PageSettingsConfig.targeting} instead.
          */
         setTargeting(key: string, value: string | string[]): PubAdsService;
 
@@ -493,6 +494,7 @@ declare namespace googletag {
          * @param key Targeting parameter key. The key is optional; all targeting
          *     parameters will be cleared if it is unspecified.
          * @return The service object on which the method was called.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.targeting | PageSettingsConfig.targeting} instead.
          */
         clearTargeting(key?: string): PubAdsService;
 
@@ -512,6 +514,7 @@ declare namespace googletag {
          * @param key The targeting key to look for.
          * @return The values associated with this key, or an empty array if there
          *     is no such key.
+         * @deprecated Use {@link googletag.getConfig} instead.
          */
         getTargeting(key: string): string[];
 
@@ -527,6 +530,7 @@ declare namespace googletag {
          *   // Returns ['interests', 'colors'].
          *
          * @return Array of targeting keys. Ordering is undefined.
+         * @deprecated Use {@link googletag.getConfig} instead.
          */
         getTargetingKeys(): string[];
 
@@ -540,6 +544,7 @@ declare namespace googletag {
          * @see [Custom labels to block ads](https://support.google.com/admanager/answer/3238504)
          * @param categoryExclusion The ad category exclusion label to add.
          * @return The service object on which the method was called.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.categoryExclusion | PageSettingsConfig.categoryExclusion} instead.
          */
         setCategoryExclusion(categoryExclusion: string): PubAdsService;
 
@@ -560,6 +565,7 @@ declare namespace googletag {
          *
          * @see [Custom labels to block ads](https://support.google.com/admanager/answer/3238504)
          * @return The service object on which the method was called.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.categoryExclusion | PageSettingsConfig.categoryExclusion} instead.
          */
         clearCategoryExclusions(): PubAdsService;
 
@@ -571,6 +577,7 @@ declare namespace googletag {
          *
          * @see [Control ad loading and refresh](https://developers.google.com/publisher-tag/guides/control-ad-loading)
          * @see [Control SRA batching](https://developers.google.com/publisher-tag/samples/control-sra-batching)
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.disableInitialLoad | PageSettingsConfig.disableInitialLoad} instead.
          */
         disableInitialLoad(): void;
 
@@ -581,6 +588,7 @@ declare namespace googletag {
          * @return Returns `true` if a previous call to
          *     {@link PubAdsService.disableInitialLoad} was successful, `false`
          *     otherwise.
+         * @deprecated Use {@link googletag.getConfig} instead.
          */
         isInitialLoadDisabled(): boolean;
 
@@ -595,6 +603,7 @@ declare namespace googletag {
          * @return Returns `true` if single request mode was enabled and
          *     `false` if it is impossible to enable single request mode
          *     because the method was called after the service was enabled.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.singleRequest | PageSettingsConfig.singleRequest} instead.
          */
         enableSingleRequest(): boolean;
 
@@ -610,8 +619,9 @@ declare namespace googletag {
          *   // Make ads centered.
          *   googletag.pubads().setCentering(true);
          *
-         * @param centerAds `true` to center ads, `false` to
-         *     left-align them.
+         * @param centerAds `true` to center ads, `false` to left-align them.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.centering | PageSettingsConfig.centering}
+         *  instead.
          */
         setCentering(centerAds: boolean): void;
 
@@ -688,6 +698,7 @@ declare namespace googletag {
          * competitive exclusion constraints on display and video ads. If the video
          * content is known, call {@link PubAdsService.setVideoContent} in order to be
          * able to use content exclusion for display ads.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.videoAds | PageSettingsConfig.videoAds} instead.
          */
         enableVideoAds(): void;
 
@@ -701,6 +712,7 @@ declare namespace googletag {
          * @see [VAST ad tag URL parameters](https://support.google.com/admanager/answer/1068325)
          * @param videoContentId The video content ID.
          * @param videoCmsId The video CMS ID.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.videoAds | PageSettingsConfig.videoAds} instead.
          */
         setVideoContent(videoContentId: string, videoCmsId: string): void;
 
@@ -717,6 +729,7 @@ declare namespace googletag {
          * @return Returns `true` if div collapse mode was enabled and
          *     `false` if it is impossible to enable collapse mode
          *     because the method was called after the service was enabled.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.collapseDiv | PageSettingsConfig.collapseDiv} instead.
          */
         collapseEmptyDivs(collapseBeforeAdFetch?: boolean): boolean;
 
@@ -763,6 +776,7 @@ declare namespace googletag {
          *
          * @param address Freeform address.
          * @return The service object on which the method was called.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.location | PageSettingsConfig.location} instead.
          */
         setLocation(address: string): PubAdsService;
 
@@ -795,6 +809,7 @@ declare namespace googletag {
          * @param key The name of the attribute.
          * @param value Attribute value.
          * @return The service object on which the method was called.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.adsenseAttributes | PageSettingsConfig.adsenseAttributes} instead.
          */
         set(key: string, value: string): PubAdsService;
 
@@ -811,6 +826,7 @@ declare namespace googletag {
          * @param key Name of the attribute to look for.
          * @return Current value for the attribute key, or `null` if the
          *     key is not present.
+         * @deprecated Use {@link googletag.getConfig} instead.
          */
         get(key: string): string | null;
 
@@ -825,6 +841,7 @@ declare namespace googletag {
          *
          * @return Array of attribute keys set on this service. Ordering is
          *     undefined.
+         * @deprecated Use {@link googletag.getConfig} instead.
          */
         getAttributeKeys(): string[];
 
@@ -921,7 +938,8 @@ declare namespace googletag {
          *     be rendered in SafeFrames and `false` to change the
          *     previous setting to false. Setting this to `false` when
          *     unspecified earlier, won't change anything.
-         * @return The service object on which the function was called.
+         * @return The service object on which the method was called.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.safeFrame | PageSettingsConfig.safeFrame} instead.
          */
         setForceSafeFrame(forceSafeFrame: boolean): PubAdsService;
 
@@ -962,6 +980,7 @@ declare namespace googletag {
          * @see [Render creatives using SafeFrame](https://support.google.com/admanager/answer/6023110)
          * @param config The configuration object.
          * @return The service object on which the method was called.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.safeFrame | PageSettingsConfig.safeFrame} instead.
          */
         setSafeFrameConfig(config: config.SafeFrameConfig): PubAdsService;
 
@@ -1011,6 +1030,7 @@ declare namespace googletag {
          *     margins on mobile vs. desktop. For example, a value of 2.0 will
          *     multiply all margins by 2 on mobile devices, increasing the minimum
          *     distance a slot can be before fetching and rendering.
+         * @deprecated Use {@link googletag.config.PageSettingsConfig.lazyLoad | PageSettingsConfig.lazyLoad} instead.
          */
         enableLazyLoad(config?: {
             fetchMarginPercent?: number;
@@ -1249,6 +1269,7 @@ declare namespace googletag {
          * @param key The name of the attribute.
          * @param value Attribute value.
          * @return The slot object on which the method was called.
+         * @deprecated Use {@link googletag.config.SlotSettingsConfig.adsenseAttributes | SlotSettingsConfig.adsenseAttributes} instead.
          */
         set(key: string, value: string): Slot;
 
@@ -1269,6 +1290,7 @@ declare namespace googletag {
          * @param key Name of the attribute to look for.
          * @return Current value for the attribute key, or `null` if the
          *     key is not present.
+         * @deprecated Use {@link googletag.Slot.getConfig} instead.
          */
         get(key: string): string | null;
 
@@ -1287,6 +1309,7 @@ declare namespace googletag {
          *   // Returns ['adsense_background_color', 'adsense_border_color'].
          *
          * @return Array of attribute keys. Ordering is undefined.
+         * @deprecated Use {@link googletag.Slot.getConfig} instead.
          */
         getAttributeKeys(): string[];
 
@@ -1343,6 +1366,7 @@ declare namespace googletag {
          *
          * @param value The click URL to set.
          * @return The slot object on which the method was called.
+         * @deprecated Use {@link googletag.config.SlotSettingsConfig.clickUrl | SlotSettingsConfig.clickUrl} instead.
          */
         setClickUrl(value: string): Slot;
 
@@ -1358,6 +1382,7 @@ declare namespace googletag {
          * @see [Custom labels to block ads](https://support.google.com/admanager/answer/3238504)
          * @param categoryExclusion The ad category exclusion label to add.
          * @return The slot object on which the method was called.
+         * @deprecated Use {@link googletag.config.SlotSettingsConfig.categoryExclusion | SlotSettingsConfig.categoryExclusion} instead.
          */
         setCategoryExclusion(categoryExclusion: string): Slot;
 
@@ -1379,6 +1404,7 @@ declare namespace googletag {
          *   // Make an ad request. Any ad can be returned for the slot.
          *
          * @return The slot object on which the method was called.
+         * @deprecated Use {@link googletag.config.SlotSettingsConfig.categoryExclusion | SlotSettingsConfig.categoryExclusion} instead.
          */
         clearCategoryExclusions(): Slot;
 
@@ -1396,6 +1422,7 @@ declare namespace googletag {
          *
          * @return The ad category exclusion labels for this slot, or an empty array
          *     if none have been set.
+         * @deprecated Use {@link googletag.Slot.getConfig} instead.
          */
         getCategoryExclusions(): string[];
 
@@ -1419,6 +1446,7 @@ declare namespace googletag {
          * @param key Targeting parameter key.
          * @param value Targeting parameter value or array of values.
          * @return The slot object on which the method was called.
+         * @deprecated Use {@link googletag.config.SlotSettingsConfig.targeting | SlotSettingsConfig.targeting} instead.
          */
         setTargeting(key: string, value: string | string[]): Slot;
 
@@ -1444,6 +1472,7 @@ declare namespace googletag {
          * @param key Targeting parameter key. The key is optional; all
          *     targeting parameters will be cleared if it is unspecified.
          * @return The slot object on which the method was called.
+         * @deprecated Use {@link googletag.config.SlotSettingsConfig.targeting | SlotSettingsConfig.targeting} instead.
          */
         clearTargeting(key?: string): Slot;
 
@@ -1465,6 +1494,7 @@ declare namespace googletag {
          * @param key The targeting key to look for.
          * @return The values associated with this key, or an empty array if there
          *     is no such key.
+         * @deprecated Use {@link googletag.Slot.getConfig} instead.
          */
         getTargeting(key: string): string[];
 
@@ -1482,6 +1512,7 @@ declare namespace googletag {
          *   // Returns ['interests', 'allow_expandable'].
          *
          * @return Array of targeting keys. Ordering is undefined.
+         * @deprecated Use {@link googletag.Slot.getConfig} instead.
          */
         getTargetingKeys(): string[];
 
@@ -1508,6 +1539,7 @@ declare namespace googletag {
          * @param collapseBeforeAdFetch Whether to collapse the slot even before an
          *     ad is fetched. Ignored if collapse is not `true`.
          * @return The slot object on which the method was called.
+         * @deprecated Use {@link googletag.config.SlotSettingsConfig.collapseDiv | SlotSettingsConfig.collapseDiv} instead.
          */
         setCollapseEmptyDiv(collapse: boolean, collapseBeforeAdFetch?: boolean): Slot;
 
@@ -1572,6 +1604,7 @@ declare namespace googletag {
          *     page-level setting (if present). Setting this to `false`
          *     when not specified at the page-level won't change anything.
          * @return The slot object on which the method was called.
+         * @deprecated Use {@link googletag.config.SlotSettingsConfig.safeFrame | SlotSettingsConfig.safeFrame} instead.
          */
         setForceSafeFrame(forceSafeFrame: boolean): Slot;
 
@@ -1602,6 +1635,7 @@ declare namespace googletag {
          * @see [Render creatives using SafeFrame](https://support.google.com/admanager/answer/6023110)
          * @param config The configuration object.
          * @return The slot object on which the method was called.
+         * @deprecated Use {@link googletag.config.SlotSettingsConfig.safeFrame | SlotSettingsConfig.safeFrame} instead.
          */
         setSafeFrameConfig(config: config.SafeFrameConfig | null): Slot;
 
@@ -1639,6 +1673,7 @@ declare namespace googletag {
          *
          * @param map Targeting parameter key:value map.
          * @return The slot object on which the method was called.
+         * @deprecated Use {@link googletag.config.SlotSettingsConfig.targeting | SlotSettingsConfig.targeting} instead.
          */
         updateTargetingFromMap(map: { [adUnitPath: string]: string | string[] }): Slot;
 
@@ -1650,13 +1685,13 @@ declare namespace googletag {
         setConfig(slotConfig: config.SlotSettingsConfig): void;
 
         /**
-         * Gets general configuration options for the page set by {@link setConfig}.
+         * Gets general configuration options for the slot set by {@link setConfig}.
          *
          * Not all `setConfig()` properties are supported by this method. Supported
          * properties are:
-         * - {@link config.SlotSettingsConfig.adsenseAttributes | `adsenseAttributes`}
-         * - {@link config.SlotSettingsConfig.categoryExclusion | `categoryExclusion`}
-         * - {@link config.SlotSettingsConfig.targeting | `targeting`}
+         * - {@link googletag.config.SlotSettingsConfig.adsenseAttributes | `adsenseAttributes`}
+         * - {@link googletag.config.SlotSettingsConfig.categoryExclusion | `categoryExclusion`}
+         * - {@link googletag.config.SlotSettingsConfig.targeting | `targeting`}
          *
          * @example
          *   const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!;
