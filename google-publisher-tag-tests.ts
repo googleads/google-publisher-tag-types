@@ -661,6 +661,144 @@ function test_googletag_config_pageSettingsConfig_threadYield() {
     googletag.setConfig({ threadYield: null });
 }
 
+// Test for googletag.config.PageSettingsConfig.location
+function test_googletag_config_pageSettingsConfig_location() {
+    // Geo-target line items to US postal code 10001.
+    googletag.setConfig({ location: '10001,US' });
+
+    // Clear the location setting.
+    googletag.setConfig({ location: null });
+}
+
+// Test for googletag.config.PageSettingsConfig.videoAds
+function test_googletag_config_pageSettingsConfig_videoAds() {
+    // Enable video ads and set video content and content source IDs.
+    googletag.setConfig({
+        videoAds: {
+            enableVideoAds: true,
+            videoContentId: 'e1eGlRL7ju8',
+            videoCmsId: '1234567',
+        },
+    });
+}
+
+// Test for googletag.config.PageSettingsConfig.lazyLoad
+function test_googletag_config_pageSettingsConfig_lazyLoad() {
+    // Enable lazy loading.
+    googletag.setConfig({
+        lazyLoad: {
+            // Fetch slots within 5 viewports.
+            fetchMarginPercent: 500,
+            // Render slots within 2 viewports.
+            renderMarginPercent: 200,
+            // Double the above values on mobile.
+            mobileScaling: 2.0,
+        },
+    });
+
+    // Clear fetch margin only.
+    googletag.setConfig({
+        lazyLoad: { fetchMarginPercent: null },
+    });
+
+    // Clear all lazy loading settings.
+    googletag.setConfig({ lazyLoad: null });
+}
+
+// Test for googletag.config.PageSettingsConfig.safeFrame
+function test_googletag_config_pageSettingsConfig_safeFrame() {
+    // Force SafeFrame for all ads on the page.
+    googletag.setConfig({
+        safeFrame: { forceSafeFrame: true },
+    });
+
+    // Configure SafeFrame to allow overlay expansion.
+    googletag.setConfig({
+        safeFrame: { allowOverlayExpansion: true },
+    });
+
+    // Clear forceSafeFrame setting.
+    googletag.setConfig({
+        safeFrame: { forceSafeFrame: null },
+    });
+
+    // Clear all SafeFrame settings.
+    googletag.setConfig({ safeFrame: null });
+}
+
+// Test for googletag.config.PageSettingsConfig.centering
+function test_googletag_config_pageSettingsConfig_centering() {
+    // Make ads centered.
+    googletag.setConfig({ centering: true });
+
+    // Clear the centering setting.
+    googletag.setConfig({ centering: null });
+}
+
+// Test for googletag.config.PageSettingsConfig.collapseDiv
+function test_googletag_config_pageSettingsConfig_collapseDiv() {
+    // Collapse the div for this slot if no ad is returned.
+    googletag.setConfig({ collapseDiv: 'ON_NO_FILL' });
+
+    // Collapse the div for this slot by default, and expand only
+    // if an ad is returned.
+    googletag.setConfig({ collapseDiv: 'BEFORE_FETCH' });
+
+    // Do not collapse the div for this slot.
+    googletag.setConfig({ collapseDiv: 'DISABLED' });
+
+    // Clear the collapse setting.
+    googletag.setConfig({ collapseDiv: null });
+}
+
+// Test for googletag.config.PageSettingsConfig.singleRequest
+function test_googletag_config_pageSettingsConfig_singleRequest() {
+    // Enable Single Request Architecture.
+    googletag.setConfig({ singleRequest: true });
+}
+
+// Test for googletag.config.PageSettingsConfig.disableInitialLoad
+function test_googletag_config_pageSettingsConfig_disableInitialLoad() {
+    // Prevent requesting ads when `display()` is called.
+    googletag.setConfig({ disableInitialLoad: true });
+}
+
+// Test for googletag.config.PageSettingsConfig.categoryExclusion
+function test_googletag_config_pageSettingsConfig_categoryExclusion() {
+    // Label = AirlineAd.
+    googletag.setConfig({ categoryExclusion: ['AirlineAd'] });
+
+    // Clearing category exclusion setting.
+    googletag.setConfig({ categoryExclusion: null });
+}
+
+// Test for googletag.config.PageSettingsConfig.targeting
+function test_googletag_config_pageSettingsConfig_targeting() {
+    // Setting a single targeting key-value.
+    googletag.setConfig({ targeting: { interests: 'sports' } });
+
+    // Setting multiple values for a single targeting key
+    googletag.setConfig({ targeting: { interests: ['sports', 'music'] } });
+
+    // Setting multiple targeting key-values at once.
+    googletag.setConfig({ targeting: { interests: ['sports', 'music'], color: 'red' } });
+
+    // Clearing a single targeting key.
+    googletag.setConfig({ targeting: { interests: null } });
+}
+
+// Test for googletag.config.PageSettingsConfig.adsenseAttributes
+function test_googletag_config_pageSettingsConfig_adsenseAttributes() {
+    // Set the document language and page URL.
+    googletag.setConfig({ adsenseAttributes: { document_language: 'en', page_url: 'http://www.example.com' } });
+
+    // Clear the page URL only.
+    googletag.setConfig({ adsenseAttributes: { page_url: null } });
+
+    // Clear all AdSense attributes.
+    googletag.setConfig({ adsenseAttributes: null });
+}
+
 // Test for googletag.config.PrivacyTreatmentsConfig.treatments
 function test_googletag_config_privacyTreatmentsConfig_treatments() {
     // Disable personalization across the entire page.
@@ -683,6 +821,119 @@ function test_googletag_config_publisherProvidedSignalsConfig() {
             },
         },
     });
+}
+
+// Test for googletag.config.SlotSettingsConfig.clickUrl
+function test_googletag_config_slotSettingsConfig_clickUrl() {
+    const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!.addService(googletag.pubads());
+
+    // Sets the click URL to 'http://www.example.com?original_click_url='.
+    slot.setConfig({
+        clickUrl: 'http://www.example.com?original_click_url=',
+    });
+
+    // Clears the click URL.
+    slot.setConfig({
+        clickUrl: null,
+    });
+}
+
+// Test for googletag.config.SlotSettingsConfig.safeFrame
+function test_googletag_config_slotSettingsConfig_safeFrame() {
+    const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!.addService(googletag.pubads());
+
+    // Force SafeFrame for the slot.
+    slot.setConfig({
+        safeFrame: { forceSafeFrame: true },
+    });
+
+    // Configure SafeFrame to allow overlay expansion for the slot.
+    slot.setConfig({
+        safeFrame: { allowOverlayExpansion: true },
+    });
+
+    // Clear forceSafeFrame setting for the slot.
+    slot.setConfig({
+        safeFrame: { forceSafeFrame: null },
+    });
+
+    // Clear all SafeFrame settings for the slot.
+    slot.setConfig({ safeFrame: null });
+}
+
+// Test for googletag.config.SlotSettingsConfig.collapseDiv
+function test_googletag_config_slotSettingsConfig_collapseDiv() {
+    const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!.addService(googletag.pubads());
+
+    // Collapse the div for this slot if no ad is returned.
+    slot.setConfig({
+        collapseDiv: 'ON_NO_FILL',
+    });
+
+    // Collapse the div for this slot by default, and expand only
+    // if an ad is returned.
+    slot.setConfig({
+        collapseDiv: 'BEFORE_FETCH',
+    });
+
+    // Do not collapse the div for this slot.
+    slot.setConfig({
+        collapseDiv: 'DISABLED',
+    });
+
+    // Clear the collapse setting.
+    slot.setConfig({
+        collapseDiv: null,
+    });
+}
+
+// Test for googletag.config.SlotSettingsConfig.categoryExclusion
+function test_googletag_config_slotSettingsConfig_categoryExclusion() {
+    const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!.addService(googletag.pubads());
+
+    // Label = AirlineAd
+    slot.setConfig({
+        categoryExclusion: ['AirlineAd'],
+    });
+
+    // Clearing category exclusion setting.
+    slot.setConfig({ categoryExclusion: null });
+}
+
+// Test for googletag.config.SlotSettingsConfig.targeting
+function test_googletag_config_slotSettingsConfig_targeting() {
+    const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!.addService(googletag.pubads());
+
+    // Setting a single targeting key-value.
+    slot.setConfig({ targeting: { interests: 'sports' } });
+
+    // Setting multiple values for a single targeting key.
+    slot.setConfig({ targeting: { interests: ['sports', 'music'] } });
+
+    // Setting multiple targeting key-values at once.
+    slot.setConfig({ targeting: { interests: ['sports', 'music'], color: 'red' } });
+
+    // Clearing a single targeting key.
+    slot.setConfig({ targeting: { interests: null } });
+
+    // Clear all targeting keys.
+    slot.setConfig({ targeting: null });
+}
+
+// Test for googletag.config.SlotSettingsConfig.adsenseAttributes
+function test_googletag_config_slotSettingsConfig_adsenseAttributes() {
+    const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!.addService(googletag.pubads());
+
+    // Set the AdSense ad format and channel IDs.
+    slot.setConfig({
+        adsenseAttributes: { adsense_ad_format: '120x240_as', adsense_channel_ids: '271828183+314159265' },
+    });
+
+    // Clear the AdSense channel IDs only.
+    slot.setConfig({ adsenseAttributes: { adsense_channel_ids: null } });
+
+    // Clear all AdSense attributes.
+    slot.setConfig({ adsenseAttributes: null });
 }
 
 // Test for googletag.config.ComponentAuctionConfig.auctionConfig
