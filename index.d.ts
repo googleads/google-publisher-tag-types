@@ -3363,6 +3363,38 @@ declare namespace googletag {
         interface RewardedSlotClosedEvent extends Event {}
 
         /**
+         * This event is fired when a rewarded video ad has finished playing.
+         * @example
+         *   const targetSlot = googletag.defineOutOfPageSlot(
+         *       '/1234567/example',
+         *       googletag.enums.OutOfPageFormat.REWARDED);
+         *
+         *   // Slot returns null if the page or device does not support rewarded ads.
+         *   if(targetSlot) {
+         *     targetSlot.addService(googletag.pubads());
+         *
+         *     // This listener is called when the video in a rewarded ad slot has
+         *     // finished playing.
+         *     googletag.pubads().addEventListener('rewardedSlotVideoCompleted',
+         *         (event) => {
+         *           const slot = event.slot;
+         *           console.log('Video in rewarded ad slot', slot.getSlotElementId(),
+         *                       'has finished playing.');
+         *
+         *           if (slot === targetSlot) {
+         *             // Slot specific logic.
+         *           }
+         *         }
+         *     );
+         *   }
+         *
+         * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
+         * @see [Display a rewarded ad](https://developers.google.com/publisher-tag/samples/display-rewarded-ad)
+         */
+
+        interface RewardedSlotVideoCompletedEvent extends Event {}
+
+        /**
          * This event is fired when a
          * [rewarded ad](https://support.google.com/admanager/answer/9116812) is
          * ready to be displayed. The publisher is responsible for presenting the user
@@ -3531,6 +3563,11 @@ declare namespace googletag {
              * Alias for {@link events.RewardedSlotClosedEvent}.
              */
             rewardedSlotClosed: RewardedSlotClosedEvent;
+
+            /**
+             * Alias for {@link events.RewardedSlotVideoCompletedEvent}.
+             */
+            rewardedSlotVideoCompleted: RewardedSlotVideoCompletedEvent;
 
             /**
              * Alias for {@link events.RewardedSlotReadyEvent}.

@@ -1213,6 +1213,27 @@ function test_googletag_events_rewardedSlotClosedEvent() {
     }
 }
 
+// Test for googletag.events.RewardedSlotVideoCompletedEvent
+function test_googletag_events_rewardedSlotVideoCompletedEvent() {
+    const targetSlot = googletag.defineOutOfPageSlot('/1234567/example', googletag.enums.OutOfPageFormat.REWARDED);
+
+    // Slot returns null if the page or device does not support rewarded ads.
+    if (targetSlot) {
+        targetSlot.addService(googletag.pubads());
+
+        // This listener is called when the video in a rewarded ad slot has
+        // finished playing.
+        googletag.pubads().addEventListener('rewardedSlotVideoCompleted', event => {
+            const slot = event.slot;
+            console.log('Video in rewarded ad slot', slot.getSlotElementId(), 'has finished playing.');
+
+            if (slot === targetSlot) {
+                // Slot specific logic.
+            }
+        });
+    }
+}
+
 // Test for googletag.events.RewardedSlotReadyEvent
 function test_googletag_events_rewardedSlotReadyEvent() {
     // This listener is called when a rewarded ad slot becomes ready to be
