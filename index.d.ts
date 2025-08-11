@@ -3358,7 +3358,6 @@ declare namespace googletag {
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          * @see [Display a rewarded ad](https://developers.google.com/publisher-tag/samples/display-rewarded-ad)
          */
-
         // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface RewardedSlotClosedEvent extends Event {}
 
@@ -3391,7 +3390,7 @@ declare namespace googletag {
          * @see [Ad event listeners](https://developers.google.com/publisher-tag/samples/ad-event-listeners)
          * @see [Display a rewarded ad](https://developers.google.com/publisher-tag/samples/display-rewarded-ad)
          */
-
+        // eslint-disable-next-line @typescript-eslint/no-empty-interface
         interface RewardedSlotVideoCompletedEvent extends Event {}
 
         /**
