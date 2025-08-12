@@ -2158,7 +2158,7 @@ declare namespace googletag {
              * @see [Minimize layout shift](https://developers.google.com/publisher-tag/guides/minimize-layout-shift)
              *
              */
-            collapseDiv?: 'DISABLED' | 'BEFORE_FETCH' | 'ON_NO_FILL' | null;
+            collapseDiv?: CollapseDivBehavior | null;
 
             /**
              * Setting to enable or disable Single Request Architecture (SRA).
@@ -2272,6 +2272,14 @@ declare namespace googletag {
              */
             adsenseAttributes?: AdSenseAttributesConfig | null;
         }
+
+        /**
+         * Supported values for controlling the collapsing behavior of ad slots.
+         *
+         * @see {@link googletag.config.PageSettingsConfig.collapseDiv | PageSettingsConfig.collapseDiv}
+         * @see {@link googletag.config.SlotSettingsConfig.collapseDiv | SlotSettingsConfig.collapseDiv}
+         */
+        type CollapseDivBehavior = 'DISABLED' | 'BEFORE_FETCH' | 'ON_NO_FILL';
 
         /**
          * Settings to control publisher privacy treatments.
@@ -2576,7 +2584,7 @@ declare namespace googletag {
              * @see [Minimize layout shift](https://developers.google.com/publisher-tag/guides/minimize-layout-shift)
              *
              */
-            collapseDiv?: 'DISABLED' | 'BEFORE_FETCH' | 'ON_NO_FILL' | null;
+            collapseDiv?: CollapseDivBehavior | null;
 
             /**
              * Setting to configure ad category exclusions.
