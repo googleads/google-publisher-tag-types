@@ -3445,8 +3445,10 @@ declare namespace googletag {
             /**
              * Displays the rewarded ad. This method should not be called until the user
              * has consented to view the ad.
+             *
+             * @return Whether the rewarded ad was successfully displayed.
              */
-            makeRewardedVisible(): void;
+            makeRewardedVisible(): boolean;
         }
 
         /**
