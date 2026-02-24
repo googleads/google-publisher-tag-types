@@ -956,6 +956,46 @@ function test_googletag_config_slotSettingsConfig_adsenseAttributes() {
     slot.setConfig({ adsenseAttributes: null });
 }
 
+// Test for googletag.config.ComponentAuctionConfig.auctionConfig
+function test_googletag_config_componentAuctionConfig_auctionConfig() {
+    const componentAuctionConfig = {
+        // Seller URL should be https and the same as decisionLogicURL's origin
+        seller: 'https://testSeller.com',
+        decisionLogicURL: 'https://testSeller.com/ssp/decision-logic.js',
+        interestGroupBuyers: ['https://example-buyer.com'],
+        auctionSignals: { auction_signals: 'auction_signals' },
+        sellerSignals: { seller_signals: 'seller_signals' },
+        perBuyerSignals: {
+            // listed on interestGroupBuyers
+            'https://example-buyer.com': {
+                per_buyer_signals: 'per_buyer_signals',
+            },
+        },
+    };
+
+    const auctionSlot = googletag.defineSlot('/1234567/example', [160, 600])!;
+
+    // To add configKey to the component auction:
+    auctionSlot.setConfig({
+        componentAuction: [
+            {
+                configKey: 'https://testSeller.com',
+                auctionConfig: componentAuctionConfig,
+            },
+        ],
+    });
+
+    // To remove configKey from the component auction:
+    auctionSlot.setConfig({
+        componentAuction: [
+            {
+                configKey: 'https://testSeller.com',
+                auctionConfig: null,
+            },
+        ],
+    });
+}
+
 // Test for googletag.config.InterstitialConfig.triggers
 function test_googletag_config_interstitialConfig_triggers() {
     // Define a GPT managed web interstitial ad slot.
