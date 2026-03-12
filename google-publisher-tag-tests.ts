@@ -669,6 +669,16 @@ function test_googletag_config_adExpansionConfig() {
     });
 }
 
+// Test for googletag.config.AutoRefreshConfig.heavyAds
+function test_googletag_config_autoRefreshConfig_heavyAds() {
+    // Set the auto refresh configuration, disabling auto refresh on heavy
+    // ad intervention.
+    googletag.setConfig({ autoRefresh: { heavyAds: false } });
+
+    // Clear the auto refresh configuration, restoring to default behavior.
+    googletag.setConfig({ autoRefresh: null });
+}
+
 // Test for googletag.config.PageSettingsConfig.threadYield
 function test_googletag_config_pageSettingsConfig_threadYield() {
     // Disable yielding.
@@ -817,6 +827,15 @@ function test_googletag_config_pageSettingsConfig_adsenseAttributes() {
 
     // Clear all AdSense attributes.
     googletag.setConfig({ adsenseAttributes: null });
+}
+
+// Test for googletag.config.PageSettingsConfig.autoRefresh
+function test_googletag_config_pageSettingsConfig_autoRefresh() {
+    // Set the auto refresh configuration.
+    googletag.setConfig({ autoRefresh: { heavyAds: false } });
+
+    // Clear the auto refresh configuration.
+    googletag.setConfig({ autoRefresh: null });
 }
 
 // Test for googletag.config.PrivacyTreatmentsConfig.treatments
