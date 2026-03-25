@@ -1691,8 +1691,9 @@ declare namespace googletag {
          * Sets general configuration options for this slot.
          *
          * @param slotConfig The configuration object.
+         * @return The slot object on which the method was called.
          */
-        setConfig(slotConfig: config.SlotSettingsConfig): void;
+        setConfig(slotConfig: config.SlotSettingsConfig): Slot;
 
         /**
          * Gets general configuration options for the slot set by {@link setConfig}.
