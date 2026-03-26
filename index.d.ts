@@ -286,7 +286,8 @@ declare namespace googletag {
     function setConfig(config: config.PageSettingsConfig): void;
 
     /**
-     * Gets general configuration options for the page set by {@link setConfig}.
+     * Gets a frozen copy of the general configuration options for the page set by
+     * {@link setConfig}.
      *
      * Not all `setConfig()` properties are supported by this method. Supported
      * properties are:
@@ -302,11 +303,11 @@ declare namespace googletag {
      *   const config = googletag.getConfig(['adsenseAttributes', 'disableInitialLoad']);
      *
      * @param keys The keys of the configuration options to get.
-     * @return The configuration options for the slot.
+     * @return A frozen copy of the configuration options for the page.
      */
     function getConfig(
         keys: string | string[],
-    ): Pick<config.PageSettingsConfig, 'adsenseAttributes' | 'disableInitialLoad' | 'targeting'>;
+    ): Readonly<Pick<config.PageSettingsConfig, 'adsenseAttributes' | 'disableInitialLoad' | 'targeting'>>;
 
     /**
      * The command array accepts a sequence of functions and invokes them in
@@ -1696,7 +1697,8 @@ declare namespace googletag {
         setConfig(slotConfig: config.SlotSettingsConfig): Slot;
 
         /**
-         * Gets general configuration options for the slot set by {@link setConfig}.
+         * Gets a frozen copy of the general configuration options for the slot set by
+         * {@link setConfig}.
          *
          * Not all `setConfig()` properties are supported by this method. Supported
          * properties are:
@@ -1714,11 +1716,11 @@ declare namespace googletag {
          *   const config = slot.getConfig(['adsenseAttributes', 'categoryExclusion']);
          *
          * @param keys The keys of the configuration options to get.
-         * @return The configuration options for the slot.
+         * @return A frozen copy of the configuration options for the slot.
          */
         getConfig(
             keys: string | string[],
-        ): Pick<config.SlotSettingsConfig, 'categoryExclusion' | 'targeting' | 'adsenseAttributes'>;
+        ): Readonly<Pick<config.SlotSettingsConfig, 'categoryExclusion' | 'targeting' | 'adsenseAttributes'>>;
     }
 
     /** Array of two numbers representing [width, height]. */
