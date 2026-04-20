@@ -126,6 +126,19 @@ function test_googletag_privacySettingsConfig_trafficSource() {
     });
 }
 
+// Test for googletag.PrivacySettingsConfig.tagForAgeTreatment
+function test_googletag_privacySettingsConfig_tagForAgeTreatment() {
+    // Enable teen privacy treatment.
+    googletag.pubads().setPrivacySettings({
+        tagForAgeTreatment: googletag.enums.TagForAgeTreatment.TEEN,
+    });
+
+    // Clear age treatment configuration.
+    googletag.pubads().setPrivacySettings({
+        tagForAgeTreatment: googletag.enums.TagForAgeTreatment.UNSPECIFIED,
+    });
+}
+
 // Test for googletag.PubAdsService.setTargeting
 function test_googletag_pubAdsService_setTargeting() {
     // Example with a single value for a key.
