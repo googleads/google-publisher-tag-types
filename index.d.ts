@@ -2807,7 +2807,12 @@ declare namespace googletag {
         /**
          * Supported interstitial ad triggers.
          */
-        type InterstitialTrigger = 'unhideWindow' | 'navBar' | 'inactivity' | 'backward' | 'endOfArticle';
+        type InterstitialTrigger =
+            | 'unhideWindow'
+            | 'navBar'
+            | 'inactivity'
+            | 'endOfArticle'
+            | /** @deprecated */ 'backward';
 
         /**
          * Settings to configure video ad related settings.
