@@ -2929,6 +2929,11 @@ declare namespace googletag {
 
         /**
          * Supported interstitial ad triggers.
+         *
+         * **Note**: Beginning June 15, 2026, the `backward` trigger will no longer be
+         * supported and enabling it will have no effect. See the
+         * [GPT release notes](https://developers.google.com/publisher-tag/release-notes#2026-05-18)
+         * for more information.
          */
         type InterstitialTrigger =
             | 'unhideWindow'
