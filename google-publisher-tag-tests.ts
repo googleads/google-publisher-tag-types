@@ -975,6 +975,23 @@ function test_googletag_config_pageSettingsConfig_autoRefresh() {
     googletag.setConfig({ autoRefresh: null });
 }
 
+// Test for googletag.config.PageSettingsConfig.continueButton
+function test_googletag_config_pageSettingsConfig_continueButton() {
+    // Configure continue button settings.
+    googletag.setConfig({
+        continueButton: {
+            font: 'Arial',
+            fontColor: 'white',
+            backgroundColor: 'blue',
+            targetId: 'target-div-id',
+            freqCapIntervalMinutes: 20,
+        },
+    });
+
+    // Clear continue button settings.
+    googletag.setConfig({ continueButton: null });
+}
+
 // Test for googletag.config.PrivacyTreatmentsConfig.treatments
 function test_googletag_config_privacyTreatmentsConfig_treatments() {
     // Disable personalization across the entire page.
