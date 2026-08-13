@@ -2078,6 +2078,8 @@ declare namespace googletag {
 
             /**
              * The frequency capping interval in minutes.
+             *
+             * Must be an integer greater than or equal to 1.
              */
             freqCapIntervalMinutes?: number | null;
         }
