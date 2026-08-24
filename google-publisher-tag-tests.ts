@@ -806,6 +806,16 @@ function test_googletag_config_adExpansionConfig() {
     });
 }
 
+// Test for googletag.config.AutoRefreshConfig.backForwardCache
+function test_googletag_config_autoRefreshConfig_backForwardCache() {
+    // Set the auto refresh configuration, disabling auto refresh on
+    // back/forward cache restore.
+    googletag.setConfig({ autoRefresh: { backForwardCache: false } });
+
+    // Clear the auto refresh configuration, restoring to default behavior.
+    googletag.setConfig({ autoRefresh: null });
+}
+
 // Test for googletag.config.AutoRefreshConfig.heavyAds
 function test_googletag_config_autoRefreshConfig_heavyAds() {
     // Set the auto refresh configuration, disabling auto refresh on heavy
