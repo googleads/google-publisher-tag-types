@@ -2705,7 +2705,7 @@ declare namespace googletag {
              * `true` (cannot be forced to `false`). Note that the
              * sandbox attribute disables plugins (e.g. Flash).
              */
-            sandbox?: boolean | null;
+            sandbox?: true | null;
 
             /**
              * Whether SafeFrame should use randomized subdomains for
