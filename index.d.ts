@@ -282,6 +282,23 @@ declare namespace googletag {
 
     /**
      * Sets general configuration options for the page.
+     *
+     * Only properties specified in the `config` object are modified. Unrecognized
+     * properties or invalid values are ignored, and a diagnostic warning is
+     * logged to the browser console and the
+     * [Google Publisher Console](https://developers.google.com/publisher-tag/guides/publisher-console-messages#warning).
+     *
+     * @example
+     *   // Enable Single Request Architecture (SRA) and set page-level targeting.
+     *   googletag.setConfig({
+     *     singleRequest: true,
+     *     targeting: {
+     *       interests: ['sports', 'music']
+     *     }
+     *   });
+     *
+     * @see [Config API migration](https://developers.google.com/publisher-tag/guides/config-migration)
+     * @param config The configuration object.
      */
     function setConfig(config: config.PageSettingsConfig): void;
 
@@ -1877,6 +1894,23 @@ declare namespace googletag {
         /**
          * Sets general configuration options for this slot.
          *
+         * Only properties specified in the `slotConfig` object are modified.
+         * Unrecognized properties or invalid values are ignored, and a diagnostic
+         * warning is logged to the browser console and the
+         * [Google Publisher Console](https://developers.google.com/publisher-tag/guides/publisher-console-messages#warning).
+         *
+         * @example
+         *   const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!;
+         *
+         *   // Collapse the slot if no ad is returned and set slot-level targeting.
+         *   slot.setConfig({
+         *     collapseDiv: 'ON_NO_FILL',
+         *     targeting: {
+         *       interests: ['sports', 'music']
+         *     }
+         *   });
+         *
+         * @see [Config API migration](https://developers.google.com/publisher-tag/guides/config-migration)
          * @param slotConfig The configuration object.
          * @return The slot object on which the method was called.
          */

@@ -83,6 +83,17 @@ function test_googletag_setAdIframeTitle() {
     googletag.setAdIframeTitle('title');
 }
 
+// Test for googletag.setConfig
+function test_googletag_setConfig() {
+    // Enable Single Request Architecture (SRA) and set page-level targeting.
+    googletag.setConfig({
+        singleRequest: true,
+        targeting: {
+            interests: ['sports', 'music'],
+        },
+    });
+}
+
 // Test for googletag.getConfig
 function test_googletag_getConfig() {
     // Get the value of the `targeting` setting.
@@ -799,6 +810,19 @@ function test_googletag_slot_updateTargetingFromMap() {
     slot.updateTargetingFromMap({
         'color': 'red',
         'interests': ['sports', 'music', 'movies'],
+    });
+}
+
+// Test for googletag.Slot.setConfig
+function test_googletag_slot_setConfig() {
+    const slot = googletag.defineSlot('/1234567/sports', [160, 600], 'div')!;
+
+    // Collapse the slot if no ad is returned and set slot-level targeting.
+    slot.setConfig({
+        collapseDiv: 'ON_NO_FILL',
+        targeting: {
+            interests: ['sports', 'music'],
+        },
     });
 }
 
