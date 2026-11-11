@@ -2350,6 +2350,35 @@ declare namespace googletag {
             location?: string | null;
 
             /**
+             * Setting to control the IP address associated with ad requests.
+             *
+             * By default, Google Ad Manager retrieves the IP address of the user's
+             * browser directly from each ad request. When you expect that address to
+             * differ from the user's unmasked IP address, such as when browser privacy
+             * proxies or IP protection settings mask client IP addresses on third-party
+             * ad requests, use this setting to provide the user's encrypted IP address
+             * instead.
+             *
+             * Capture the user's unmasked IPv4 or IPv6 address on your server, encrypt the address
+             * with Google's public encryption key, and pass the encrypted payload to GPT
+             * as an unpadded base64url-encoded string.
+             *
+             * To include the encrypted IP address in the initial ad request, call
+             * {@link googletag.setConfig | `googletag.setConfig()`} before you call
+             * {@link googletag.enableServices | `googletag.enableServices()`},
+             * {@link googletag.display | `googletag.display()`}, or
+             * {@link PubAdsService.refresh | `PubAdsService.refresh()`}.
+             *
+             * @example
+             *   // Set the encrypted IP address payload.
+             *   googletag.setConfig({ipAddress: 'ENCRYPTED_IP_PAYLOAD'});
+             *
+             *   // Clear the IP address setting.
+             *   googletag.setConfig({ipAddress: null});
+             */
+            ipAddress?: string | null;
+
+            /**
              * Settings to control video ads.
              *
              * @example

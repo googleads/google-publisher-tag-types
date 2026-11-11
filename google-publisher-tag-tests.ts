@@ -886,6 +886,15 @@ function test_googletag_config_pageSettingsConfig_location() {
     googletag.setConfig({ location: null });
 }
 
+// Test for googletag.config.PageSettingsConfig.ipAddress
+function test_googletag_config_pageSettingsConfig_ipAddress() {
+    // Set the encrypted IP address payload.
+    googletag.setConfig({ ipAddress: 'ENCRYPTED_IP_PAYLOAD' });
+
+    // Clear the IP address setting.
+    googletag.setConfig({ ipAddress: null });
+}
+
 // Test for googletag.config.PageSettingsConfig.videoAds
 function test_googletag_config_pageSettingsConfig_videoAds() {
     // Enable video ads and set video content and content source IDs.
