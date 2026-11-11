@@ -1220,7 +1220,17 @@ declare namespace googletag {
      * @experimental
      */
     interface RequestHook {
-        (input: { slots: Slot[] }): Promise<void>;
+        (input: RequestHookInput): Promise<void>;
+    }
+
+    /**
+     * Input passed to a {@link RequestHook} callback.
+     *
+     * @experimental
+     */
+    interface RequestHookInput {
+        /** The slots included in the ad request. */
+        slots: Slot[];
     }
 
     /**
